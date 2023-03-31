@@ -1,24 +1,9 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+サイト名：ゲームレビュー
+サイト概要：ゲームのレビューサイトを作成
+テーマ：幅広い世代で様々なゲーム種類を知れ、1人から複数で遊べるゲームの紹介（レビューサイト）
+　　　　ユーザーが広めたい、様々なゲームを伝え合う
+理由：私がゲーム好きであり、様々なおすすめゲームを知ってもらうため、他ユーザからの記述により知りたいため。
+　　　PCやPS系のゲーム以外にもテーブル系のパーティーゲームにも埋もれた面白く知ってほしいゲームがたくさんり知ってほしい
+ターゲットユーザー：1人～複数。その人が遊びたいものを見つけられる。
+主な利用シーン：他ユーザーが伝えたいゲームの手伝いをする目的
+　　　　　　　　何か面白いゲームを探す際に利用
