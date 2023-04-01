@@ -37,4 +37,5 @@ $ bundle install<br>
 # 著者
 *齊藤紘典
 
-![ゲームレビューファイル (1)](https://user-images.githubusercontent.com/121594678/229040577-39a116ef-e4b7-450a-93d7-182de48c04ab.jpg)
+
+![ゲームレビューファイル (2)](https://user-images.githubusercontent.com/121594678/229276107-ca406534-64ed-4041-a106-a82ea519b55a.jpg)
