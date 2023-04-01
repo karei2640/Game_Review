@@ -18,10 +18,15 @@ Bootstrap v4.5.3
 # インストール方法
 
 $ git clone git@github.com:karei2640/Game_Review.git
+
 $ cd Game_Review
+
 $ rails db:migrate
+
 $ rails db:seed
+
 $ yarn install
+
 $ bundle install
 
 # 著者
