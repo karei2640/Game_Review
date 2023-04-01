@@ -16,7 +16,7 @@ ruby 3.1.2
 Rails 6.1.7.3
 Bootstrap v4.5.3
 
-# インストール方法
+# インストール方法（予定）
 
 $ git clone git@github.com:karei2640/Game_Review.git
 
