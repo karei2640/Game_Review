@@ -43,7 +43,8 @@ ActiveRecord::Schema.define(version: 2023_04_02_032115) do
     t.string "name", null: false
     t.date "birthday", null: false
     t.string "post_code", null: false
-    t.string "addres", null: false
+    t.string "prefecture_code", null: false
+    t.string "address"
     t.string "telephone", null: false
     t.boolean "withdrawal", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
