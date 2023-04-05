@@ -1,0 +1,15 @@
+<h1><%= @bordgame.game_title %></h1>
+
+<p><strong>プラットフォーム:</strong> <%= @bordgame.platform %></p>
+<p><strong>カテゴリー:</strong> <%= @bordgame.categorie %></p>
+<p><strong>ジャンル:</strong> <%= @bordgame.genre %></p>
+<p><strong>リリース日:</strong> <%= @bordgame.release_date %></p>
+<p><strong>価格:</strong> <%= @bordgame.price %> 円</p>
+
+<p><strong>紹介タイトル:</strong> <%= @bordgame.introduct_title %></p>
+<p><strong>紹介文:</strong> <%= @bordgame.introduct %></p>
+<p><strong>良い点:</strong> <%= @bordgame.good_introduct %></p>
+<p><strong>悪い点:</strong> <%= @bordgame.bad_introduct %></p>
+<p><strong>総合評価:</strong> <%= @bordgame.overall_review %></p>
+
+<%= image_tag @bordgame.image if @bordgame.image.attached? %>

@@ -54,6 +54,12 @@ class Public::RegistrationsController < Devise::RegistrationsController
   def after_sign_up_path_for(resource)
     root_path
   end
+  
+  private
+
+  def account_update_params
+  params.require(:customer).permit(:name, :birthday, :post_code, :prefecture_code, :address, :telephone, :email, :password, :password_confirmation, :current_password)
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

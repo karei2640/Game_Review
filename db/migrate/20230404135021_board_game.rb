@@ -1,6 +1,6 @@
-class CreateGames < ActiveRecord::Migration[6.1]
+class BoardGame < ActiveRecord::Migration[6.1]
   def change
-    create_table :games do |t|
+    create_table :bordgames do |t|
       t.string :image
       t.string :genre_id
       t.string :platform_id

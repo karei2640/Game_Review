@@ -9,7 +9,12 @@ class Public::CustomersController < ApplicationController
   end
 
  
-  def withdraw
+  def withdrawal
+    @customer = current_customer
+    @customer.update(withdraw: true)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to root_path
   end
 
   def edit
@@ -18,10 +23,25 @@ class Public::CustomersController < ApplicationController
 
   def update
     @customer = current_customer
-    @customer.update
+    if @customer.update(customer_params)
+      flash[:notice] = "登録情報の編集が成功しました"
+      redirect_to customers_path
+    else
+      render :edit
+    end
   end
-  
-  
+    
+  private
 
+  def customer_params
+  params.require(:customer).permit(:name, :birthday, :post_code, :prefecture_code, :address, :telephone)
+  end
 
+  
 end
+
+
+  
+  
+
+

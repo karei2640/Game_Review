@@ -26,7 +26,7 @@
             <!--adminログイン時のヘッダー-->
             <% if admin_signed_in? %>
               <li class="nav-item">
-                <%= link_to admin_products_path, class: 'btn btn-info mr-2' do %>
+                <%= link_to admin_games_path, class: 'btn btn-info mr-2' do %>
                   <i class="fas fa-birthday-cake"></i>商品一覧
                 <% end %>
               </li>
@@ -73,9 +73,13 @@
                 <% end %>
               </li>
               <li class="nav-item">
-                <%#= link_to  gamess_path, class: 'btn btn-info mr-2' do %>
-                  <i class=""></i>ゲーム一覧
-                <%# end %>
+                <%= link_to games_path, class: 'btn btn-info mr-2' do %>
+                  ハード系<i class="fas fa-desktop fa-lg" style="color: #ff0000;"></i>
+                <% end %>
+                <li class="nav-item">
+                <%= link_to bordgames_path, class: 'btn btn-info mr-2' do %>
+                  テーブル系<i class="fas fa-chess fa-lg" style="color: #00ff62;"></i>
+                <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to destroy_customer_session_path, method: :get, class: 'btn btn-info' do %>
@@ -88,27 +92,31 @@
               <% else %>
               <li class="nav-item">
                 <%= link_to about_path, class: 'btn btn-info mr-2' do %>
-                  <i class="fas fa-store-alt"></i>About
+                  About<i class="fas fa-store-alt"></i>
                 <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to games_path, class: 'btn btn-info mr-2' do %>
-                  <i class=""></i>ゲーム一覧
+                  ハード系<i class="fas fa-desktop fa-lg" style="color: #ff0000;"></i>
+                <% end %>
+                <li class="nav-item">
+                <%= link_to bordgames_path, class: 'btn btn-info mr-2' do %>
+                  テーブル系<i class="fas fa-chess fa-lg" style="color: #00ff62;"></i>
                 <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to new_customer_registration_path, data: {"turbolinks" => false}, class: 'btn btn-info mr-2' do %>
-                  <i class="fas fa-user-plus"></i>新規登録
+                  新規登録<i class="fas fa-user-plus"></i>
                 <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to  new_customer_session_path, class: 'btn btn-info mr-2' do%>
-                  <i class="fas fa-sign-in-alt"></i>ログイン
+                  ログイン<i class="fas fa-sign-in-alt"></i>
                 <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to  new_admin_session_path, class: 'btn btn-info' do%>
-                  <i class="fas fa-sign-in-alt"></i>管理者用
+                  管理者用<i class="fas fa-sign-in-alt"></i>
                 <% end %>
               </li>
               

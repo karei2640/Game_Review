@@ -2,19 +2,17 @@
         <%= link_to new_game_path do %>
         <i class="fas fa-plus-circle"></i>ハード系ゲーム投稿
         <% end %>
-        <%= link_to new_bordgame_path do %>
+        <%= link_to new_game_path do %>
         <i class="fas fa-plus-circle"></i>テーブル系ゲーム投稿
         <% end %>
     </div>
-    <h1>Games</h1>
-
-<ul>
-  <% @games.each do |game| %>
+    <ul>
+  <% @bordgames.each do |bordgame| %>
     <li>
-      <%= link_to game.game_title, game %>
-      <%= game.introduct_title %><br>
-      <% if game.image.attached? %>
-        <%= image_tag game.image, size: "100x100" %>
+      <%= link_to bordgame.game_title, bordgame %>
+      <%= bordgame.introduct_title %>
+      <% if bordgame.image.attached? %>
+        <%= image_tag bordgame.image, size: "100x100" %>
       <% end %>
     </li>
   <% end %>

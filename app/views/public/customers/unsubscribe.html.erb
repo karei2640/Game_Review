@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row my-3">
+    <div class="col-sm-8 px-sm-0 offset-sm-1">
+      <h2>退会画面</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 mb-4 offset-md-1">
+      <p>退会手続きをされますと、すべてのサービスがご利用いただけなくなります。<br>
+        再度ご利用いただく場合には、新規登録のお手続きが必要になります。<br>
+        本当に退会してよろしいですか？
+      </p>
+    </div>
+  </div>
+  <div class="row offset-md-2">
+    <div class="col-3 mb-4">
+      <%= link_to "退会しない", customers_path, class:"btn btn-success" %>
+    </div>
+    <div class="col-3 mb-4">
+      <%= link_to "退会する", customers_withdraw_path, class:"btn btn-danger", method: :get, data: { confirm: "本当に退会しますか？" } %>
+    </div>
+  </div>
+</div>

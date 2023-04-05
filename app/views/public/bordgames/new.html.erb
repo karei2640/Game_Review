@@ -5,7 +5,7 @@
     </div>
     <div class= "row">
         <div class="col-sm-2 px-sm-0" >
-        <%= form_with model: @game,url: games_path do |f| %>
+        <%= form_with model: @bordgame,url: bordgames_path do |f| %>
         <table>
             <tr>
                 <div class= "from-group">
@@ -22,9 +22,9 @@
             
             <tr>
                 <th><%= f.label :ジャンル %></th>
-                <td><%= f.select :platform, ['PC', 'PS5', 'PS4', 'Switch', "xbox"], {}, { class: 'type' } %>
-                    <%= f.select :categorie, ['シングル','マルチ'], {}, { class: 'tabletop-genre' } %>
-                    <%= f.select :genre, options_for_select([['アクション'], ['RPG'],['シューティング'],['シミュレーション'], ['サバイバル'],['レース'], ['アドベンチャー'], ['パズル'], ['カードゲーム'],['カードゲーム']]), id: :game_genre %>
+                <td><%= f.select :platform, [ 'テーブル'], {}, { class: 'type' } %>
+                    <%= f.select :categorie, ['1人','2人','3人','4人','5人以上'], {}, { class: 'tabletop-genre' } %>
+                    <%= f.select :genre, options_for_select([['すごろく'], ['ワーカープレイスメント'],['拡大再生産'],['パズル'], ['タイル配置'],['陣取り'], ['ドラフト'], ['心理戦'], ['競り'],['協力']]), id: :categorie %>
           </td>
             <tr>
                 <div class="form-group">

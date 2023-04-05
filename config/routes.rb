@@ -20,8 +20,10 @@ end
 
 scope module: :public do
   resource :customers, only: [:show, :update, :edit]
+  resources :bordgames, only: [:new,:index, :show,:create, :edit, :update, :destroy]
   resources :games, only: [:new,:index, :show,:create, :edit, :update, :destroy]
   get "/search" => "games#search"
+  get "/customers/withdraw" => "customers#withdraw"
 end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
