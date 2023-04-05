@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row my-3">
+    <div class="col-sm-8 px-sm-0 offset-sm-1">
+      <h2>マイページ</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 px-sm-0 offset-sm-1">
+      <h4>登録情報</h4>
+    </div>
+    <div class="col-sm-4 px-sm-0">
+      <%= link_to "編集する", edit_customers_path, class:"btn btn-success px-4 mb-2" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 px-sm-0 offset-sm-1">
+      <table class="table table-bordered">
+        <tr>
+          <th class="table-active">お名前</th>
+          <td><%= @customer.name %></td>
+        </tr>
+          <th class="table-active">郵便番号</th>
+          <td>〒<%= @customer.post_code %></td>
+        </tr>
+        </tr>
+          <th class="table-active">都道府県</th>
+          <td><%= @customer.prefecture_code %></td>
+        </tr>
+        <tr>
+          <th class="table-active">住所(番地)</th>
+          <td><%= @customer.address %></td>
+        </tr>
+        <tr>
+          <th class="table-active">電話番号</th>
+          <td><%= @customer.telephone %></td>
+        </tr>
+        <tr>
+          <th class="table-active">メールアドレス</th>
+          <td><%= @customer.email %></td>
+        </tr>
+      </table>
