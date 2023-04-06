@@ -13,6 +13,7 @@ class BoardGame < ActiveRecord::Migration[6.1]
       t.text :overall_review, null: false
       t.integer :points, null: false
       t.date :release_date
+      t.string :genre
       t.string :platform
       t.string :categorie
       t.integer :price

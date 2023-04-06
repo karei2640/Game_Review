@@ -1,8 +1,6 @@
 <h1><%= @game.game_title %></h1>
-
-<p><strong>プラットフォーム:</strong> <%= @game.platform %></p>
-<p><strong>カテゴリー:</strong> <%= @game.categorie %></p>
-<p><strong>ジャンル:</strong> <%= @game.genre %></p>
+<%= image_tag @game.image if @game.image.attached? %>
+<p><strong>プラットフォーム:</strong> <%= @game.platform %>　<strong>カテゴリー:</strong> <%= @game.categorie %>　<strong>ジャンル:</strong> <%= @game.genre %></p>
 <p><strong>リリース日:</strong> <%= @game.release_date %></p>
 <p><strong>価格:</strong> <%= @game.price %> 円</p>
 
@@ -12,4 +10,3 @@
 <p><strong>悪い点:</strong> <%= @game.bad_introduct %></p>
 <p><strong>総合評価:</strong> <%= @game.overall_review %></p>
 
-<%= image_tag @game.image if @game.image.attached? %>

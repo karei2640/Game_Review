@@ -15,7 +15,9 @@ namespace :admin do
   get "/" => "homes#top"
   get "/customers/withdraw" => "customers#withdraw"
   resources :games, only: [:index, :show,:create, :edit, :update, :destroy]
-  resources :genres, only: [:index, :edit, :create, :update]
+  resources :genres, only: [:index,:new, :edit, :create, :update] # ジャンルの追加機能
+  resources :categories, only: [:index,:new, :edit, :create, :update]# カテゴリの追加機能
+  resources :platforms, only: [:index,:new, :edit, :create, :update]# プラットフォームの追加機能
 end
 
 scope module: :public do

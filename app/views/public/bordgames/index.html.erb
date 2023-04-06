@@ -1,19 +1,26 @@
-<div class="col-sm-2 px-sm-0" >
-        <%= link_to new_game_path do %>
-        <i class="fas fa-plus-circle"></i>ハード系ゲーム投稿
-        <% end %>
-        <%= link_to new_game_path do %>
-        <i class="fas fa-plus-circle"></i>テーブル系ゲーム投稿
-        <% end %>
-    </div>
-    <ul>
-  <% @bordgames.each do |bordgame| %>
-    <li>
-      <%= link_to bordgame.game_title, bordgame %>
-      <%= bordgame.introduct_title %>
-      <% if bordgame.image.attached? %>
-        <%= image_tag bordgame.image, size: "100x100" %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+<table class='table table-hover table-inverse'>
+  <thead>
+    <tr>
+      <th></th>
+      <th>ゲーム名</th>
+      <th>紹介</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <h1>テーブル系投稿一覧</h1>
+    <% @bordgames.each do |bordgame| %>
+      <tr>
+        <td><%= link_to(bordgame.customer_id) do %>
+            <% if bordgame.image.attached? %>
+            <%= image_tag bordgame.image, size: "100x100" %>
+            <% end %>
+        </td>
+        <td><%= link_to bordgame.game_title,bordgame, class: "game_#{bordgame.id}" %></td>
+        <td><%= bordgame.introduct_title %></td>
+        </td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>

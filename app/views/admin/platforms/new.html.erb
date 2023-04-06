@@ -1,0 +1,7 @@
+<h1>New Platform</h1>
+
+<%= form_for @platform, url: admin_platforms_path do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit "Create Platform" %>
+<% end %>

@@ -25,101 +25,13 @@
 
             <!--adminログイン時のヘッダー-->
             <% if admin_signed_in? %>
-              <li class="nav-item">
-                <%= link_to admin_games_path, class: 'btn btn-info mr-2' do %>
-                  <i class="fas fa-birthday-cake"></i>商品一覧
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to admin_customers_path, class: 'btn btn-info mr-2' do %>
-                  <i class="fas fa-users"></i>会員一覧
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to admin_orders_path, class: 'btn btn-info mr-2' do %>
-                  <i class="fas fa-list"></i>注文履歴一覧
-                <% end %>
-              </li>
-              <li class="nav-item">
-
-                <%= link_to admin_genres_path, class: 'btn btn-info mr-2' do%>
-                  <i class="fas fa-tags"></i>ジャンル一覧
-                <% end %>
-
-              </li>
-              <li class="nav-item">
-                <%= link_to destroy_admin_session_path, method: :get, class: 'btn btn-info' do %>
-                  <i class="fas fa-sign-out-alt"></i>ログアウト
-                <% end %>
-              </li>
-              <li class="mt-0">
-                <%= form_with url: admin_admin_search_path, method: :get, local: true do |f| %>
-                  <%= f.collection_select :word_for_search, Genre.all, :id, :genre_name %>
-                  <%= f.submit "検索",class: "btn btn-info btn-sm" %>
-                <% end %>
-              </li>
-
+            <%= render partial: 'layouts/header_admin' %>
             <!--customersログイン時のヘッダー-->
             <% elsif customer_signed_in? %>
-              <li class="nav-item mr-2">
-                ようこそ <%= link_to customers_path do %>
-                <strong><%= current_customer.name %></strong>
-                <% end %>
-                 さん
-              </li>
-              <li class="nav-item">
-                <%= link_to customers_path, class: 'btn btn-info mr-2' do %>
-                  <i class="fas fa-user"></i>マイページ
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to games_path, class: 'btn btn-info mr-2' do %>
-                  ハード系<i class="fas fa-desktop fa-lg" style="color: #ff0000;"></i>
-                <% end %>
-                <li class="nav-item">
-                <%= link_to bordgames_path, class: 'btn btn-info mr-2' do %>
-                  テーブル系<i class="fas fa-chess fa-lg" style="color: #00ff62;"></i>
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to destroy_customer_session_path, method: :get, class: 'btn btn-info' do %>
-                  <i class="fas fa-sign-out-alt"></i>ログアウト
-                <% end %>
-              </li>
-              
-
+            <%= render partial: 'layouts/header_customer' %>
             <!--ログイン前時のヘッダー-->
-              <% else %>
-              <li class="nav-item">
-                <%= link_to about_path, class: 'btn btn-info mr-2' do %>
-                  About<i class="fas fa-store-alt"></i>
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to games_path, class: 'btn btn-info mr-2' do %>
-                  ハード系<i class="fas fa-desktop fa-lg" style="color: #ff0000;"></i>
-                <% end %>
-                <li class="nav-item">
-                <%= link_to bordgames_path, class: 'btn btn-info mr-2' do %>
-                  テーブル系<i class="fas fa-chess fa-lg" style="color: #00ff62;"></i>
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to new_customer_registration_path, data: {"turbolinks" => false}, class: 'btn btn-info mr-2' do %>
-                  新規登録<i class="fas fa-user-plus"></i>
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to  new_customer_session_path, class: 'btn btn-info mr-2' do%>
-                  ログイン<i class="fas fa-sign-in-alt"></i>
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to  new_admin_session_path, class: 'btn btn-info' do%>
-                  管理者用<i class="fas fa-sign-in-alt"></i>
-                <% end %>
-              </li>
-              
+            <% else %>
+            <%= render partial: 'layouts/header' %>
             <% end %>
             </ul>
 
