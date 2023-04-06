@@ -1,0 +1,58 @@
+<div class="container">
+  <h2><%= @customer.name %>さんの会員詳細</h2>
+  <div class="row">
+    <div class="col-sm-6 px-sm-0 offset-sm-1">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th class="table-active">会員ID</th>
+            <td><%= @customer.id %></td>
+          </tr>
+          <tr>
+            <th class="table-active">お名前</th>
+            <td><%= @customer.name %></td>
+          </tr>
+          <tr>
+            <th class="table-active">生年月日</th>
+            <td><%= @customer.birthday %></td>
+          </tr>
+          <tr>
+            <th class="table-active">郵便番号</th>
+            <td>〒<%= @customer.post_code %></td>
+          </tr>
+          </tr>
+            <th class="table-active">都道府県</th>
+            <td><%= @customer.prefecture_code %></td>
+          </tr>
+           <tr>
+            <th class="table-active">住所</th>
+            <td><%= @customer.address %></td>
+          </tr>
+           <tr>
+            <th class="table-active">電話番号</th>
+            <td><%= @customer.telephone %></td>
+          </tr>
+           <tr>
+            <th class="table-active">メールアドレス</th>
+            <td><%= @customer.email %></td>
+          </tr>
+           <tr>
+            <th class="table-active">会員ステータス</th>
+            <td>
+              <% if @customer.withdrawal %>
+                <span class="text-secondary font-weight-bold">退会</span>
+              <% else %>
+                <span class="text-success font-weight-bold">有効</span>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-5"></div>
+        <%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success mr-5" %>
+      </div>
+      </div>
+        </div>
+      </div>
+</div>

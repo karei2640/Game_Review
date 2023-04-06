@@ -1,4 +1,5 @@
 class Genre < ApplicationRecord
-  has_many :genre_games
-  has_many :games, through: :genre_games
+  has_many :games
+  has_many :categories
+  has_many :platforms
 end

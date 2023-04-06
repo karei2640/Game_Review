@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_05_033649) do
+ActiveRecord::Schema.define(version: 2023_04_06_044319) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -65,13 +65,13 @@ ActiveRecord::Schema.define(version: 2023_04_05_033649) do
     t.text "overall_review", null: false
     t.integer "points", null: false
     t.date "release_date"
+    t.string "genre"
     t.string "platform"
     t.string "categorie"
     t.integer "price"
     t.integer "customer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "genre"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -131,32 +131,23 @@ ActiveRecord::Schema.define(version: 2023_04_05_033649) do
     t.text "overall_review", null: false
     t.integer "points", null: false
     t.date "release_date"
+    t.string "genre"
     t.string "platform"
     t.string "categorie"
     t.integer "price"
     t.integer "customer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "genre"
-  end
-
-  create_table "genre_games", force: :cascade do |t|
-    t.integer "genre_id", null: false
-    t.integer "game_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["game_id"], name: "index_genre_games_on_game_id"
-    t.index ["genre_id"], name: "index_genre_games_on_genre_id"
   end
 
   create_table "genres", force: :cascade do |t|
     t.string "name"
+    t.integer "genre_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "genre_id"
   end
 
-  create_table "type", force: :cascade do |t|
+  create_table "platforms", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -168,6 +159,4 @@ ActiveRecord::Schema.define(version: 2023_04_05_033649) do
   add_foreign_key "comments", "games"
   add_foreign_key "favorites", "customers"
   add_foreign_key "favorites", "games"
-  add_foreign_key "genre_games", "games"
-  add_foreign_key "genre_games", "genres"
 end

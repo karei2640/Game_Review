@@ -1,0 +1,39 @@
+<div class="category-index">
+  <div class="container mt-5 mb-5">
+    <div class="row">
+      <div class="col">
+        <h2>プレイ人数追加</h2>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <%= form_with model: @category, url: admin_categories_path, method: :post, local: true do |f| %>
+            <%= f.label :name, "プレイ人数" %>
+            <%= f.text_field :name, autofocus: true %>
+            <%= f.submit "新規登録", class:"btn btn-primary" %>
+            <% end %>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-5 mt-3">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>プレイ人数</th>
+                      <th colspan="1"></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <% @categories.each do |categorie| %>
+                        <tr>
+                          <td><%= categorie.name %></td>
+                          <td><%#= link_to "編集する", edit_admin_categories_path(category), class:"btn btn-success"%></td>
+                        </tr>
+                        <% end %>
+                        <%#= paginate @categories %>
+                      </tbody>
+                </table>
+             </div>
+        </div>
+    </div>
+</div>
