@@ -1,0 +1,23 @@
+<h1>Edit Game</h1>
+
+<%= form_with(model: @game, url: game_path(@game), method: :patch) do |form| %>
+  <%= form.label :game_title %>
+  <%= form.text_field :game_title %>
+
+  <%= form.label :platform %>
+  <%= form.text_field :platform %>
+
+  <%= form.label :categorie %>
+  <%= form.text_field :categorie %>
+
+  <%= form.label :genre %>
+  <%= form.text_field :genre %>
+
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+
+  <%= form.label :image %>
+  <%= form.file_field :image %>
+
+  <%= form.submit %>
+<% end %>

@@ -6,6 +6,11 @@
   </div>
   <%= render "public/shared/error_messages", resource: resource %>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <!--画像の編集-->
+  <div class="row">
+    <div class="col-3 offset-md-1"><%= f.label :プロフィール画像 %></div>
+    <div class="col-3"><%= f.file_field :profile_image, class: "form-control-file user_image", accept: 'image/*' %></div>
+  </div>
   <!--名前の編集-->
     <div class="row">
       <div class="col-3 offset-md-1"><%= f.label "お名前" %></div>

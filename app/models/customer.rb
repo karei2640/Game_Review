@@ -3,8 +3,12 @@ class Customer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         belongs_to :user
-         has_many :comments
+         
+         has_many :game_comments, dependent: :destroy
+         has_many :bordgame_comments, dependent: :destroy
+         has_many :games
+         has_many :bordgames
+         has_one_attached :profile_image
   with_options presence: true do
   validates :name
   validates:birthday
@@ -17,6 +21,10 @@ class Customer < ApplicationRecord
   
   def active_for_authentication?
     super && (withdrawal == false)
+  end
+  
+  def get_profile_image
+    (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
   
 end

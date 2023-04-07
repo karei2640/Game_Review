@@ -1,0 +1,39 @@
+<div class="genre-index">
+  <div class="container mt-5 mb-5">
+    <div class="row">
+      <div class="col">
+        <h2>テーブルジャンル追加</h2>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <%= form_with model: @table, url: admin_tables_path, method: :post, local: true do |f| %>
+            <%= f.label :name, "テーブル名" %>
+            <%= f.text_field :name %>
+            <%= f.submit "新規登録", class:"btn btn-primary" %>
+            <% end %>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-5 mt-3">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>ジャンル一覧</th>
+                      <th colspan="1"></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <% @tables.each do |table| %>
+                        <tr>
+                          <td><%= table.name %></td>
+                          <td><%#= link_to "編集する", edit_admin_table_path(table), class:"btn btn-success"%></td>
+                        </tr>
+                        <% end %>
+                        <%#= paginate @tables %>
+                      </tbody>
+                </table>
+             </div>
+        </div>
+    </div>
+</div>

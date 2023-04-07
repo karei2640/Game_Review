@@ -1,0 +1,2 @@
+class Tableplat < ApplicationRecord
+end

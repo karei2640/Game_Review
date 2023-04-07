@@ -4,7 +4,7 @@ class CreateGames < ActiveRecord::Migration[6.1]
       t.string :image
       t.string :genre_id
       t.string :platform_id
-      t.string :categorie_id
+      t.string :category_id
       t.string :game_title, null: false
       t.text :introduct_title, null: false
       t.text :introduct, null: false
@@ -15,7 +15,7 @@ class CreateGames < ActiveRecord::Migration[6.1]
       t.date :release_date
       t.string :genre
       t.string :platform
-      t.string :categorie
+      t.string :category
       t.integer :price
       t.integer :customer_id
 

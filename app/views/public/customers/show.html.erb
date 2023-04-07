@@ -1,41 +1,97 @@
-<div class="container">
-  <div class="row my-3">
-    <div class="col-sm-8 px-sm-0 offset-sm-1">
-      <h2>マイページ</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3 px-sm-0 offset-sm-1">
-      <h4>登録情報</h4>
-    </div>
-    <div class="col-sm-4 px-sm-0">
-      <%= link_to "編集する", edit_customers_path, class:"btn btn-success px-4 mb-2" %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6 px-sm-0 offset-sm-1">
-      <table class="table table-bordered">
-        <tr>
-          <th class="table-active">お名前</th>
-          <td><%= @customer.name %></td>
-        </tr>
-          <th class="table-active">郵便番号</th>
-          <td>〒<%= @customer.post_code %></td>
-        </tr>
-        </tr>
-          <th class="table-active">都道府県</th>
-          <td><%= @customer.prefecture_code %></td>
-        </tr>
-        <tr>
-          <th class="table-active">住所(番地)</th>
-          <td><%= @customer.address %></td>
-        </tr>
-        <tr>
-          <th class="table-active">電話番号</th>
-          <td><%= @customer.telephone %></td>
-        </tr>
-        <tr>
-          <th class="table-active">メールアドレス</th>
-          <td><%= @customer.email %></td>
-        </tr>
-      </table>
+  <div class='container px-5 px-sm-0'>
+    <div class='row'>
+     <div class='col-md-3'>
+       <h2>マイページ</h2>
+       <%= render 'info', customer: @customer %>
+       </div>
+       <div class='col-md-8 offset-md-1'>
+       <% if @games.present? || @bordgames.present? %>
+  <h2>投稿一覧</h2>
+  <table class='table table-hover table-inverse'>
+    <thead>
+      <tr>
+        <th></th>
+        <th>ゲーム名</th>
+        <th>ジャンル　　</th>
+        <th>ゲーム紹介</th>
+        <th>閲覧数</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @games.present? %>
+        <% @games.each do |game| %>
+          <tr>
+            <td><%= link_to customers_path(game.customer) do %>
+              <%= image_tag game.customer.get_profile_image, size:'50x50' %>
+              <% end %>
+            </td>
+            <% if game.game_title.length > 10 %>
+              <td><%= link_to "#{game.game_title.slice(0, 10)}...", game, class: "game_#{game.id}" %></td>
+            <% else %>
+              <td><%= link_to game.game_title, game, class: "game_#{game.id}" %></td>
+            <% end %>
+              <td><%= game.genre.name %></td>
+            <% if game.introduct_title.length > 10 %>
+              <td><%= "#{game.introduct_title.slice(0, 10)}..." %></td>
+            <% else %>
+              <td><%= game.introduct_title %></td>
+            <% end %>
+              <td><p class="view-count">view: <%#= game.view_counts.count %></p></td>
+            <td class=<%#= "favorite-" + game.id.to_s %> >
+              <%#= render "favorites/btn", game: game %>
+            </td>
+            <td><%#= render "game_comments/counter", game: game %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      <% if @bordgames.present? %>
+        <% @bordgames.each do |bordgame| %>
+          <tr>
+            <td><%= link_to customers_path(bordgame.customer) do %>
+              <%= image_tag bordgame.customer.get_profile_image, size:'50x50' %>
+              <% end %>
+            </td>
+            <% if bordgame.game_title.length > 10 %>
+              <td><%= link_to bordgame.game_title.slice(0, 10) + "...",bordgame, class: "bordgame_#{bordgame.id}" %></td>
+            <% else %>
+              <td><%= link_to bordgame.game_title, bordgame, class: "bordgame_#{bordgame.id}" %></td>
+            <% end %>
+              <td><%= bordgame.table.name %></td>
+            <% if bordgame.introduct_title.length > 20 %>
+              <td><%= "#{bordgame.introduct_title.slice(0, 20)}..." %></td>
+            <% else %>
+              <td><%= bordgame.introduct_title %></td>
+           <% end %>
+              <td><p class="view-count">view: <%#= bordgame.view_counts.count %></p></td>
+
+            <td class=<%#= "favorite-" + bordgame.id.to_s %> >
+              <%#= render "favorites/btn", bordgame: bordgame %>
+            </td>
+            <td><%#= render "book_comments/counter", bordgame: bordgame %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h2>投稿一覧</h2>
+  <table class='table table-hover table-inverse'>
+    <thead>
+      <tr>
+        <th></th>
+        <th>ゲーム名</th>
+        <th>ゲーム紹介</th>
+        <th>タイプ</th>
+        <th>ジャンル</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td><strong>投稿がありません</strong></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
