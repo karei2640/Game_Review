@@ -3,4 +3,10 @@ class Admin < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         
+         has_many :view_counts, dependent: :destroy
+         has_many :game_comments, dependent: :destroy
+         has_many :bordgame_comments, dependent: :destroy
+         has_many :games
+         has_many :bordgames
 end

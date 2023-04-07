@@ -1,0 +1,70 @@
+
+<div class="container">
+	<div class="row ">
+    <div class="col">
+      <h2>ゲーム投稿詳細</h2>
+    </div>
+  </div>
+    <div class="col">
+      <table class="table table-bordered">
+        <% if @game.image.attached? %>
+           <tr><%= image_tag @game.image, size:'200x200' if @game.image.attached? %></tr>
+        <% else %>
+            <tr><%= image_tag 'no_image', size: "200x200" %></tr>
+        <% end %>
+        <% if current_customer.admin? || @game.customer == current_customer %>
+        <tr>
+          <th><%= link_to "編集　", edit_game_path(@game), class:"btn btn-success btn-lg" %></th>
+          <td><%= button_to '削除',  game_path(@game.id), method: :delete, data: { confirm: '本当に消しますか？' }, class:"btn btn-danger btn-lg"  %></td>
+           <% end %>
+        </tr>
+        <tr>
+           <th>投稿者 :<strong><%= link_to @game.customer.name, customers_path(@game.customer.id) %></strong></th>
+           <th>ゲーム名:　<strong><%= @game.game_title %></strong></th>
+        </tr>
+
+        <tr>
+          <th>タイプ　<strong><%= @game.platform.name %></strong></th>
+          <th>ジャンル:<strong><%= @game.genre.name %></strong>　
+          プレイ人数:　<strong><%= @game.category.name %></strong></th>
+        </tr>
+        <tr>
+          <th>税込価格(税抜)</th>　
+          <th><strong><%= (@game.price * 1.1).floor.to_s(:delimited) %>(<%= @game.price %>)円</strong></th>
+        </tr>
+        <tr>
+          <th>商品説明</th>
+          <td><%= @game.introduct %></td>
+        </tr>
+        <tr>
+          <th>発売日</th>
+          <td><strong><%= @game.release_date %></strong></td>
+        </tr>
+        <tr>
+          <th>タイトル</th>
+          <td><%= @game.introduct_title %></td>
+        </tr>
+        <tr>
+          <th>Ｇｏｏｄ</th>
+          <td><%= @game.good_introduct %></td>
+        </tr>
+        <tr>
+          <th>Ｂａｄ</th>
+          <td><%= @game.bad_introduct %></td>
+        </tr>
+        <tr>
+          <th>総合評価</th>
+          <td><%= @game.overall_review %></td>
+        </tr>
+      </table>
+      <div class="book-comments-index">
+        <%= render "comment", game: @game %>
+      </div>
+      
+        </td>
+      </tr>
+      </tbody>
+      </table>
+    </div>
+  </div>
+</div>

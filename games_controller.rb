@@ -1,7 +1,7 @@
-class Public::GamesController < ApplicationController
-  
+class Admin::GamesController < ApplicationController
   def index
-    @games = Game.all
+    @games = Game.page(params[:page]).per(5)
+    @bordgames = Bordgame.page(params[:page]).per(5)
   end
   
   def show
@@ -20,7 +20,7 @@ class Public::GamesController < ApplicationController
     @game = Game.new(game_params)
     @game.customer_id = current_customer.id
     if @game.save
-      redirect_to (@game)
+      redirect_to game_path(@game)
     else
       render 'new'
     end
@@ -63,5 +63,6 @@ class Public::GamesController < ApplicationController
     end
   end
 end 
+
 
 

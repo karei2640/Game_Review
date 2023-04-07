@@ -1,0 +1,64 @@
+<div class="container">
+	<div class="row ">
+    <div class="col">
+      <h2>ゲーム投稿詳細</h2>
+    </div>
+  </div>
+    <div class="col">
+      <table class="table table-bordered">
+        <% if @bordgame.image.attached? %>
+           <tr><%= image_tag @bordgame.image, size:'200x200' if @bordgame.image.attached? %></tr>
+        <% else %>
+            <tr><%= image_tag 'no_image', size: "200x200" %></tr>
+        <% end %>
+        <% if current_customer.admin? || @bordgame.customer == current_customer %>
+        <tr>
+          <th><%= link_to "編集　", edit_bordgame_path(@bordgame), class:"btn btn-success btn-lg" %></th>
+          <td><%= button_to '削除',  bordgame_path(@bordgame.id), method: :delete, data: { confirm: '本当に消しますか？' }, class:"btn btn-danger btn-lg"  %></td>
+          <% end %>
+        <tr>
+           <th>投稿者<strong><%= link_to @bordgame.customer.name, customers_path(@bordgame.customer) %></strong></th>
+           <th>ゲーム名:　<strong><%= @bordgame.game_title %></strong></th>
+        </tr>
+
+        <tr>
+          <th>タイプ　<strong><%= @bordgame.tableplat.name %></strong></th>
+          <th>ジャンル:<strong><%= @bordgame.table.name %></strong>　　
+          プレイ人数:　<strong><%= @bordgame.category.name %></strong></th>
+        </tr>
+        <tr>
+          <th>税込価格(税抜)</th>　
+          <th><strong><%= (@bordgame.price * 1.1).floor.to_s(:delimited) %>(<%= @bordgame.price %>)円</strong></th>
+        </tr>
+        <tr>
+          <th>商品説明</th>
+          <td><%= @bordgame.introduct %></td>
+        </tr>
+        <tr>
+          <th>発売日</th>
+          <td><strong><%= @bordgame.release_date %></strong></td>
+        </tr>
+        <tr>
+          <th>タイトル</th>
+          <td><%= @bordgame.introduct_title %></td>
+        </tr>
+        <tr>
+          <th>Ｇｏｏｄ</th>
+          <td><%= @bordgame.good_introduct %></td>
+        </tr>
+        <tr>
+          <th>Ｂａｄ</th>
+          <td><%= @bordgame.bad_introduct %></td>
+        </tr>
+        <tr>
+          <th>総合評価</th>
+          <td><%= @bordgame.overall_review %></td>
+        </tr>
+        <div class="book-comments-index">
+        <%= render "comment", bordgame: @bordgame %>
+         </div>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

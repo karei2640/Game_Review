@@ -19,7 +19,7 @@
            <% end %>
         </tr>
         <tr>
-           <th>投稿者<strong><%= link_to @game.customer.name, customers_path(@game.customer) %></strong></th>
+           <th>投稿者 :<strong><%= link_to @game.customer.name, customers_path(@game.customer.id) %></strong></th>
            <th>ゲーム名:　<strong><%= @game.game_title %></strong></th>
         </tr>
 

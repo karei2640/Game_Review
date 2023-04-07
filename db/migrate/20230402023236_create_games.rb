@@ -18,6 +18,7 @@ class CreateGames < ActiveRecord::Migration[6.1]
       t.string :category
       t.integer :price
       t.integer :customer_id
+      t.integer :admin_id
 
       t.timestamps
     end

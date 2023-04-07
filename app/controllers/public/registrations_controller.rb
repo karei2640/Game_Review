@@ -59,6 +59,10 @@ class Public::RegistrationsController < Devise::RegistrationsController
     customers_path
   end
   
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
+  
   private
 
   def account_update_params

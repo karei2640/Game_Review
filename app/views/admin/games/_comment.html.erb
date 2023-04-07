@@ -1,0 +1,21 @@
+
+  <tbody>
+    <strong>コメント件数：<%= @game.game_comments.count %></strong>
+    <% game.game_comments.each do |game_comment| %>
+    <tr>
+      <td><%= image_tag game_comment.customer.get_profile_image,size: "20x20" %></td>
+      <td><%= game_comment.customer.name %></td>
+      <td><%= game_comment.comment %></td>
+      <td>
+        <% if game_comment.customer == current_customer %>
+        <%= link_to "削除", game_comment_path(game_comment.game,game_comment), method: :delete, class: "btn btn-sm btn-danger p-0 p-1", style: "font-size: 8px;" %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+    <%#= form_with model:[game,@game_comment] do |f| %>
+    <%#= f.text_area :game_comment, placeholder: "コメントをここに" %>
+    <%#= f.submit "送信" %>
+    <%# end %>
+  </tbody>
+</table>

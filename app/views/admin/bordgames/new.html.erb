@@ -1,16 +1,16 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8 px-sm-0 offset-sm-1">
-      <h2>ゲーム情報編集</h2>
+      <h2>テーブルゲーム新規登録</h2>
     </div>
-  </div>
-   <div class="row">  
-   <%= form_with model: @game, url: game_path, method: :patch, local: true do |f| %>
-   <table>
+    <div class= "row">
+        <div class="col-sm-2 px-sm-0" >
+        <%= form_with model: @bordgame,url: bordgames_path do |f| %>
+        <table>
             <tr>
                 <div class= "from-group">
-                    <th>ゲーム画像<% f.label :ゲーム画像 %></th>
-                    <th><%= f.file_field :image, accept: 'image/*' %></th>
+                    <th><%= f.label :ゲーム画像 %></th>
+                    <th><%= f.file_field :image %></th>
                 </div>
             </tr>
             <tr>
@@ -19,12 +19,14 @@
                     <td><%= f.text_field :game_title,maxlength: 150,size: "80x3", placeholder:"タイトル:150文字以内" %></td>
                 </div>
             </tr>
+            
             <tr>
-                <th><%= f.label :タイプ %></th>
-                <td><%= f.collection_select :platform_id, Platform.all, :id, :name, :prompt => "--タイプ選択--" %>
-                <%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "--ジャンル選択--" %>
-                <%= f.collection_select :category_id, Category.all, :id, :name, :prompt => "--プレイ人数--" %></td>
-            </tr>
+                <th><%= f.label :ジャンル %></th>
+                <td><%= f.collection_select :tableplat_id, Tableplat.all, :id, :name, :prompt => "--タイプ選択--" %>
+                    <%= f.collection_select :table_id, Table.all, :id, :name, :prompt => "--ジャンル選択--" %>
+                    <%= f.collection_select :category_id, Category.all, :id, :name, :prompt => "--プレイ人数--" %>
+                    
+          </td>
             <tr>
                 <div class="form-group">
                     <th><%= f.label :点数 %></th>
@@ -32,13 +34,20 @@
                 </div>
             </tr>
             <tr>
+                <div class="form-group">
+                    <th><%= f.label :発売日 %></th>
+                    <td><%= f.date_select :release_date, {start_year: 1960, end_year: 2023,
+                        include_blank: true, use_two_digit_numbers: true},
+                        {class: "input-tab release_date-select"}%></td>
+                </div>
+            </tr>
             <tr>
                 <div class="form-group">
                     <th><%= f.label :価格 %></th>
                     <td><%= f.text_field :price, placeholder:"0000" %>円</td>
                 </div>
             </tr>
-             <tr>
+            <tr>
                 <div class= "from-group">
                     <th><%= f.label :タイトル %></th>
                     <td><%= f.text_area :introduct_title, maxlength: 60,size: "80x3", placeholder:"紹介文タイトル60文字以内" %></td>
@@ -53,7 +62,7 @@
             <tr>
                 <div class="form-group">
                     <th><%= f.label :Ｇｏｏｄ %></th>
-                    <td><%= f.text_area :good_introduct,maxlength: 180, size: "80x4", placeholder:"良い点:120文字以内" %></td>
+                    <td><%= f.text_area :good_introduct,maxlength: 180, size: "80x4", placeholder:"良い点:120文字以内"%></td>
                 </div>
             </tr>
             <tr>
@@ -70,12 +79,13 @@
             </tr>
             </tr>
             </tr>
-           <tr>
-              <div class="form-action">
-                <td><%= f.submit "変更を保存", class:"btn btn-success" %></td>
-              </div>
+            <tr>
+                <div class="form-action">
+                    <th>　　　　　</th>
+                    <th><%= f.submit "登録する",class:"btn btn-success" %></th>
+                </div>
             </tr>
-            <% end %>
-   </table>
-   </div>
-</div>
+        <% end %>
+        </table>
+        </div>
+    </div>
