@@ -1,0 +1,2 @@
+module BordgameCommentsHelper
+end

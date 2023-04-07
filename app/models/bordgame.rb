@@ -1,10 +1,11 @@
 class Bordgame < ApplicationRecord
-    has_many :comments
-    has_one :game
-    has_many :genre_games
-    has_many :genres, through: :genre_games
-    has_many :genres
-    has_many :categories
-    has_many :platforms
+  belongs_to :customer
+  has_one :game
+  has_many :genre_games
+  belongs_to :table
+  belongs_to :category
+  belongs_to :tableplat
+  
+    has_many :bordgame_comments, dependent: :destroy
     has_one_attached :image
 end

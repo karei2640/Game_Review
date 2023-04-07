@@ -3,6 +3,7 @@
     <tr>
       <th></th>
       <th>ゲーム名</th>
+      <th>タイプ</th>
       <th>紹介</th>
       <th colspan="3"></th>
     </tr>
@@ -11,16 +12,28 @@
     <h1>テーブル系投稿一覧</h1>
     <% @bordgames.each do |bordgame| %>
       <tr>
-        <td><%= link_to(bordgame.customer_id) do %>
+        <td><%= link_to(bordgame) do %>
             <% if bordgame.image.attached? %>
             <%= image_tag bordgame.image, size: "100x100" %>
             <% end %>
         </td>
-        <td><%= link_to bordgame.game_title,bordgame, class: "game_#{bordgame.id}" %></td>
-        <td><%= bordgame.introduct_title %></td>
-        </td>
+        <% if bordgame.game_title.length > 10 %>
+        <td><%= link_to bordgame.game_title.slice(0, 10) + "...",bordgame, class: "bordgame_#{bordgame.id}" %></td>
+        <% else %>
+          <td><%= link_to bordgame.game_title, bordgame, class: "bordgame_#{bordgame.id}" %></td>
+        <% end %>
+          <td><%= bordgame.tableplat.name %></td>
+        <% if bordgame.introduct_title.length > 20 %>
+            <td><%= "#{bordgame.introduct_title.slice(0, 20)}..." %></td>
+         <% else %>
+            <td><%= bordgame.introduct_title %></td>
+         <% end %>
+        <td class=<%#= "favorite-" + bordgame.id.to_s %> >
+           <%#= render "favorites/btn", bordgame: bordgame %></td>
+        <td><%#= render "game_comments/counter", bordgame: bordgame %></td>
+        <td><p class="view-count">閲覧数: <%#= bordgame.view_counts.count %></p></td>
       </tr>
     <% end %>
-    <% end %>
-  </tbody>
+  </tbody> 
+  <% end %>
 </table>

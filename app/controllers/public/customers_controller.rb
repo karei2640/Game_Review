@@ -3,6 +3,8 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = current_customer
+    @games = @customer.games
+    @bordgames = @customer.bordgames
   end
   
   def index
@@ -34,8 +36,10 @@ class Public::CustomersController < ApplicationController
   private
 
   def customer_params
-  params.require(:customer).permit(:name, :birthday, :post_code, :prefecture_code, :address, :telephone)
+    params.require(:customer).permit(:name, :profile_image, :birthday, :post_code, :prefecture_code, :address, :telephone, :email, :password, :password_confirmation)
   end
+
+
 
   
 end

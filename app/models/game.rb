@@ -1,10 +1,13 @@
 class Game < ApplicationRecord
-    has_many :comments
-    has_one :bordgame
-    has_many :genre_games
-    has_many :genres, through: :genre_games
-    has_many :genres
-    has_many :categories
-    has_many :platforms
-    has_one_attached :image
+  belongs_to :customer
+  has_one :bordgame
+  has_many :genre_games
+  belongs_to :genre
+  belongs_to :category
+  belongs_to :platform
+  
+  has_many :game_comments, dependent: :destroy
+  has_one_attached :image
+  
+  
 end

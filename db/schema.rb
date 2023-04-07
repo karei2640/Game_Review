@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_06_044319) do
+ActiveRecord::Schema.define(version: 2023_04_07_051531) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,11 +52,19 @@ ActiveRecord::Schema.define(version: 2023_04_06_044319) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "bordgame_comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "customers_id"
+    t.integer "bordgame_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "bordgames", force: :cascade do |t|
     t.string "image"
-    t.string "genre_id"
-    t.string "platform_id"
-    t.string "categorie_id"
+    t.string "table_id"
+    t.string "tableplat_id"
+    t.string "category_id"
     t.string "game_title", null: false
     t.text "introduct_title", null: false
     t.text "introduct", null: false
@@ -67,7 +75,7 @@ ActiveRecord::Schema.define(version: 2023_04_06_044319) do
     t.date "release_date"
     t.string "genre"
     t.string "platform"
-    t.string "categorie"
+    t.string "category"
     t.integer "price"
     t.integer "customer_id"
     t.datetime "created_at", precision: 6, null: false
@@ -118,11 +126,19 @@ ActiveRecord::Schema.define(version: 2023_04_06_044319) do
     t.index ["game_id"], name: "index_favorites_on_game_id"
   end
 
+  create_table "game_comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "customer_id"
+    t.integer "game_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "games", force: :cascade do |t|
     t.string "image"
     t.string "genre_id"
     t.string "platform_id"
-    t.string "categorie_id"
+    t.string "category_id"
     t.string "game_title", null: false
     t.text "introduct_title", null: false
     t.text "introduct", null: false
@@ -133,7 +149,7 @@ ActiveRecord::Schema.define(version: 2023_04_06_044319) do
     t.date "release_date"
     t.string "genre"
     t.string "platform"
-    t.string "categorie"
+    t.string "category"
     t.integer "price"
     t.integer "customer_id"
     t.datetime "created_at", precision: 6, null: false
@@ -149,6 +165,20 @@ ActiveRecord::Schema.define(version: 2023_04_06_044319) do
 
   create_table "platforms", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tableplats", force: :cascade do |t|
+    t.string "name"
+    t.integer "tableplat_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tables", force: :cascade do |t|
+    t.string "name"
+    t.integer "table_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
