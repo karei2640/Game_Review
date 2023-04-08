@@ -1,6 +1,5 @@
-class Admin::GamesController < ApplicationController
+class Admin::BordgamesController < ApplicationController
   def index
-    @games = Game.all
     @bordgames = Bordgame.all
   end
   

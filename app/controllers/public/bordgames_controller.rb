@@ -5,6 +5,9 @@ class Public::BordgamesController < ApplicationController
 
   def show
     @bordgame = Bordgame.find(params[:id])
+    unless current_customer && ViewCount.find_by(customer_id: current_customer.id, bordgame_id: @bordgame.id)
+       ViewCount.create(customer_id: current_customer&.id, bordgame_id: @bordgame.id)
+    end
     @bordgame_comment = BordgameComment.new
   end
 

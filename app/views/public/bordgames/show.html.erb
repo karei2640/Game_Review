@@ -17,6 +17,11 @@
           <td><%= button_to '削除',  bordgame_path(@bordgame.id), method: :delete, data: { confirm: '本当に消しますか？' }, class:"btn btn-danger btn-lg"  %></td>
           <% end %>
         <tr>
+        <% if current_admin.present? %>
+        <tr>
+          <td><%= button_to '削除',  bordgame_path(@bordgame.id), method: :delete, data: { confirm: '本当に消しますか？' }, class:"btn btn-danger btn-lg"  %></td>
+          <% end %>
+        <tr>
            <th>投稿者<strong><%= link_to @bordgame.customer.name, customers_path(@bordgame.customer) %></strong></th>
            <th>ゲーム名:　<strong><%= @bordgame.game_title %></strong></th>
         </tr>
@@ -54,7 +59,7 @@
           <th>総合評価</th>
           <td><%= @bordgame.overall_review %></td>
         </tr>
-        <div class="book-comments-index">
+        <div class="bordgame-comments-index">
         <%= render "comment", bordgame: @bordgame %>
          </div>
         </tr>

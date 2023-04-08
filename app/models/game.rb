@@ -5,7 +5,7 @@ class Game < ApplicationRecord
   belongs_to :genre
   belongs_to :category
   belongs_to :platform
-  
+  has_many :view_counts, dependent: :destroy
   has_many :game_comments, dependent: :destroy
   has_one_attached :image
   
