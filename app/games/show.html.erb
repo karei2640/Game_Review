@@ -18,13 +18,8 @@
           <td><%= button_to '削除',  game_path(@game.id), method: :delete, data: { confirm: '本当に消しますか？' }, class:"btn btn-danger btn-lg"  %></td>
            <% end %>
         </tr>
-        <% if current_admin.present? %>
         <tr>
-          <td><%= button_to '削除',  game_path(@game.id), method: :delete, data: { confirm: '本当に消しますか？' }, class:"btn btn-danger btn-lg"  %></td>
-          <% end %>
-        </tr>
-        <tr>
-           <th>投稿者 :<strong><%= link_to @game.customer.name, customers_path(@game.customer.id) %></strong></th>
+           <th>投稿者<strong><%= link_to @game.customer.name, customers_path(@game.customer) %></strong></th>
            <th>ゲーム名:　<strong><%= @game.game_title %></strong></th>
         </tr>
 
@@ -62,7 +57,7 @@
           <td><%= @game.overall_review %></td>
         </tr>
       </table>
-      <div class="game-comments-index">
+      <div class="book-comments-index">
         <%= render "comment", game: @game %>
       </div>
       

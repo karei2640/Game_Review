@@ -37,7 +37,7 @@
             <% else %>
               <td><%= game.introduct_title %></td>
             <% end %>
-              <td><p class="view-count">view: <%#= game.view_counts.count %></p></td>
+              <td><p class="view-count">view: <%= game.view_counts.count %></p></td>
             <td class=<%#= "favorite-" + game.id.to_s %> >
               <%#= render "favorites/btn", game: game %>
             </td>
@@ -63,7 +63,7 @@
             <% else %>
               <td><%= bordgame.introduct_title %></td>
            <% end %>
-              <td><p class="view-count">view: <%#= bordgame.view_counts.count %></p></td>
+              <td><p class="view-count">view: <%= bordgame.view_counts.count %></p></td>
 
             <td class=<%#= "favorite-" + bordgame.id.to_s %> >
               <%#= render "favorites/btn", bordgame: bordgame %>

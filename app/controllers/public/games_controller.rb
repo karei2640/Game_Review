@@ -6,6 +6,10 @@ class Public::GamesController < ApplicationController
   
   def show
     @game = Game.find(params[:id])
+      unless current_customer && ViewCount.find_by(customer_id: current_customer.id, game_id: @game.id)
+       ViewCount.create(customer_id: current_customer&.id, game_id: @game.id)
+      end
+
     @game_comment = GameComment.new
   end
   
