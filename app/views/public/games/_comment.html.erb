@@ -1,21 +1,41 @@
-
-  <tbody>
-    <strong>コメント件数：<%= @game.game_comments.count %></strong>
-    <% game.game_comments.each do |game_comment| %>
-    <tr>
-      <td><%= image_tag game_comment.customer.get_profile_image,size: "20x20" %></td>
-      <td><%= game_comment.customer.name %></td>
-      <td><%= game_comment.comment %></td>
-      <td>
-        <% if game_comment.customer == current_customer %>
-        <%= link_to "削除", game_comment_path(game_comment.game,game_comment), method: :delete, class: "btn btn-sm btn-danger p-0 p-1", style: "font-size: 8px;" %>
-        <% end %>
-      </td>
-    </tr>
-    <% end %>
-    <%= form_with model:[game,@game_comment] do |f| %>
-    <%= f.text_area :game_comment, placeholder: "コメントをここに" %>
-    <%= f.submit "送信" %>
-    <% end %>
-  </tbody>
-</table>
+<table class='table table-hover table-inverse'>
+          <thead>
+            <tr>
+              <th>コメント一覧</th>
+              <th>投稿日</th>
+              <th>コメント</th>
+              <th></th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @game.comments.each do |comment| %>
+          <tr>
+            <% if customer_signed_in? %>
+            <td>投稿者：<%= link_to "#{comment.customer.name}さん", customer_path(comment.customer) %></td>
+            <% else %> 
+            <td>投稿者：<%= "#{comment.customer.name}さん" %></td>
+            <% end %>
+            <td>投稿日：<%= comment.created_at.strftime('%Y/%m/%d') %></td>
+            <th>コメント：<%= comment.comment %></th>
+            <td>
+              <% if comment.customer == current_customer %>
+              <%= link_to "削除", game_game_comment_path(comment.game,comment), method: :delete, class: "btn btn-lg btn-danger p-0 p-1", style: "font-size: 8px;", data: { confirm: "本当に削除しますか？" } %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+          <td></td>
+          <td></td>
+          <td>
+          <% if customer_signed_in? %>
+          <%= form_with model:[@comment], url: game_game_comments_path(@game) do |f| %>
+          <%= f.text_area :comment,maxlength: 100, size: "95x4", placeholder:"コメントをここに(1000文字以内)" %>
+          <%= f.submit "送信" %>
+          <% end %>
+          <% end %>
+          <% if @comment.parent_comment_id %>
+            <%= form.hidden_field :parent_comment_id, value: @comment.parent_comment_id %>
+          <% end %>
+          </td>
+        </tbody>  

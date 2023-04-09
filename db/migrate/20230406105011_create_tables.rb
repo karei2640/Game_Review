@@ -6,5 +6,12 @@ class CreateTables < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    Table.create(name: "ボード")
+    Table.create(name: "カード")
+    Table.create(name: "タイル")
+    Table.create(name: "ダイス")
+    Table.create(name: "パズル")
+    Table.create(name: "立体")
+    Table.create(name: "その他")
   end
 end

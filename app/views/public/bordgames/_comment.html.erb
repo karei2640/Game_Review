@@ -1,21 +1,36 @@
-
-  <tbody>
-    <strong>コメント件数：<%= @bordgame.bordgame_comments.count %></strong>
-    <% bordgame.bordgame_comments.each do |bordgame_comment| %>
+<table class='table table-hover table-inverse'>
+  <thead>
     <tr>
-      <td><%= image_tag bordgame_comment.customer.get_profile_image,size: "20x20" %></td>
-      <td><%= bordgame_comment.customer.name %></td>
-      <td><%= bordgame_comment.comment %></td>
+     <th>コメント一覧</th>
+     <th>投稿日</th>
+     <th>コメント</th>
+     <th></th>
+     <th colspan="3"></th>
+    </tr>
+   </thead>
+   <tbody>    
+    <% @bordgame.bordgame_comments.each do |bordgame_comment| %>
+    <tr>
+      <% if customer_signed_in? %>
+      <td>投稿者：<%= link_to "#{bordgame_comment.customer.name}さん", customer_path(bordgame_comment.customer) %></td>
+      <% else %> 
+      <td>投稿者：<%= "#{bordgame_comment.customer.name}さん" %></td>
+      <% end %>
+      <td>投稿日：<%= bordgame_comment.created_at.strftime('%Y/%m/%d') %><%= bordgame_comment.comment %></td><br>
+      <td><%= bordgame_comment.bordgame_comment %></td>
       <td>
         <% if bordgame_comment.customer == current_customer %>
-        <%= link_to "削除", bordgame_comment_path(bordgame_comment.bordgame,bordgame_comment), method: :delete, class: "btn btn-sm btn-danger p-0 p-1", style: "font-size: 8px;" %>
+        <%= link_to "削除", game_bordgame_comment_path(bordgame_comment.bordgame,bordgame_comment), method: :delete, class: "btn btn-sm btn-danger p-0 p-1", style: "font-size: 8px;", data: { confirm: "本当に削除しますか？" } %>
         <% end %>
       </td>
     </tr>
     <% end %>
-    <%= form_with model:[game,@game_comment] do |f| %>
-    <%= f.text_area :bordgame_comment, placeholder: "コメントをここに" %>
+    <td></td>
+    <td></td>
+    <td>
+    <%= form_with model:[@comment], url: game_bordgame_comments_path(@bordgame) do |f| %>
+    <%= f.text_area :bordgame_comment,maxlength: 100, size: "80x4", placeholder:"コメントをここに(1000文字以内)" %>
     <%= f.submit "送信" %>
     <% end %>
-  </tbody>
-</table>
+   </td>
+</tbody>  

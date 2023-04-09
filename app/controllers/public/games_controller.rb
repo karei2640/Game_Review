@@ -2,15 +2,19 @@ class Public::GamesController < ApplicationController
   
   def index
     @games = Game.all
+    @latest_games = Game.order(created_at: :desc).limit(10)
+    @popular_games = Game.joins(:view_counts).group(:id).order('count(view_counts.id) desc').limit(10)
+    @customer = current_customer
   end
   
   def show
     @game = Game.find(params[:id])
-      unless current_customer && ViewCount.find_by(customer_id: current_customer.id, game_id: @game.id)
-       ViewCount.create(customer_id: current_customer&.id, game_id: @game.id)
-      end
-
-    @game_comment = GameComment.new
+      if current_customer
+       current_customer.view_counts.create(game_id: @game.id)
+      else
+        ViewCount.create(game_id: @game.id)
+      end  
+    @comment = Comment.new
   end
   
   def new
@@ -49,7 +53,7 @@ class Public::GamesController < ApplicationController
   private
   
   def game_params
-    params.require(:game).permit(:game_title, :platform_id,:tableplat_id, :category_id, :table_id, :genre_id, :points, :release_date, :price, :image, :introduct_title, :introduct, :good_introduct, :bad_introduct, :overall_review)
+    params.require(:game).permit(:game_title, :platform_id,:tableplat_id, :category_id, :table_id, :genre_id, :points, :release_date, :price, :image, :introduct_title, :introduct, :good_introduct, :bad_introduct, :overall_review,:game_comment)
   end
   
   def game_comment_params

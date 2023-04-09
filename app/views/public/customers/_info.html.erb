@@ -1,5 +1,6 @@
+<div data-turbolinks="true">
 <table class='table'>
-    <% if @customer.profile_image.attached? %>
+  <% if @customer.profile_image.attached? %>
   <tr><%= image_tag @customer.get_profile_image, size: "100x100" %></tr>
   <% else %>
   <tr><%= image_tag 'no_image', size: "100x100" %></tr>
@@ -14,21 +15,22 @@
   </tr>
   <tr>
     <th>フォロー</th>
-    <th><%#= link_to customer.followings.count, customer_followings_path(customer) %></th>
+    <th><%= link_to @customer.followings.count, customer_followings_path(@customer) %></th>
   </tr>
   <tr>
     <th>フォロワー</th>
-    <th><%#= link_to customer.followers.count, customer_followers_path(customer) %></th>
+    <th><%= link_to @customer.followers.count, customer_followers_path(@customer) %></th>
   </tr>
   
 </table>
 　
 <div class='row'>
-  <% if current_customer != @customer %>
-    <td><%= render "relationships/btn", customer: customer %></td>
-  <% else %>
-    <%= link_to edit_customers_path, class: "btn btn-outline-secondary btn-block edit_customer_#{@customer.id}" do %>
-      <i class="fas fa-user-cog"></i>
+  <% if current_customer == @customer %>
+    <%= link_to edit_customer_path(current_customer.id), class: "btn btn-outline-secondary btn-block edit-customer-btn" do %>
+    <i class="fas fa-user-cog"></i>
     <% end %>
+  <% else %>
+  <td><%= render "public/relationships/btn", customer: @customer %></td>
   <% end %>
+</div>
 </div>

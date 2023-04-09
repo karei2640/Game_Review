@@ -4,7 +4,7 @@
 //= require turbolinks
 //= require jquery.jpostal <--追加
 //= require_tree .
-
+('#customer-info').replaceWith("<%= j render 'public/customers/info', customer: @customer %>")
 $(function() {
   $(document).on('turbolinks:load', () => {
     $('#customer_post_code').jpostal({
@@ -25,3 +25,4 @@ $(function() {
 // #   %5  町域
 // #   %6  大口事業所の番地 ex)100-6080
 // #   %7  大口事業所の名称
+

@@ -1,0 +1,32 @@
+<div data-turbolinks="true">
+<table class='table'>
+    <tr><%= image_tag 'guest', size: "100x100" %></tr>
+    <tr>
+	  <th>名前</th>
+	  <th>ゲスト</th>
+	</tr>
+	<tr>
+      <th>ゲーム一覧</th>
+      <th><%= link_to 'こちら', games_path %></th>
+    </tr>
+    <tr>
+      <th>ボードドゲーム一覧</th>
+      <th><%= link_to 'こちら', bordgames_path %></th>
+    </tr>
+    <tr>
+      <th>投稿の際は</th>
+      <th><%= link_to '新規登録', new_customer_registration_path %></th>
+    </tr>
+     <tr>
+        <th>ゲーム検索</th>
+        <th>キーワード</th>
+     </tr>
+     <tr>
+        <th>ボードゲーム検索</th>
+        <th>キーワード</th>
+     </tr>
+     <tr>
+        <th><%= link_to 'ログイン',new_customer_session_path %></th>
+     </tr>
+</table>
+</div>

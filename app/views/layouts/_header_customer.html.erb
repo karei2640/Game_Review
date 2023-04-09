@@ -1,6 +1,6 @@
    
    <li class="nav-item">
-                <%= link_to customers_path, class: 'btn btn-info mr-2' do %>
+                <%= link_to customer_path(current_customer.id), class: 'btn btn-info mr-2' do %>
                   <i class="fas fa-user fa-lg" style="color: #07058f;"></i>マイページ
                 <% end %>
               </li>
@@ -10,7 +10,7 @@
               <div class="dropdown-menu">
                <a class="dropdown-item"><%= link_to games_path do %><i class="fas fa-desktop fa-lg" style="color: #07058f;"></i>ハード系</a>
                <% end %>
-               <a class="dropdown-item"><%= link_to bordgames_path do %><i class="fas fa-chess fa-lg" style="color: #07058f;"></i>テーブル系</a>
+               <a class="dropdown-item"><%= link_to bordgames_path do %><i class="fas fa-chess fa-lg" style="color: #07058f;"></i>ボード系</a>
                <% end %>
               </div>
             </div>　
@@ -20,7 +20,7 @@
               <div class="dropdown-menu">
                <a class="dropdown-item"><%= link_to new_game_path do %><i class="fas fa-desktop fa-lg" style="color: #07058f;"></i>ハード系</a>
                <% end %>
-               <a class="dropdown-item"><%= link_to new_bordgame_path do %><i class="fas fa-chess fa-lg" style="color: #07058f;"></i>テーブル系</a>
+               <a class="dropdown-item"><%= link_to new_bordgame_path do %><i class="fas fa-chess fa-lg" style="color: #07058f;"></i>ボード系</a>
                <% end %>
               </div>
             </div>　

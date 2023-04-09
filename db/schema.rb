@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_07_165538) do
+ActiveRecord::Schema.define(version: 2023_04_09_063811) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,12 +52,20 @@ ActiveRecord::Schema.define(version: 2023_04_07_165538) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "bord_view_counts", force: :cascade do |t|
+    t.integer "bordgame_id"
+    t.integer "customer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "bordgame_comments", force: :cascade do |t|
     t.text "comment"
     t.integer "customer_id"
     t.integer "bordgame_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "bordgame_comment"
   end
 
   create_table "bordgames", force: :cascade do |t|
@@ -70,6 +78,7 @@ ActiveRecord::Schema.define(version: 2023_04_07_165538) do
     t.text "introduct", null: false
     t.text "good_introduct"
     t.text "bad_introduct"
+    t.text "bordgame_comment"
     t.text "overall_review", null: false
     t.integer "points", null: false
     t.date "release_date"
@@ -89,11 +98,12 @@ ActiveRecord::Schema.define(version: 2023_04_07_165538) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.text "content"
+    t.text "comment"
     t.integer "customer_id", null: false
     t.integer "game_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "parent_comment_id"
     t.index ["customer_id"], name: "index_comments_on_customer_id"
     t.index ["game_id"], name: "index_comments_on_game_id"
   end
@@ -127,7 +137,7 @@ ActiveRecord::Schema.define(version: 2023_04_07_165538) do
   end
 
   create_table "game_comments", force: :cascade do |t|
-    t.text "comment"
+    t.text "game_comment"
     t.integer "customer_id"
     t.integer "game_id"
     t.datetime "created_at", precision: 6, null: false
@@ -144,6 +154,7 @@ ActiveRecord::Schema.define(version: 2023_04_07_165538) do
     t.text "introduct", null: false
     t.text "good_introduct"
     t.text "bad_introduct"
+    t.text "game_comment"
     t.text "overall_review", null: false
     t.integer "points", null: false
     t.date "release_date"
@@ -169,6 +180,13 @@ ActiveRecord::Schema.define(version: 2023_04_07_165538) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "tableplats", force: :cascade do |t|
     t.string "name"
     t.integer "tableplat_id"
@@ -185,9 +203,7 @@ ActiveRecord::Schema.define(version: 2023_04_07_165538) do
 
   create_table "view_counts", force: :cascade do |t|
     t.integer "game_id"
-    t.integer "bordgame_id"
     t.integer "customer_id"
-    t.integer "admin_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,14 +1,19 @@
 class Public::BordgamesController < ApplicationController
   def index
     @bordgames = Bordgame.all
+    @latest_bordgames = Bordgame.order(created_at: :desc).limit(10)
+    @popular_bordgames = Bordgame.joins(:view_counts).group(:id).order('count(view_counts.id) desc').limit(10)
+    @customer = current_customer
   end
 
   def show
     @bordgame = Bordgame.find(params[:id])
-    unless current_customer && ViewCount.find_by(customer_id: current_customer.id, bordgame_id: @bordgame.id)
-       ViewCount.create(customer_id: current_customer&.id, bordgame_id: @bordgame.id)
+    if current_customer
+      current_customer.bord_view_counts.create(bordgame_id: @bordgame.id)
+    else
+      BordViewCount.create(bordgame_id: @bordgame.id)
     end
-    @bordgame_comment = BordgameComment.new
+    @comment = BordgameComment.new
   end
 
   def new
@@ -31,7 +36,7 @@ class Public::BordgamesController < ApplicationController
   
   def update
     @bordgame = Bordgame.find(params[:id])
-    if @bordgame.update(game_params)
+    if @bordgame.update(bordgame_params)
       redirect_to @bordgame
     else
       render 'edit'
@@ -49,7 +54,7 @@ class Public::BordgamesController < ApplicationController
   private
 
   def bordgame_params
-    params.require(:bordgame).permit(:game_title,:tableplat_id, :category_id, :table_id, :points, :release_date, :price, :image, :introduct_title, :introduct, :good_introduct, :bad_introduct, :overall_review)
+    params.require(:bordgame).permit(:game_title,:tableplat_id, :category_id, :table_id, :points, :release_date, :price, :image, :introduct_title, :introduct, :good_introduct, :bad_introduct, :overall_review,:bordgame_comment)
   end
   
   def ensure_correct_customer
