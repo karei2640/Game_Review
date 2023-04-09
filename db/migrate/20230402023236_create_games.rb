@@ -10,6 +10,7 @@ class CreateGames < ActiveRecord::Migration[6.1]
       t.text :introduct, null: false
       t.text :good_introduct
       t.text :bad_introduct
+      t.text :game_comment
       t.text :overall_review, null: false
       t.integer :points, null: false
       t.date :release_date

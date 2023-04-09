@@ -6,5 +6,7 @@ class CreateTableplats < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    Tableplat.create(name: "テーブル")
+    Tableplat.create(name: "その他")
   end
 end

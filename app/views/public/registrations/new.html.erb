@@ -27,7 +27,7 @@
       </div>
       <div class="box-post_code">
           <%= f.label :post_code,"郵便番号(ハイフンなし)" %><br />
-          <%= f.text_field :post_code, autofocus: true %>
+          <%= f.text_field :post_code, autofocus: true, maxlength: 7, onkeypress: "return event.charCode >= 48 && event.charCode <= 57" %>
       </div>
       
       <div class="box-prefecture_code">
@@ -43,7 +43,7 @@
 
       <div class="box-telephone">
           <%= f.label :"電話番号(ハイフンなし)" %><br />
-          <%= f.text_field :telephone, autofocus: true, class: "col-lg-2" %>
+          <%= f.text_field :telephone, autofocus: true, class: "col-lg-2", maxlength: 20, onkeypress: "return event.charCode >= 48 && event.charCode <= 57" %>
       </div>
 
       <div class="box-password">

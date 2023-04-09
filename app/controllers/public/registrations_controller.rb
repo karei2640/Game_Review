@@ -52,11 +52,11 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    customers_path
+    customer_path(current_customer)
   end
   
   def after_update_path_for(resource)
-    customers_path
+    customer_path
   end
   
   private

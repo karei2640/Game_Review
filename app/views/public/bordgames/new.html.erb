@@ -30,7 +30,7 @@
             <tr>
                 <div class="form-group">
                     <th><%= f.label :点数 %></th>
-                    <td><%= f.text_field :points,size: "1x2", placeholder:"00" %>点</td>
+                    <td><%= f.number_field :points,size: "1x2", placeholder:"00", max: 100, min: 0 %>点</td>
                 </div>
             </tr>
             <tr>
@@ -44,7 +44,7 @@
             <tr>
                 <div class="form-group">
                     <th><%= f.label :価格 %></th>
-                    <td><%= f.text_field :price, placeholder:"0000" %>円</td>
+                    <td><%= f.number_field :price, placeholder:"0000", max: 100000, min: 0 %>円</td>
                 </div>
             </tr>
             <tr>

@@ -2,7 +2,7 @@ class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
 
   def show
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
     @games = @customer.games
     @bordgames = @customer.bordgames
   end
@@ -38,10 +38,6 @@ class Public::CustomersController < ApplicationController
   def customer_params
     params.require(:customer).permit(:name, :profile_image, :birthday, :post_code, :prefecture_code, :address, :telephone, :email, :password, :password_confirmation)
   end
-
-
-
-  
 end
 
 

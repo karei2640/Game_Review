@@ -15,8 +15,8 @@ namespace :admin do
   get "/" => "homes#top"
   get "/customers/withdraw" => "customers#withdraw"
   resources :games, only: [:index, :show,:create, :edit, :update, :destroy] do
-    resources :game_comments, only: [:create]
-    resources :bordgame_comments, only: [:create]
+    # resources :comments, only: [:create, :destroy]
+    resources :bordgame_comments, only: [:create, :destroy]
   end
   resources :genres, only: [:index,:new, :edit, :create, :update] # ジャンルの追加機能
   resources :tables, only: [:index,:new, :edit, :create, :update]# テーブルジャンルの追加機能
@@ -26,9 +26,17 @@ namespace :admin do
 end
 
 scope module: :public do
-  resource :customers, only: [:show, :update, :edit]
+  resources :customers, only: [:show, :update, :edit]
   resources :bordgames, only: [:new,:index, :show,:create, :edit, :update, :destroy]
-  resources :games, only: [:new,:index, :show,:create, :edit, :update, :destroy]
+  resources :games, only: [:new,:index, :show,:create, :edit, :update, :destroy] do
+    resources :game_comments, only: [:create, :destroy]
+    resources :bordgame_comments, only: [:create, :destroy]
+  end
+  resources :customers do  
+    resource :relationships, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
+  end  
   get "/search" => "games#search"
   get 'customers/withdrawal' => 'customers#withdrawal', as: 'customers_withdrawal'
 end

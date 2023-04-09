@@ -14,10 +14,10 @@
   </div>
   <div class="row offset-md-2">
     <div class="col-3 mb-4">
-      <%= link_to "退会しない", customers_path, class:"btn btn-success" %>
+      <%= link_to "退会しない", customer_path, class:"btn btn-success" %>
     </div>
     <div class="col-3 mb-4">
-      <%= link_to "退会する", customers_withdraw_path, class:"btn btn-danger", method: :get, data: { confirm: "本当に退会しますか？" } %>
+      <%= link_to "退会する", customer_withdraw_path, class:"btn btn-danger", method: :get, data: { confirm: "本当に退会しますか？" } %>
     </div>
   </div>
 </div>
