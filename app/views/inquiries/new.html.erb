@@ -1,0 +1,14 @@
+<h1>アカウントに関するお問い合わせ</h1>
+
+<%= form_with model: @inquiry, url: inquiries_path, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :email %>
+  <%= form.email_field :email %>
+
+  <%= form.label :message %>
+  <%= form.text_area :message %>
+
+  <%= form.submit "送信する" %>
+<% end %>

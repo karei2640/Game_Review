@@ -1,8 +1,7 @@
-
 <div class="container">
 	<div class="row ">
     <div class="col">
-      <h2>ゲーム投稿詳細</h2>
+      <h2>ボードゲーム投稿詳細</h2>
     </div>
   </div>
     <div class="col">
@@ -25,16 +24,19 @@
         <tr>
           <tr>
            <th><strong>コメント件数：<%= @bordgame.bordgame_comments.count %></strong></th>
-           <th><strong>閲覧数：<%= @bordgame.bord_view_counts.count %></strong></th>
+           <th><strong>閲覧数：<%= @bordgame.bord_view_counts.count %></strong>
+           
+           </th>
         </tr>
            <% if customer_signed_in? %>
            <th>投稿者<strong><%= link_to @bordgame.customer.name, customer_path(@bordgame.customer) %>さん</strong></th>
            <% else %> 
            <th>投稿者:<strong><%= @bordgame.customer.name %>さん</strong></th>
            <% end %> 
-           <th>ゲーム名:<strong><%= @bordgame.game_title %></strong></th>
+           <th>ゲーム名:<strong><%= @bordgame.game_title %></strong>
+           <%= render 'public/bord_favorites/bordbtn', bordgame: @bordfavorite %>
+           </th>
         </tr>
-
         <tr>
           <th>発売日:<strong><%= @bordgame.release_date %></strong></th>
           <th>

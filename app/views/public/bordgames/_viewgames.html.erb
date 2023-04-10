@@ -1,26 +1,29 @@
-    <% if @popular_games.any? %>
-      <h1>閲覧数ランキング</h1>
-      <% @popular_games.each do |game| %>
+  <div class="tab-content">
+  <div class="tab-pane fade" id="popular">
+    <% if @popular_bordgames.any? %>
+      <% @popular_bordgames.each do |bordgame| %>
         <tr>
           <td>
-            <%= link_to(game) do %>
-              <% if game.image.attached? %>
-                <%= image_tag game.image, size: "100x100" %>
+            <%= link_to(bordgame) do %>
+              <% if bordgame.image.attached? %>
+                <%= image_tag bordgame.image, size: "100x100" %>
               <% end %>
             <% end %>
           </td>
-          <% if game.game_title.length > 10 %>
-            <td><%= link_to "#{game.game_title.slice(0, 10)}...", game, class: "game_#{game.id}" %></td>
+          <% if bordgame.game_title.length > 10 %>
+            <td><%= link_to "#{bordgame.game_title.slice(0, 10)}...", bordgame, class: "bordgame_#{bordgame.id}" %></td>
           <% else %>
-            <td><%= link_to game.game_title, game, class: "game_#{game.id}" %></td>
+            <td><%= link_to bordgame.game_title, bordgame, class: "bordgame_#{bordgame.id}" %></td>
           <% end %>
-          <td><%= game.platform.name %></td>
-          <% if game.introduct_title.length > 20 %>
-            <td><%= "#{game.introduct_title.slice(0, 20)}..." %></td>
+          <td><%= bordgame.tableplat.name %></td>
+          <% if bordgame.introduct_title.length > 20 %>
+            <td><%= "#{bordgame.introduct_title.slice(0, 20)}..." %></td>
           <% else %>
-            <td><%= game.introduct_title %></td>
+            <td><%= bordgame.introduct_title %></td>
          <% end %>
-          <td><%= game.view_counts.count %></td>
+          <td><%= bordgame.bord_view_counts.count %></td>
         </tr>
       <% end %>
     <% end %>
+  </div>
+  </div>

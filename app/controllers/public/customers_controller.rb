@@ -3,8 +3,8 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @games = @customer.games
-    @bordgames = @customer.bordgames
+    @games = @customer.games.page(params[:page]).per(5)
+    @bordgames = @customer.bordgames.page(params[:page]).per(5)
   end
   
   def index

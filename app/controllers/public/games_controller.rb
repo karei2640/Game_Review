@@ -1,9 +1,9 @@
 class Public::GamesController < ApplicationController
   
   def index
-    @games = Game.all
-    @latest_games = Game.order(created_at: :desc).limit(10)
-    @popular_games = Game.joins(:view_counts).group(:id).order('count(view_counts.id) desc').limit(10)
+    @games = Game.page(params[:page]).per(5)
+    @latest_games = Game.order(created_at: :desc).page(params[:page]).per(10)
+    @popular_games = Game.joins(:view_counts).group(:id).order('count(view_counts.id) desc').page(params[:page]).per(10)
     @customer = current_customer
   end
   
@@ -49,6 +49,7 @@ class Public::GamesController < ApplicationController
     @game.destroy
     redirect_to games_path
   end
+  
   
   private
   

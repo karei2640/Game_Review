@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_09_063811) do
+ActiveRecord::Schema.define(version: 2023_04_10_033257) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(version: 2023_04_09_063811) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "bord_favorites", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "bordgame_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "bord_view_counts", force: :cascade do |t|
@@ -128,12 +135,10 @@ ActiveRecord::Schema.define(version: 2023_04_09_063811) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "customer_id", null: false
-    t.integer "game_id", null: false
+    t.integer "customer_id"
+    t.integer "game_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_favorites_on_customer_id"
-    t.index ["game_id"], name: "index_favorites_on_game_id"
   end
 
   create_table "game_comments", force: :cascade do |t|
@@ -212,6 +217,4 @@ ActiveRecord::Schema.define(version: 2023_04_09_063811) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "customers"
   add_foreign_key "comments", "games"
-  add_foreign_key "favorites", "customers"
-  add_foreign_key "favorites", "games"
 end

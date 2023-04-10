@@ -1,5 +1,6 @@
- <% if @latest_bordgames.present? %>
-      <h2 class="mb-4">最新記事一覧</h2>
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="latest">
+     <% if @latest_bordgames.present? %>
       <% @latest_bordgames.each do |bordgame| %>
         <tr>
           <td><%= link_to(bordgame) do %>
@@ -22,3 +23,5 @@
         </tr>
       <% end %>
     <% end %>
+  </div>
+</div>

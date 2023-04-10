@@ -1,7 +1,7 @@
 class Public::BordgameCommentsController < ApplicationController
     
   def create
-    bordgame = Bordgame.find(params[:game_id])
+    bordgame = Bordgame.find(params[:bordgame_id])
     bordgame_comment = current_customer.bordgame_comments.new(bordgame_comment_params)
     bordgame_comment.bordgame_id = bordgame.id
     bordgame_comment.save

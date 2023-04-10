@@ -20,7 +20,7 @@
       <td><%= bordgame_comment.bordgame_comment %></td>
       <td>
         <% if bordgame_comment.customer == current_customer %>
-        <%= link_to "削除", game_bordgame_comment_path(bordgame_comment.bordgame,bordgame_comment), method: :delete, class: "btn btn-sm btn-danger p-0 p-1", style: "font-size: 8px;", data: { confirm: "本当に削除しますか？" } %>
+        <%= link_to "削除", bordgame_bordgame_comment_path(bordgame_comment.bordgame,bordgame_comment), method: :delete, class: "btn btn-sm btn-danger p-0 p-1", style: "font-size: 8px;", data: { confirm: "本当に削除しますか？" } %>
         <% end %>
       </td>
     </tr>
@@ -28,7 +28,7 @@
     <td></td>
     <td></td>
     <td>
-    <%= form_with model:[@comment], url: game_bordgame_comments_path(@bordgame) do |f| %>
+    <%= form_with model:[@comment], url: bordgame_bordgame_comments_path(@bordgame) do |f| %>
     <%= f.text_area :bordgame_comment,maxlength: 100, size: "80x4", placeholder:"コメントをここに(1000文字以内)" %>
     <%= f.submit "送信" %>
     <% end %>
