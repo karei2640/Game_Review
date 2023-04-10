@@ -1,8 +1,8 @@
 class Public::BordgamesController < ApplicationController
   def index
     @bordgames = Bordgame.all
-    @latest_bordgames = Bordgame.order(created_at: :desc).limit(10)
-    @popular_bordgames = Bordgame.joins(:view_counts).group(:id).order('count(view_counts.id) desc').limit(10)
+    @latest_bordgames = Bordgame.order(created_at: :desc).page(params[:page]).per(10)
+    @popular_bordgames = Bordgame.joins(:bord_view_counts).group(:id).order('count(bord_view_counts.id) desc').page(params[:page]).per(10)
     @customer = current_customer
   end
 
@@ -48,9 +48,7 @@ class Public::BordgamesController < ApplicationController
     @bordgame.destroy
     redirect_to bordgames_path
   end
-  
-  
-
+ 
   private
 
   def bordgame_params

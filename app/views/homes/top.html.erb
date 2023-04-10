@@ -1,0 +1,14 @@
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <% if customer_signed_in? %>
+        <h2>ユーザ情報</h2>
+        <%= form_with model: @customer, url: customer_path(current_customer.id), remote: true do |f| %>
+        <% end %>
+      <% else %>
+      <% end %>
+    </div>
+    <h1>ようこそ Roll The Dice!</h1>
+<p>Roll The Diceは、ゲーム好きな人々が集まる、ゲームレビューサイトです。</p>
+<p>最新のゲーム情報、人気ゲームのレビュー、プレイ日記や攻略情報など、ゲームに関するあらゆる情報を共有できます。</p>
+<p>また、気に入ったゲームをお気に入りに登録して、いつでも簡単にアクセスすることもできます。ゲームを愛する全ての人々が、Roll The Diceで楽しみましょう！</p>

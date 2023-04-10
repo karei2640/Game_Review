@@ -24,7 +24,9 @@
         </tr>
          <tr>
            <th><strong>コメント件数：<%= @game.comments.count %></strong></th>
-           <th>閲覧数：<%= @game.view_counts.count %></th>
+           <th>閲覧数：<%= @game.view_counts.count %>
+           <%= render 'public/favorites/btn', game: @favorite %>
+           </th>
         </tr>
         <tr>
           <% if customer_signed_in? %>
@@ -34,7 +36,6 @@
           <% end %> 
            <th>ゲーム名:<strong><%= @game.game_title %></strong></th>
         </tr>
-
         <tr>
           <th>発売日:  <strong><%= @game.release_date %></strong></th>
           <th>

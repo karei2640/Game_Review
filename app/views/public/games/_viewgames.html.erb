@@ -1,5 +1,6 @@
+  <div class="tab-content">
+  <div class="tab-pane fade" id="popular">
     <% if @popular_games.any? %>
-      <h1>閲覧数ランキング</h1>
       <% @popular_games.each do |game| %>
         <tr>
           <td>
@@ -24,3 +25,5 @@
         </tr>
       <% end %>
     <% end %>
+  </div>
+  </div>

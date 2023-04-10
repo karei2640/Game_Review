@@ -27,10 +27,14 @@ end
 
 scope module: :public do
   resources :customers, only: [:show, :update, :edit]
-  resources :bordgames, only: [:new,:index, :show,:create, :edit, :update, :destroy]
+  resources :bordgames, only: [:new,:index, :show,:create, :edit, :update, :destroy] do
+    resources :bordgame_comments, only: [:create, :destroy]
+    resource :bord_favorites, only: [:create, :destroy]
+  end
   resources :games, only: [:new,:index, :show,:create, :edit, :update, :destroy] do
     resources :game_comments, only: [:create, :destroy]
-    resources :bordgame_comments, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy]
+    
   end
   resources :customers do  
     resource :relationships, only: [:create, :destroy]
