@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root :to =>"homes#top"
   get "/about" => "homes#about"
-  
+  get '/search', to: 'searchs#index'
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
@@ -12,11 +12,14 @@ Rails.application.routes.draw do
 
 namespace :admin do
   resources :customers, only: [:index, :show, :edit, :update]
+  get '/search', to: 'searchs#index'
   get "/" => "homes#top"
   get "/customers/withdraw" => "customers#withdraw"
   resources :games, only: [:index, :show,:create, :edit, :update, :destroy] do
-    # resources :comments, only: [:create, :destroy]
-    resources :bordgame_comments, only: [:create, :destroy]
+    resources :comments, only: [:destroy]
+    resources :bordgame_comments, only: [:destroy]
+  end
+  resources :bordgames, only: [:index, :show,:create, :edit, :update, :destroy] do
   end
   resources :genres, only: [:index,:new, :edit, :create, :update] # ジャンルの追加機能
   resources :tables, only: [:index,:new, :edit, :create, :update]# テーブルジャンルの追加機能
@@ -26,6 +29,7 @@ namespace :admin do
 end
 
 scope module: :public do
+  get '/search', to: 'searchs#index'
   resources :customers, only: [:show, :update, :edit]
   resources :bordgames, only: [:new,:index, :show,:create, :edit, :update, :destroy] do
     resources :bordgame_comments, only: [:create, :destroy]

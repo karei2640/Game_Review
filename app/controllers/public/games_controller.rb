@@ -2,8 +2,9 @@ class Public::GamesController < ApplicationController
   
   def index
     @games = Game.page(params[:page]).per(5)
-    @latest_games = Game.order(created_at: :desc).page(params[:page]).per(10)
-    @popular_games = Game.joins(:view_counts).group(:id).order('count(view_counts.id) desc').page(params[:page]).per(10)
+    @latest_games = Game.order(created_at: :desc).page(params[:page]).per(20)
+    @popular_games = Game.joins(:view_counts).group(:id).order('count(view_counts.id) desc').page(params[:page]).per(20)
+    @favorite_games = Game.joins(:favorites).group(:id).order('count(favorites.id) desc').page(params[:page]).per(20)
     @customer = current_customer
   end
   
@@ -47,7 +48,11 @@ class Public::GamesController < ApplicationController
   def destroy
     @game = Game.find(params[:id])
     @game.destroy
-    redirect_to games_path
+    if admin_signed_in?
+    redirect_to admin_games_path # 管理者ページにリダイレクト
+    else
+    redirect_to games_path # 一般顧客はゲーム一覧ページにリダイレクト
+    end
   end
   
   

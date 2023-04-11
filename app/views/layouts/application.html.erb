@@ -22,7 +22,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-
+              
             <!--adminログイン時のヘッダー-->
             <% if admin_signed_in? %>
             <%= render partial: 'layouts/header_admin' %>
@@ -34,9 +34,13 @@
             <%= render partial: 'layouts/header' %>
             <% end %>
             </ul>
-
           </div>
         </div>
+        <%= form_with(url: search_path, method: :get) do |form| %>
+              <%= form.label :keyword, "検索ワード" %>
+              <%= form.text_field :keyword %>
+              <%= form.submit "検索" %>
+            <% end %>
       </nav>
     </header>
 

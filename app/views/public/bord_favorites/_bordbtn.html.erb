@@ -1,16 +1,16 @@
 <% if current_customer %>
   <% if @bordgame.bord_favorited_by?(current_customer) %>
     <%= link_to bordgame_bord_favorites_path(@bordgame), {method: :delete, id: "bord_favorite-#{@bordgame.id}", remote: true} do %>
-      <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+      <i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>
       <%= @bordgame.bord_favorites.count %> いいね
     <% end %>
   <% else %>
     <%= link_to bordgame_bord_favorites_path(@bordgame), {method: :post, id: "bord_favorite-#{@bordgame.id}", remote: true} do %>
-      <i class="fas fa-heart" aria-hidden="true"></i>
+      <i class="far fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>
       <%= @bordgame.bord_favorites.count %> いいね
     <% end %>
   <% end %>
 <% else %>
-  <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+  <i class="far fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>
   <%= @bordgame.bord_favorites.count %> いいね
 <% end %>
