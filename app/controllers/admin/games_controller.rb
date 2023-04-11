@@ -1,8 +1,9 @@
 class Admin::GamesController < ApplicationController
   def index
     @games = Game.page(params[:page]).per(5)
-    @latest_games = Game.order(created_at: :desc).page(params[:page]).per(10)
-    @popular_games = Game.joins(:view_counts).group(:id).order('count(view_counts.id) desc').page(params[:page]).per(10)
+    @latest_games = Game.order(created_at: :desc).page(params[:page]).per(20)
+    @popular_games = Game.joins(:view_counts).group(:id).order('count(view_counts.id) desc').page(params[:page]).per(20)
+    @favorite_games = Game.joins(:favorites).group(:id).order('count(favorites.id) desc').page(params[:page]).per(20)
   end
   
   def show

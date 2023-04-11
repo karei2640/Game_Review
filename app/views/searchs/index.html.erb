@@ -78,12 +78,14 @@
                 <%= image_tag 'no_image', size: "60x60" %>
               <% end %></td>
               <% if admin_signed_in? %>
-                <td><%= link_to customer.name, admin_customer_path(customer) %>さん</td>
+                <td><strong><%= link_to customer.name, admin_customer_path(customer) %>さん</td></strong>
+                <td><%=  customer.followings.count %></td>
+                <td><%=  customer.followers.count %></td>
               <% elsif customer_signed_in? %>
                 <td><%= link_to customer.name, customer_path(customer) %>さん</td>
+                <td><%= link_to customer.followings.count, customer_followings_path(customer) %></td>
+                <td><%= link_to customer.followers.count, customer_followers_path(customer) %></td>
               <% end %>
-              <td><%= link_to customer.followings.count, customer_followings_path(customer) %></td>
-              <td><%= link_to customer.followers.count, customer_followers_path(customer) %></td>
             </tbody>
             <% end %>
         </ul>
