@@ -19,7 +19,7 @@
       <td>投稿日：<%= bordgame_comment.created_at.strftime('%Y/%m/%d') %><%= bordgame_comment.comment %></td><br>
       <td><%= bordgame_comment.bordgame_comment %></td>
       <td>
-        <% if bordgame_comment.customer == current_customer %>
+        <% if bordgame_comment.customer == current_customer || admin_signed_in? %>
         <%= link_to "削除", bordgame_bordgame_comment_path(bordgame_comment.bordgame,bordgame_comment), method: :delete, class: "btn btn-sm btn-danger p-0 p-1", style: "font-size: 8px;", data: { confirm: "本当に削除しますか？" } %>
         <% end %>
       </td>
@@ -28,9 +28,13 @@
     <td></td>
     <td></td>
     <td>
+    <% if customer_signed_in? %>
     <%= form_with model:[@comment], url: bordgame_bordgame_comments_path(@bordgame) do |f| %>
     <%= f.text_area :bordgame_comment,maxlength: 100, size: "80x4", placeholder:"コメントをここに(1000文字以内)" %>
     <%= f.submit "送信" %>
+    <% end %>
+    <% if @comment.parent_comment_id %>
+      <%= form.hidden_field :parent_comment_id, value: @comment.parent_comment_id %>
     <% end %>
    </td>
 </tbody>  

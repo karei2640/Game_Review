@@ -3,6 +3,7 @@ class Public::BordgamesController < ApplicationController
     @bordgames = Bordgame.all
     @latest_bordgames = Bordgame.order(created_at: :desc).page(params[:page]).per(10)
     @popular_bordgames = Bordgame.joins(:bord_view_counts).group(:id).order('count(bord_view_counts.id) desc').page(params[:page]).per(10)
+    @bordfavorite_bordgames = Bordgame.joins(:bord_favorites).group(:id).order('count(bord_favorites.id) desc').page(params[:page]).per(20)
     @customer = current_customer
   end
 
@@ -46,8 +47,13 @@ class Public::BordgamesController < ApplicationController
   def destroy
     @bordgame = Bordgame.find(params[:id])
     @bordgame.destroy
-    redirect_to bordgames_path
+   if admin_signed_in?
+      redirect_to admin_bordgames_path # 管理者ページにリダイレクト
+   else
+      redirect_to boardgames_path # 一般顧客はボードゲーム一覧ページにリダイレクト
+   end
   end
+  
  
   private
 

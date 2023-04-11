@@ -19,7 +19,7 @@
             <td>投稿日：<%= comment.created_at.strftime('%Y/%m/%d') %></td>
             <th>コメント：<%= comment.comment %></th>
             <td>
-              <% if comment.customer == current_customer %>
+              <% if comment.customer == current_customer || admin_signed_in? %>
               <%= link_to "削除", game_game_comment_path(comment.game,comment), method: :delete, class: "btn btn-lg btn-danger p-0 p-1", style: "font-size: 8px;", data: { confirm: "本当に削除しますか？" } %>
               <% end %>
             </td>

@@ -1,10 +1,11 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
+  skip_before_action :authenticate_customer!, if: -> { admin_signed_in? }
 
   def show
     @customer = Customer.find(params[:id])
-    @games = @customer.games.page(params[:page]).per(5)
-    @bordgames = @customer.bordgames.page(params[:page]).per(5)
+    @games = @customer.games.page(params[:page]).per(15)
+    @bordgames = @customer.bordgames.page(params[:page]).per(15)
   end
   
   def index
