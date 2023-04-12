@@ -14,6 +14,14 @@
 	  <th><%= @customer.prefecture_code %></th>
   </tr>
   <tr>
+	  <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>ゲーム</th>
+	  <th><%= link_to '一覧', favorites_path %></th>
+  </tr>
+  <tr>
+	  <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>ボード</th></th>
+	  <th><%= link_to '一覧', bord_favorites_path %></th>
+  </tr>
+  <tr>
     <th>フォロー</th>
     <th><%= link_to @customer.followings.count, customer_followings_path(@customer) %></th>
   </tr>
@@ -32,5 +40,8 @@
   <% else %>
   <td><%= render "public/relationships/btn", customer: @customer %></td>
   <% end %>
+</div>
+<div>
+  <%= image_tag '黒Dice.png', size: "250x250" %>
 </div>
 </div>

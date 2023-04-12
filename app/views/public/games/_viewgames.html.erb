@@ -6,9 +6,9 @@
           <td>
             <%= link_to(game) do %>
             <% if game.image.attached? %>
-              <%= image_tag game.image, size:'60x60' %>
+              <%= image_tag game.image, size:'120x120' %>
            <% else %>
-              <%= image_tag 'no_image.jpg', size: "60x60" %>
+              <%= image_tag 'no_image.jpg', size: "120x120" %>
           <% end %>
           </td>
           <% end %>

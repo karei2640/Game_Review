@@ -2,9 +2,9 @@ class Game < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :view_counts, dependent: :destroy
   has_many :comments, dependent: :destroy
-  belongs_to :customer
   has_one :bordgame
   has_many :genre_games
+  belongs_to :customer
   belongs_to :genre
   belongs_to :category
   belongs_to :platform

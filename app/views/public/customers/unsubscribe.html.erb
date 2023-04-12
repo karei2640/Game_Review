@@ -1,23 +1,17 @@
-<div class="container">
-  <div class="row my-3">
-    <div class="col-sm-8 px-sm-0 offset-sm-1">
-      <h2>退会画面</h2>
+
+<div class="container-fluid">
+      <div class="container-fluid" style="background-image: url('/assets/background-image.jpg'); height: 100vh; width: 100vw; background-size: cover;">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 text-center" style="background-color: rgba(255,0,0,0.8); padding: 30px; border-radius: 10px; color: white;">
+          <h1 style="font-size: 60px; text-shadow: 2px 2px 4px black;">退会画面</h1>
+          <p style="font-size: 25px;">退会手続きをされますと、すべてのサービスがご利用いただけなくなります。</p><br>
+          <p style="font-size: 25px;">再度ご利用いただく場合には、新規登録のお手続きが必要になります。><br>
+          <p style="font-size: 25px;">本当に退会してよろしいですか？<br>
+          <p><%= link_to "退会しない", customer_path(@customer), class:"btn btn-success" %></p>
+          <p><%= link_to "退会する", customers_withdrawl_path, class:"btn btn-danger", method: :get, data: { confirm: "本当に退会しますか？" } %></p>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-4 mb-4 offset-md-1">
-      <p>退会手続きをされますと、すべてのサービスがご利用いただけなくなります。<br>
-        再度ご利用いただく場合には、新規登録のお手続きが必要になります。<br>
-        本当に退会してよろしいですか？
-      </p>
-    </div>
-  </div>
-  <div class="row offset-md-2">
-    <div class="col-3 mb-4">
-      <%= link_to "退会しない", customer_path, class:"btn btn-success" %>
-    </div>
-    <div class="col-3 mb-4">
-      <%= link_to "退会する", customer_withdraw_path, class:"btn btn-danger", method: :get, data: { confirm: "本当に退会しますか？" } %>
-    </div>
-  </div>
-</div>
