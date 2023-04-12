@@ -30,23 +30,24 @@ end
 
 scope module: :public do
   get '/search', to: 'searchs#index'
-  resources :customers, only: [:show, :update, :edit]
-  resources :bordgames, only: [:new,:index, :show,:create, :edit, :update, :destroy] do
-    resources :bordgame_comments, only: [:create, :destroy]
-    resource :bord_favorites, only: [:create, :destroy]
-  end
-  resources :games, only: [:new,:index, :show,:create, :edit, :update, :destroy] do
-    resources :game_comments, only: [:create, :destroy]
-    resource :favorites, only: [:create, :destroy]
-    
-  end
-  resources :customers do  
+  get "/customers/unsubscribe" => "customers#unsubscribe"
+  get "/customers/withdrawl" => "customers#withdrawl"
+  resources :customers, only: [:show, :update, :edit] do  
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
-  end  
+  end
+  resources :bordgames, only: [:new,:index, :show,:create, :edit, :update, :destroy] do
+    resources :bordgame_comments, only: [:create, :destroy]
+    resource :bord_favorites, only: [ :create, :destroy]
+  end
+  resources :bord_favorites, only: [:index]
+  resources :games, only: [:new,:index, :show,:create, :edit, :update, :destroy] do
+    resources :game_comments, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy]
+  end
+  resources :favorites, only: [:index]
   get "/search" => "games#search"
-  get 'customers/withdrawal' => 'customers#withdrawal', as: 'customers_withdrawal'
 end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

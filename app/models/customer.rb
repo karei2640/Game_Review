@@ -30,7 +30,7 @@ class Customer < ApplicationRecord
   validates :prefecture_code
   validates :address
   end
-  
+  # ユーザーの退会状況
   def active_for_authentication?
     super && (withdrawal == false)
   end

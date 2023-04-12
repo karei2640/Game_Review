@@ -5,9 +5,9 @@
         <tr>
           <td><%= link_to(bordgame) do %>
             <% if bordgame.image.attached? %>
-              <%= image_tag bordgame.image, size: "60x60" %>
+              <%= image_tag bordgame.image, size: "120x120" %>
              <% else %>
-              <%= image_tag 'no_image.jpg', size: "60x60" %>
+              <%= image_tag 'no_image.jpg', size: "120x120" %>
           <% end %>
           </td>
           <% end %>

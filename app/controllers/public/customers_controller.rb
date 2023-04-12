@@ -10,16 +10,20 @@ class Public::CustomersController < ApplicationController
   
   def index
   end
+  
+  def unsubscribe
+    @customer = current_customer
+  end
 
  
-  def withdrawal
+  def withdrawl
     @customer = current_customer
     @customer.update(withdrawal: true)
     reset_session
     flash[:notice] = "退会処理を実行いたしました"
     redirect_to root_path
   end
-
+  
   def edit
     @customer = current_customer
   end

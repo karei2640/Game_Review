@@ -36,8 +36,8 @@
             <tr>
                 <div class="form-group">
                     <th><%= f.label :発売日 %></th>
-                    <td><%= f.date_select :release_date, {start_year: 1960, end_year: 2023,
-                        include_blank: true, use_two_digit_numbers: true},
+                    <td><%= f.date_select :release_date, {start_year: Date.current.year, end_year: 1930,   
+                         include_blank: true, use_two_digit_numbers: true,},
                         {class: "input-tab release_date-select"}%></td>
                 </div>
             </tr>

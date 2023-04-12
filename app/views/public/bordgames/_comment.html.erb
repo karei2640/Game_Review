@@ -33,8 +33,9 @@
     <%= f.text_area :bordgame_comment,maxlength: 100, size: "80x4", placeholder:"コメントをここに(1000文字以内)" %>
     <%= f.submit "送信" %>
     <% end %>
-    <% if @comment.parent_comment_id %>
-      <%= form.hidden_field :parent_comment_id, value: @comment.parent_comment_id %>
+    <% end %>
+    <% if params[:parent_comment_id] %>
+      <%= f.hidden_field :parent_comment_id, value: params[:parent_comment_id] %>
     <% end %>
    </td>
 </tbody>  
