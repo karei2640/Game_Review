@@ -1,0 +1,11 @@
+<% if @game.favorited_by?(current_customer) %>
+  <%= link_to game_favorites_path(@game), method: :delete, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+    <%= @game.favorites.count %> いいね
+    <% end %>
+<% else %>
+  <%= link_to game_favorites_path(@game), method: :post, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true"></i>
+    <%= @game.favorites.count %> いいね
+    <% end %>
+  <% end %>

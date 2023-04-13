@@ -1,0 +1,140 @@
+ <div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <% if customer_signed_in? %>
+      <h2>ユーザ情報</h2>
+      <%= form_with model: @customer, url: customer_path(current_customer.id), remote: true do |f| %>
+      <%= render partial: 'info', customer: @customer%>
+      <% end %>
+    </div>
+    <% end %>
+    <div class='col-md-8 offset-md-1'>
+      <h2>投稿一覧</h2>
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#games" role="tab">ゲーム投稿一覧</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#bordgames" role="tab">ボードゲーム投稿一覧</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="games" role="tabpanel">
+          <table class='table table-hover table-inverse'>
+             <% if @games.present? || @bordgames.present? %>
+            <tbody>
+              <% if @games.present? %>
+              <thead>
+              <tr>
+                <th>ゲーム投稿</th>
+                <th>ゲーム名</th>
+                <th>ジャンル　　</th>
+                <th>ゲーム紹介</th>
+                <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
+                <th>閲覧数</th>
+                <th colspan="3"></th>
+              </tr>
+              </thead>
+                <% @games.each do |game| %>
+                  <tr>
+                    <td>
+                      <%= link_to game_path(game) do %>
+                      <% if game.image.attached? %>
+                        <%= image_tag game.image, size:'120x120' %>
+                      <% else %>
+                        <%= image_tag 'no_image.jpg', size: "120x120" %>
+                      <% end %>
+                    </td>
+                    <% end %>
+                    <% if game.game_title.length > 10 %>
+                      <td><%= link_to "#{game.game_title.slice(0, 10)}...", game, class: "game_#{game.id}" %></td>
+                    <% else %>
+                      <td><%= link_to game.game_title, game, class: "game_#{game.id}" %></td>
+                    <% end %>
+                    <td><%= game.genre.name %></td>
+                    <% if game.introduct_title.length > 10 %>
+                      <td><%= "#{game.introduct_title.slice(0, 10)}..." %></td>
+                    <% else %>
+                      <td><%= game.introduct_title %></td>
+                    <% end %>
+                    <td><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i><%= game.favorites.count %></td>
+                    <td><p class="view-count">view: <%= game.view_counts.count %></p></td>
+                </tr>
+              <% end %>
+              <%= paginate @games %>
+            <% end %>
+            </div>
+            </table>
+          </div>
+          <div class="tab-pane" id="bordgames" role="tabpanel">
+            <table class='table table-hover table-inverse'>
+              <% if @bordgames.present? %>
+              <div class="tab-pane" id="bordgames" role="tabpanel">
+                <table class='table table-hover table-inverse'>
+                  <thead>
+                    <tr>
+                      <th>ボードゲーム投稿</th>
+                      <th>ボードゲーム名</th>
+                      <th>ジャンル　　</th>
+                      <th>ボードゲーム紹介</th>
+                      <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
+                      <th>閲覧数</th>
+                      <th colspan="3"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @bordgames.each do |bordgame| %>
+                      <tr>
+                        <td>
+                          <%= link_to bordgame_path(bordgame) do %>
+                            <% if bordgame.image.attached? %>
+                              <%= image_tag bordgame.image, size:'120x120' %>
+                            <% else %>
+                              <%= image_tag 'no_image.jpg', size: "120x120" %>
+                            <% end %>
+                          <% end %>
+                        </td>
+                        <% if bordgame.game_title.length > 10 %>
+                          <td><%= link_to "#{bordgame.game_title.slice(0, 10)}...", bordgame, class: "bordgame_#{bordgame.id}" %></td>
+                        <% else %>
+                          <td><%= link_to bordgame.game_title, bordgame, class: "bordgame_#{bordgame.id}" %></td>
+                        <% end %>
+                        <td><%= bordgame.table.name %></td>
+                        <% if bordgame.introduct_title.length > 10 %>
+                          <td><%= "#{bordgame.introduct_title.slice(0, 10)}..." %></td>
+                        <% else %>
+                          <td><%= bordgame.introduct_title %></td>
+                        <% end %>
+                        <td><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i><%= bordgame.bord_favorites.count %></td>
+                        <td><p class="view-count">view: <%= bordgame.bord_view_counts.count %></p></td>
+                      </tr>
+                    <% end %>
+                    <%= paginate @bordgames %>
+                  </tbody>
+                </table>
+              </div>
+            <% end %>
+            <% else %>
+              <h2>投稿一覧</h2>
+              <table class='table table-hover table-inverse'>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>ゲーム名</th>
+                    <th>ゲーム紹介</th>
+                    <th>タイプ</th>
+                    <th>ジャンル</th>
+                    <th colspan="3"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td><strong>投稿がありません</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            <% end %>
+          </div>
+        </div>
+      </div>

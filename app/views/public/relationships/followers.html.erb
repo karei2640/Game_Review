@@ -1,0 +1,42 @@
+<div class='container px-5 px-sm-0'>
+ <div class='row'>
+   <div class='col-md-3'>
+      <% if customer_signed_in? %>
+        <h2>ユーザ情報</h2>
+        <%= form_with model: @customer, url: customer_path(current_customer.id), remote: true do |f| %>
+            <%= render partial: 'public/customers/info', customer: @customer %>
+        <% end %>
+      <% else %>
+        <%= render partial: 'public/customers/guest' %>
+      <% end %>
+   </div>
+   <div class='col-md-8'>
+    <table class='table table-hover table-inverse'>
+     <thead>
+        <tr><strong>フォロワー</strong></tr>
+      <tr>
+       <th>プロフィール画像</th>
+       <th>名前</th>
+       <th colspan="1"></th>
+      </tr>
+     </thead>
+     <tbody>
+        <% if @customers.exists? %>
+        <% @customers.each do |customer| %>
+        <tr>
+        <td><%= image_tag customer.get_profile_image, size: '50x50' %></td>
+        <td><%= customer.name %></td>
+        <td><%= render "public/relationships/btn", customer: customer %></td>
+        <td><%= link_to 'Show', customer, class: "customer_#{customer.id}" %></td>
+      </tr>
+      <% end %>
+      <% else %>
+        <td>ユーザーはいません</td>
+      <% end %>     
+     </tbody>
+    </table>
+  </div> 
+ </div>
+</div>
+     
+         

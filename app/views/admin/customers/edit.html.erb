@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row my-3">
+    <div class="col-sm-8 px-sm-0 offset-sm-1">
+      <h2>会員情報編集</h2>
+    </div>
+  </div>
+ <%= form_with model: @customer, url: admin_customer_path(@customer) do |f| %>
+    <div class="row">
+      <% if @customer.profile_image.attached? %>
+      <div class="col-3 offset-md-1"><%= image_tag @customer.get_profile_image, size: "100x100" %></div>
+      <% else %>
+      <div class="col-3 offset-md-1"><%= image_tag 'no_image', size: "100x100" %></div>
+    </div>
+    <% end %>
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "会員ID" %></div>
+      <div class="col-3"><%= f.label :"#{@customer.id}" %></div>
+    </div>
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "お名前" %></div>
+      <div class="col-3"><%= f.text_field :name, :size => "10" %></div>
+    </div>
+    <!--生年月日の編集-->
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "生年月日" %></div>
+      <div class="col-3"><%= f.date_select :birthday, {start_year: 1930, end_year: 2023,
+        include_blank: true, use_two_digit_numbers: true},
+        {class: "input-tab birthday-select"}%></div>
+    </div>
+  <!--郵便番号変更-->    
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "郵便番号(ハイフンなし)" %></div>
+      <div class="col-3"><%= f.text_field :post_code, :size => "15" %></div>
+    </div>
+    <!--都道府県変更-->    
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "都道府県" %></div>
+      <div class="col-3"><%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :name, :name %></div>
+    </div>
+  <!--住所変更-->
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "住所" %></div>
+      <div class="col-3"><%= f.text_field :address, :size => "30"%></div>
+    </div>
+  <!--電話番号変更-->
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "電話番号(ハイフンなし)" %></div>
+      <div class="col-3"><%= f.text_field :telephone %></div>
+    </div>
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.label :"会員ステータス" %></div>
+      <div class="col-3"><%= f.radio_button :withdrawal, true %>
+      <%= f.label :withdrawal, "退会", {value: :true, style: "display: inline-block;"} %>
+      <%= f.radio_button :withdrawal, false %>
+      <%= f.label :withdrawal, "有効", {value: :false, style: "display: inline-block;"} %></div>
+    </div>
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.submit "編集内容を保存", class:"btn btn-success my-4" %></div>
+    </div>
+    <% end %>
+  </div>

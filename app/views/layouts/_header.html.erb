@@ -1,0 +1,28 @@
+
+<li class="nav-item">
+      <div class="btn-group">
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-indent fa-lg" style="color: #07058f;"></i>ゲーム一覧
+        </button>
+        <div class="dropdown-menu">
+         <a class="dropdown-item"><%= link_to games_path do %><i class="fas fa-desktop fa-lg" style="color: #07058f;"></i>ハード系</a>
+         <% end %>
+         <a class="dropdown-item"><%= link_to bordgames_path do %><i class="fas fa-chess fa-lg" style="color: #07058f;"></i>テーブル系</a>
+         <% end %>
+         </div>
+        </div>　
+        <div class="btn-group">
+         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-plus fa-lg" style="color: #07058f;"></i>ユーザー
+         </button>
+         <div class="dropdown-menu">
+          <a class="dropdown-item"><%= link_to new_customer_registration_path do %><i class="fas fa-user-plus fa-lg" style="color: #07058f;"></i>新規登録</a>
+          <% end %>
+          <a class="dropdown-item"><%= link_to new_customer_session_path do %><i class="fas fa-sign-in-alt fa-lg" style="color: #07058f;"></i>ログイン</a>
+           <% end %>
+         </div>
+        </div>　
+        <li class="nav-item"> 
+        <%= link_to  new_admin_session_path, class: 'btn btn-info' do%>
+       管理者用<i class="fas fa-sign-in-alt"></i>
+       <% end %>
+     </li>
+              

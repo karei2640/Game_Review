@@ -1,0 +1,77 @@
+<div class="container">
+	<div class="row ">
+    <div class="col">
+      <h2>ゲーム投稿詳細</h2>
+    </div>
+  </div>
+    <div class="col">
+      <table class="table table-bordered">
+        <% if @game.image.attached? %>
+           <tr><%= image_tag @game.image, size:'200x200' if @game.image.attached? %></tr>
+        <% else %>
+            <tr><%= image_tag 'no_image', size: "200x200" %></tr>
+        <% end %>
+        <% if @game.customer == current_customer %>
+        <tr>
+          <th><%= link_to "編集", edit_game_path(@game), class:"btn btn-success btn-lg" %></th>
+          <td><%= button_to '削除',  game_path(@game.id), method: :delete, data: { confirm: '本当に消しますか？' }, class:"btn btn-danger btn-lg"  %></td>
+           <% end %>
+        </tr>
+        <% if current_admin.present? %>
+        <tr>
+          <td><%= button_to '削除',  game_path(@game.id), method: :delete, data: { confirm: '本当に消しますか？' }, class:"btn btn-danger btn-lg"  %></td>
+          <% end %>
+        </tr>
+         <tr>
+           <th><strong>コメント件数：<%= @game.comments.count %></strong></th>
+           <th>閲覧数：<%= @game.view_counts.count %>
+           <%= render 'public/favorites/btn', game: @favorite %>
+           </th>
+        </tr>
+        <tr>
+          <% if customer_signed_in? %>
+           <th>投稿者 :<strong><%= link_to @game.customer.name, customer_path(@game.customer.id) %>さん</strong></th>
+          <% else %> 
+           <th>投稿者:<strong><%= @game.customer.name %>さん</strong></th>
+          <% end %> 
+           <th>ゲーム名:<strong><%= @game.game_title %></strong></th>
+        </tr>
+        <tr>
+          <th>発売日:  <strong><%= @game.release_date %></strong></th>
+          <th>
+            1⃣タイプ:<strong><%= @game.platform.name %></strong>
+            2⃣ジャンル:<strong><%= @game.genre.name %></strong>
+            3⃣プレイ人数:<strong><%= @game.category.name %></strong>
+          </th>
+        </tr>
+        <tr>
+          <th>税込価格(税抜)</th>
+          <th><strong><%= (@game.price * 1.1).floor.to_s(:delimited) %>(<%= @game.price %>)円</strong></th>
+        </tr>
+        <tr>
+          <th>ゲーム紹介！</th>
+          <td><strong><%= @game.introduct_title %></strong></td>
+        </tr>
+        <tr>
+          <th>ゲーム説明</th>
+          <td><%= @game.introduct %></td>
+        </tr>
+        <tr>
+          <th style="color: green;">Ｇｏｏｄ</th>
+          <td><%= @game.good_introduct %></td>
+        </tr>
+        <tr>
+          <th style="color: red;">Ｂａｄ</th>
+          <td><%= @game.bad_introduct %></td>
+        </tr>
+        <tr>
+          <th>総合評価</th>
+          <td><%= @game.overall_review %></td>
+        </tr>
+        <tr>
+          <%= render "comment", game: @game %>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

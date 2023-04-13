@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 px-sm-0 offset-sm-1">
+      <h2>テーブルゲーム新規登録</h2>
+    </div>
+    <div class= "row">
+        <div class="col-sm-2 px-sm-0" >
+        <%= form_with model: @bordgame,url: bordgames_path do |f| %>
+        <table>
+            <tr>
+                <div class= "from-group">
+                    <th><%= f.label :ゲーム画像 %></th>
+                    <th><%= f.file_field :image %></th>
+                </div>
+            </tr>
+            <tr>
+                <div class= "from-group">
+                    <th><%= f.label :ゲーム名 %></th>
+                    <td><%= f.text_field :game_title,maxlength: 150,size: "80x3", placeholder:"タイトル:150文字以内" %></td>
+                </div>
+            </tr>
+            
+            <tr>
+                <th><%= f.label :ジャンル %></th>
+                <td><%= f.collection_select :tableplat_id, Tableplat.all, :id, :name, :prompt => "--タイプ選択--" %>
+                    <%= f.collection_select :table_id, Table.all, :id, :name, :prompt => "--ジャンル選択--" %>
+                    <%= f.collection_select :category_id, Category.all, :id, :name, :prompt => "--プレイ人数--" %>
+                    
+          </td>
+            <tr>
+                <div class="form-group">
+                    <th><%= f.label :点数 %></th>
+                    <td><%= f.number_field :points,size: "1x2", placeholder:"00", max: 100, min: 0 %>点</td>
+                </div>
+            </tr>
+            <tr>
+                <div class="form-group">
+                    <th><%= f.label :発売日 %></th>
+                    <td><%= f.date_select :release_date, {start_year: Date.current.year, end_year: 1930,   
+                         include_blank: true, use_two_digit_numbers: true,},
+                        {class: "input-tab release_date-select"}%></td>
+                </div>
+            </tr>
+            <tr>
+                <div class="form-group">
+                    <th><%= f.label :価格 %></th>
+                    <td><%= f.number_field :price, placeholder:"0000", max: 100000, min: 0 %>円</td>
+                </div>
+            </tr>
+            <tr>
+                <div class= "from-group">
+                    <th><%= f.label :タイトル %></th>
+                    <td><%= f.text_area :introduct_title, maxlength: 60,size: "80x3", placeholder:"紹介文タイトル60文字以内" %></td>
+                </div>
+            </tr>
+            <tr>
+                <div class="form-group">
+                    <th><%= f.label :ゲーム内容 %></th>
+                    <td><%= f.text_area :introduct, maxlength: 180, size: "80x4", placeholder:"ゲーム紹介、遊び方の説明:120文字以内" %></td>
+                </div>
+            </tr>
+            <tr>
+                <div class="form-group">
+                    <th><%= f.label :Ｇｏｏｄ %></th>
+                    <td><%= f.text_area :good_introduct,maxlength: 180, size: "80x4", placeholder:"良い点:120文字以内"%></td>
+                </div>
+            </tr>
+            <tr>
+                <div class="form-group">
+                    <th><%= f.label :Ｂａｄ %></th>
+                    <td><%= f.text_area :bad_introduct,maxlength: 180, size: "80x4", placeholder:"悪い点:120文字以内" %></td>
+                </div>
+            </tr>
+           <tr>
+                <div class="form-group">
+                    <th><%= f.label :Ｔｏｔａｌ %></th>
+                    <td><%= f.text_area :overall_review,maxlength: 200, size: "80x4", placeholder:"総合評価:200文字以内" %></td>
+                </div>
+            </tr>
+            </tr>
+            </tr>
+            <tr>
+                <div class="form-action">
+                    <th>　　　　　</th>
+                    <th><%= f.submit "登録する",class:"btn btn-success" %></th>
+                </div>
+            </tr>
+        <% end %>
+        </table>
+        </div>
+    </div>

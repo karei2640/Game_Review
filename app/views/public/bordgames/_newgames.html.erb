@@ -1,0 +1,32 @@
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="latest">
+     <% if @latest_bordgames.present? %>
+      <% @latest_bordgames.each do |bordgame| %>
+        <tr>
+          <td><%= link_to(bordgame) do %>
+            <% if bordgame.image.attached? %>
+              <%= image_tag bordgame.image, size: "120x120" %>
+             <% else %>
+              <%= image_tag 'no_image.jpg', size: "120x120" %>
+          <% end %>
+          </td>
+          <% end %>
+          <% if bordgame.game_title.length > 10 %>
+            <td><%= link_to "#{bordgame.game_title.slice(0, 10)}...", bordgame, class: "bordgame_#{bordgame.id}" %></td>
+          <% else %>
+            <td><%= link_to bordgame.game_title, bordgame, class: "bordgame_#{bordgame.id}" %></td>
+          <% end %>
+          <td><%= bordgame.tableplat.name %></td>
+          <% if bordgame.introduct_title.length > 20 %>
+            <td><%= "#{bordgame.introduct_title.slice(0, 20)}..." %></td>
+          <% else %>
+            <td><%= bordgame.introduct_title %></td>
+          <% end %>
+           <td><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i><%= bordgame.bord_favorites.count %></td>
+          <td><%= bordgame.bord_view_counts.count %></td>
+          <td><%= bordgame.bordgame_comments.count %>件</td>
+        </tr>
+      <% end %>
+    <% end %>
+  </div>
+</div>

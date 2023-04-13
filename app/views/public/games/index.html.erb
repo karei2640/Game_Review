@@ -1,0 +1,87 @@
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <% if customer_signed_in? %>
+        <h2>ユーザ情報</h2>
+        <%= form_with model: @customer, url: customer_path(current_customer.id), remote: true do |f| %>
+          <%= render partial: 'public/customers/info', customer: @customer %>
+        <% end %>
+      <% else %>
+        <%= render partial: 'public/customers/guest' %>
+      <% end %>
+    </div>
+    <div class='col-md-9'>
+      <h1>ゲーム投稿一覧</h1>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#latest">最新記事</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#popular">閲覧数順</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#favorite"><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数順</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="latest">
+          <table class='table table-hover table-inverse'>
+            <thead>
+              <tr>
+                <th><%= paginate @latest_games %></th>
+                <th>ゲーム名</th>
+                <th>タイプ</th>
+                <th>紹介</th>
+                <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
+                <th>閲覧数</th>
+                <th>コメント数</th>
+                <th colspan="3"></th>
+              </tr>
+          </thead>
+          <tbody>
+              <%= render 'newgames' %>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="popular">
+          <table class='table table-hover table-inverse'>
+            <thead>
+              <tr>
+                <th><%= paginate @popular_games %></th>
+                <th>ゲーム名</th>
+                <th>タイプ</th>
+                <th>紹介</th>
+                <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
+                <th>閲覧数</th>
+                <th>コメント数</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render 'viewgames' %>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="favorite">
+            <table class='table table-hover table-inverse'>
+              <thead>
+                <tr>
+                  <th><%= paginate @favorite_games %></th>
+                  <th>ゲーム名</th>
+                  <th>タイプ</th>
+                  <th>紹介</th>
+                  <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
+                  <th>閲覧数</th>
+                  <th>コメント数</th>
+                  <th colspan="3"></th>
+                </tr>
+              </thead>
+              <tbody>
+              <%= render 'favoritegames' %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
