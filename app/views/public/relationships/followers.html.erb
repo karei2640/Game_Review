@@ -17,6 +17,8 @@
       <tr>
        <th>プロフィール画像</th>
        <th>名前</th>
+       <th>フォロー</th>
+       <th>ユーザーページへ</th>
        <th colspan="1"></th>
       </tr>
      </thead>
@@ -24,10 +26,10 @@
         <% if @customers.exists? %>
         <% @customers.each do |customer| %>
         <tr>
-        <td><%= image_tag customer.get_profile_image, size: '50x50' %></td>
+        <td><%= image_tag customer.get_profile_image, size: '80x80' %></td>
         <td><%= customer.name %></td>
         <td><%= render "public/relationships/btn", customer: customer %></td>
-        <td><%= link_to 'Show', customer, class: "customer_#{customer.id}" %></td>
+        <td><%= link_to '詳細', customer, class: "customer_#{customer.id}" %></td>
       </tr>
       <% end %>
       <% else %>

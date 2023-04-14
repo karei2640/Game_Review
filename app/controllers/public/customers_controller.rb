@@ -6,6 +6,7 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @games = @customer.games.page(params[:page]).per(15)
     @bordgames = @customer.bordgames.page(params[:page]).per(15)
+    @following_games = Game.joins(customer: :followers).where(followers: { follower_id: current_customer.id })
   end
   
   def index
