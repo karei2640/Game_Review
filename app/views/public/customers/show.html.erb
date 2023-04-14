@@ -1,4 +1,4 @@
- <div class='container px-5 px-sm-0'>
+<div class='container px-5 px-sm-0'>
   <div class='row'>
     <div class='col-md-3'>
       <% if customer_signed_in? %>
@@ -24,9 +24,9 @@
              <% if @games.present? || @bordgames.present? %>
             <tbody>
               <% if @games.present? %>
-              <thead>
+              <thead class="thead-dark">
               <tr>
-                <th>ゲーム投稿</th>
+                <th></th>
                 <th>ゲーム名</th>
                 <th>ジャンル　　</th>
                 <th>ゲーム紹介</th>
@@ -71,9 +71,9 @@
               <% if @bordgames.present? %>
               <div class="tab-pane" id="bordgames" role="tabpanel">
                 <table class='table table-hover table-inverse'>
-                  <thead>
+                  <thead class="thead-dark">
                     <tr>
-                      <th>ボードゲーム投稿</th>
+                      <th></th>
                       <th>ボードゲーム名</th>
                       <th>ジャンル　　</th>
                       <th>ボードゲーム紹介</th>
@@ -117,7 +117,7 @@
             <% else %>
               <h2>投稿一覧</h2>
               <table class='table table-hover table-inverse'>
-                <thead>
+                <thead class="thead-dark">
                   <tr>
                     <th></th>
                     <th>ゲーム名</th>
