@@ -1,4 +1,6 @@
- <div class='col-md-9'>
+ <div class="container">
+  <div class="row">
+    <div class="col-md-9">
       <h1>テーブルゲーム投稿一覧</h1>
       <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -13,8 +15,8 @@
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="latest">
-          <table class='table table-hover table-inverse'>
-            <thead>
+          <table class="table table-hover">
+            <thead class="thead-dark">
               <tr>
                 <th><%= paginate @latest_bordgames %></th>
                 <th>ゲーム名</th>
@@ -32,8 +34,8 @@
           </table>
         </div>
         <div class="tab-pane" id="popular">
-          <table class='table table-hover table-inverse'>
-            <thead>
+          <table class="table table-hover">
+            <thead class="thead-dark">
               <tr>
                 <th><%= paginate @popular_bordgames %></th>
                 <th>ゲーム名</th>
@@ -49,9 +51,9 @@
             </tbody>
           </table>
         </div>
-      <div class="tab-pane" id="favorite">
-          <table class='table table-hover table-inverse'>
-            <thead>
+        <div class="tab-pane" id="favorite">
+          <table class="table table-hover">
+            <thead class="thead-dark">
               <tr>
                 <th><%= paginate @bordfavorite_bordgames %></th>
                 <th>ゲーム名</th>

@@ -43,7 +43,7 @@
             <% end %>
       </nav>
     </header>
-
+    <body>
     <div class="container">
   			<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5"></div>
     </div>
@@ -51,8 +51,25 @@
       <%= flash[:success] %>
       <%= yield %>
     </main>
-    <footer class="border-bottom border-dark pb-5">
-
-    </footer>
+    <footer class="border-bottom border-dark pb-6">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>お知らせ</h5>
+        <ul>
+          <li><a href="#">新しい機能を追加しました</a></li>
+          <li><a href="#">メンテナンスのお知らせ</a></li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h5>お問い合わせ</h5>
+        <ul>
+          <li><a href="#">お問い合わせフォーム</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
   </body>
 </html>
