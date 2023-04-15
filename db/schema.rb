@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(version: 2023_04_10_080732) do
   end
 
   create_table "inquiries", force: :cascade do |t|
-    t.string "category", null: false
+    t.string "status"
     t.string "name", null: false
     t.string "email", null: false
     t.text "message", null: false

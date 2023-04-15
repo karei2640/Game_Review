@@ -49,5 +49,6 @@ scope module: :public do
   resources :favorites, only: [:index]
   get "/search" => "games#search"
 end
+resources :inquiries, only: [:new, :show, :index, :edit, :create, :update]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

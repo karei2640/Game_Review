@@ -1,0 +1,122 @@
+<div class="container">
+  <h1 class="text-center mb-4">お問い合わせ一覧</h1>
+  
+  <% if @inquiries.any? %>
+    <ul class="nav nav-tabs mb-4">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#status-0">未対応</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#status-1">対応中</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#status-2">対応済み</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="status-0">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>名前</th>
+              <th>メールアドレス</th>
+              <th>メッセージ</th>
+              <th>作成日時</th>
+              <% if admin_signed_in? %>
+              <th>ステータス</th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% @inquiries.select{|inquiry| inquiry.status == "未対応"}.each do |inquiry| %>
+              <tr>
+                <td><%= link_to inquiry.name, inquiry_path(inquiry) %></td>
+                <td><%= inquiry.email %></td>
+                <td><%= inquiry.message %></td>
+                <td><%= inquiry.created_at %></td>
+                <% if admin_signed_in? %>
+                <td><%= inquiry.status %></td>
+                <% end %>
+              </tr>
+            <% end %>
+            <%= paginate @inquiries %>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="status-1">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>名前</th>
+              <th>メールアドレス</th>
+              <th>メッセージ</th>
+              <th>作成日時</th>
+              <% if admin_signed_in? %>
+              <th>ステータス</th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% @inquiries.select{|inquiry| inquiry.status == "対応中"}.each do |inquiry| %>
+              <tr>
+                <td><%= link_to inquiry.name, inquiry_path(inquiry) %></td>
+                <td><%= inquiry.email %></td>
+                <td><%= inquiry.message %></td>
+                <td><%= inquiry.created_at %></td>
+                <% if admin_signed_in? %>
+                <td><%= inquiry.status %></td>
+                <% end %>
+              </tr>
+            <% end %>
+            <%= paginate @inquiries %>
+          </tbody>
+        </table>
+      </div>
+       <div class="tab-pane" id="status-2">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>名前</th>
+              <th>メールアドレス</th>
+              <th>メッセージ</th>
+              <th>作成日時</th>
+              <% if admin_signed_in? %>
+              <th>ステータス</th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% @inquiries.select{|inquiry| inquiry.status == "対応済み"}.each do |inquiry| %>
+              <tr>
+                <td><%= link_to inquiry.name, inquiry_path(inquiry) %></td>
+                <td><%= inquiry.email %></td>
+                <td><%= inquiry.message %></td>
+                <td><%= inquiry.created_at %></td>
+                <% if admin_signed_in? %>
+                <td><%= inquiry.status %></td>
+                <% end %>
+              </tr>
+            <% end %>
+            <%= paginate @inquiries %>
+          </tbody>
+        </table>
+      </div>
+      <% else %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>名前</th>
+            <th>メールアドレス</th>
+            <th>メッセージ</th>
+            <th>作成日時</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="4">お問い合わせがありません</td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  <%= link_to "新規お問い合わせ", new_inquiry_path, class: "btn btn-primary" %>
+  </div>
