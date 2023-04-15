@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card my-4">
+        <div class="card-header bg-primary text-white">
+          <h1 class="text-center">お問い合わせ詳細</h1>
+          <% if flash[:notice] %>
+          <div class="alert alert-success" role="alert">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
+        </div>
+        <div class="card-body">
+          <p class="card-text"><strong>名前：</strong><%= @inquiry.name %></p>
+          <p class="card-text"><strong>メールアドレス：</strong><%= @inquiry.email %></p>
+          <p class="card-text"><strong>メッセージ：</strong><%= @inquiry.message %></p>
+          <% if admin_signed_in? %>
+          <%= form_for @inquiry, url: inquiry_path(@inquiry), method: :patch do |f| %>
+          <div class="form-group">
+            <%= f.label :status, "ステータス" %>
+            <br>
+            <%= f.radio_button :status, "未対応" %>
+            <%= f.label :status, "未対応" %>
+            <%= f.radio_button :status, "対応中" %>
+            <%= f.label :status, "対応中" %>
+            <%= f.radio_button :status, "対応済み" %>
+            <%= f.label :status, "対応済み" %>
+          </div>
+          <%= f.submit "更新する", class: "btn btn-primary" %>
+            <% end %>
+            <%= link_to "一覧に戻る", inquiries_path, class: "btn btn-secondary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
