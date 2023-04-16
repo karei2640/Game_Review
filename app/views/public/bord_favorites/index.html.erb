@@ -31,7 +31,7 @@
                       <% if bord_favorite.bordgame.image.attached? %>
                         <%= image_tag bord_favorite.bordgame.image, size:'120x120' %>
                       <% else %>
-                        <%= image_tag 'no_image.jpg', size: "120x120" %>
+                        <%= image_tag asset_path('no_image.jpg'), size: "120x120" %>
                       <% end %>
                     </td>
                     <% if bord_favorite.bordgame.game_title.length > 20 %>

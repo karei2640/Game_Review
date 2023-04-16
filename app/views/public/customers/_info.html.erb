@@ -3,7 +3,7 @@
   <% if @customer.profile_image.attached? %>
   <tr><%= image_tag @customer.get_profile_image, size: "100x100" %></tr>
   <% else %>
-  <tr><%= image_tag 'no_image.jpg', size: "100x100" %></tr>
+  <tr><%= image_tag asset_path('no_image.jpg'), size: "100x100" %></tr>
   <% end %>
   <tr>
 	  <th>名前</th>
@@ -42,6 +42,6 @@
   <% end %>
 </div>
 <div>
-  <%= image_tag '黒Dice.png', size: "250x250" %>
+  <%= image_tag asset_path('黒Dice.png'), size: "250x250" %>
 </div>
 </div>

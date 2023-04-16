@@ -42,7 +42,7 @@
                       <% if game.image.attached? %>
                         <%= image_tag game.image, size:'120x120' %>
                       <% else %>
-                        <%= image_tag 'no_image.jpg', size: "120x120" %>
+                        <%= image_tag asset_path('no_image.jpg'), size: "120x120" %>
                       <% end %>
                     </td>
                     <% end %>
@@ -67,15 +67,13 @@
             </table>
           </div>
           <div class="tab-pane" id="bordgames" role="tabpanel">
-            <table class='table table-hover table-inverse'>
               <% if @bordgames.present? %>
-              <div class="tab-pane" id="bordgames" role="tabpanel">
                 <table class='table table-hover table-inverse'>
                   <thead class="thead-dark">
                     <tr>
                       <th></th>
                       <th>ボードゲーム名</th>
-                      <th>ジャンル　　</th>
+                      <th>ジャンル</th>
                       <th>ボードゲーム紹介</th>
                       <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
                       <th>閲覧数</th>
@@ -109,11 +107,11 @@
                         <td><p class="view-count">view: <%= bordgame.bord_view_counts.count %></p></td>
                       </tr>
                     <% end %>
-                    <%= paginate @bordgames %>
                   </tbody>
                 </table>
-              </div>
-            <% end %>
+                <%= paginate @bordgames %>
+              <% end %>
+            </div>
             <% else %>
               <h2>投稿一覧</h2>
               <table class='table table-hover table-inverse'>
