@@ -15,7 +15,7 @@
       <% if @customer.profile_image.attached? %>
       <div class="col-3 offset-md-1"><%= image_tag @customer.get_profile_image, size: "100x100" %></div>
       <% else %>
-      <div class="col-3 offset-md-1"><%= image_tag 'no_image.jpg', size: "100x100" %></div>
+      <div class="col-3 offset-md-1"><%= image_tag asset_path('no_image.jpg'), size: "100x100" %></div>
     </div>
     <% end %>
     <div class="form-group">

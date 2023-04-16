@@ -14,7 +14,7 @@
         <% if @game.image.attached? %>
            <tr><%= image_tag @game.image, size:'200x200' if @game.image.attached? %></tr>
         <% else %>
-            <tr><%= image_tag 'no_image.jpg', size: "200x200" %></tr>
+            <tr><%= image_tag asset_path('no_image.jpg'), size: "200x200" %></tr>
         <% end %>
         <% if @game.customer == current_customer %>
         <tr>
