@@ -2,7 +2,7 @@
  <div class='row'>
    <div class='col-md-3'>
       <% if customer_signed_in? %>
-        <h2>ユーザ情報</h2>
+        <h2>ユーザー情報</h2>
         <%= form_with model: @customer, url: customer_path(current_customer.id), remote: true do |f| %>
             <%= render partial: 'public/customers/info', customer: @customer %>
         <% end %>
