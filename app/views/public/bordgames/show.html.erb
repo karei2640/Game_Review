@@ -9,7 +9,7 @@
         <% if @bordgame.image.attached? %>
            <tr><%= image_tag @bordgame.image, size:'200x200' if @bordgame.image.attached? %></tr>
         <% else %>
-            <tr><%= image_tag 'no_image.jpg', size: "200x200" %></tr>
+            <tr><%= image_tag asset_path('no_image.jpg'), size: "200x200" %></tr>
         <% end %>
         <% if @bordgame.customer == current_customer %>
         <tr>
