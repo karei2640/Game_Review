@@ -122,3 +122,6 @@ Game.create!(
   customer_id: 4
 )
 
+Faq.create(question: 'よくある質問1', answer: '回答1')
+Faq.create(question: 'よくある質問2', answer: '回答2')
+Faq.create(question: 'よくある質問3', answer: '回答3')

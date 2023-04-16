@@ -65,8 +65,12 @@
       <div class="col-md-6">
         <h5>お問い合わせ</h5>
         <ul>
+          <% if admin_signed_in? %>
           <li><%= link_to "お問い合わせフォーム",inquiries_path  %></a></li>
-          <li><a href="#">FAQ</a></li>
+          <% else %>
+          <li><%= link_to "お問い合わせフォーム",new_inquiry_path  %></a></li>
+          <% end %>
+          <li><%= link_to "FAQ",faqs_path  %></li>
         </ul>
       </div>
     </div>
