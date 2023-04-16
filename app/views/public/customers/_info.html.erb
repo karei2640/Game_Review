@@ -6,6 +6,13 @@
   <tr><%= image_tag asset_path('no_image.jpg'), size: "100x100" %></tr>
   <% end %>
   <tr>
+    <th><% if flash[:notice] %>
+      <div class="alert alert-success">
+        <%= flash[:notice] %>
+      </div>
+    <% end %></th>
+  </tr>
+  <tr>
 	  <th>名前</th>
 	  <th><%= @customer.name %></th>
   </tr>

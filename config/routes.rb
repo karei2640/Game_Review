@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :faqs, only: [:index]
   root :to =>"homes#top"
   get "/about" => "homes#about"
   get '/search', to: 'searchs#index'
