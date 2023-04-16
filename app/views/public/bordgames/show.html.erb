@@ -29,9 +29,9 @@
            </th>
         </tr>
            <% if customer_signed_in? %>
-           <th>投稿者<strong><%= link_to @bordgame.customer.name, customer_path(@bordgame.customer) %>さん</strong></th>
+           <th>投稿者<br><strong><%= link_to @bordgame.customer.name, customer_path(@bordgame.customer) %></strong></th>
            <% else %> 
-           <th>投稿者:<strong><%= @bordgame.customer.name %>さん</strong></th>
+           <th>投稿者<br><strong><%= @bordgame.customer.name %></strong></th>
            <% end %> 
            <th>ゲーム名:<strong><%= @bordgame.game_title %></strong>
            <%= render 'public/bord_favorites/bordbtn', bordgame: @bordfavorite %>
@@ -47,7 +47,11 @@
         </tr>
         <tr>
           <th>税込価格(税抜)</th>
+          <% if @bordgame.price.present? %>
           <th><strong><%= (@bordgame.price * 1.1).floor.to_s(:delimited) %>(<%= @bordgame.price %>)円</strong></th>
+          <% else %>
+            <th><strong>0円</strong></th>
+          <% end %>
         </tr>
         <tr>
           <th>ゲーム紹介！</th>

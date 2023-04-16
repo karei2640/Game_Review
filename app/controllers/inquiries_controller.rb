@@ -9,7 +9,7 @@ class InquiriesController < ApplicationController
   end
 
   def index
-    @inquiries = Inquiry.all.page(params[:page]).per(1)
+    @inquiries = Inquiry.all.page(params[:page]).per(10)
   end
   
   def edit
@@ -18,6 +18,7 @@ class InquiriesController < ApplicationController
 
   def create
     @inquiry = Inquiry.new(inquiry_params)
+    @inquiry.status = "未対応" 
     if @inquiry.save
       redirect_to inquiry_path(@inquiry), notice: 'お問い合わせを受け付けました。ありがとうございました。'
     else
