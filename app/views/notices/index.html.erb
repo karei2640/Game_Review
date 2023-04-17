@@ -1,0 +1,32 @@
+<div class="container">
+<% if admin_signed_in? %>
+<%= link_to "お知らせ作成", new_notice_path, class: "btn btn-primary float-right" %>
+<% else %>
+<% end %>
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" href="#maintenance" role="tab" data-toggle="tab">メンテナンス</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#announcement" role="tab" data-toggle="tab">お知らせ</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#event" role="tab" data-toggle="tab">イベント</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="maintenance">
+    <%= render partial: 'notices/notice', collection: @maintenance_notices %>
+    <%= paginate @maintenance_notices %>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="announcement">
+    <%= render partial: 'notices/notice', collection: @announcement_notices %>
+    <%= paginate @announcement_notices %>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="event">
+    <%= render partial: 'notices/notice', collection: @event_notices %>
+    <%= paginate @event_notices %>
+  </div>
+</div>
+</div>
