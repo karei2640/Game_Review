@@ -28,7 +28,7 @@
                     <% if bordgame.image.attached? %>
                       <%= image_tag bordgame.image, size:'70x70' %>
                     <% else %>
-                      <%= image_tag 'no_image.jpg', size: "70x70" %>
+                      <%= image_tag asset_path('no_image.jpg'), size: "70x70" %>
                     <% end %>
                   <% end %>
                 </td>

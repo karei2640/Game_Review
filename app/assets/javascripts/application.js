@@ -27,3 +27,21 @@ $(function() {
 // #   %7  大口事業所の名称
 
 //= require rails-ujs
+
+$(function() {
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 100) {
+      $('#topBtn').fadeIn();
+    } else {
+      $('#topBtn').fadeOut();
+    }
+  });
+ 
+  // スムーススクロール
+  $('#topBtn').click(function() {
+    $('body,html').animate({
+      scrollTop: 0
+    }, 500);
+    return false;
+  });
+});

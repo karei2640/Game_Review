@@ -6,6 +6,7 @@
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://kit.fontawesome.com/5667bc939f.js" crossorigin="anonymous"></script>
   </head>
@@ -22,7 +23,10 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-              
+            <li class="nav-item">
+            <li><%= link_to faqs_path, class: 'btn btn-info' do %><i class="fab fa-quora fa-lg" style="color: #07058f;" ></i>FAQ
+            <% end %>
+            </li>　
             <!--adminログイン時のヘッダー-->
             <% if admin_signed_in? %>
             <%= render partial: 'layouts/header_admin' %>
@@ -43,16 +47,40 @@
             <% end %>
       </nav>
     </header>
-
-    <div class="container">
-  			<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5"></div>
-    </div>
+    <body>
+      <button id="to-top-button" class="btn btn-primary" title="トップへ">
+        <i class="fas fa-chevron-up"></i>
+      </button>
     <main>
       <%= flash[:success] %>
       <%= yield %>
     </main>
-    <footer class="border-bottom border-dark pb-5">
-
-    </footer>
+    <footer class="border-bottom border-dark pb-6">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>お知らせ</h5>
+        <ul>
+          <% if admin_signed_in? %>
+          <li><%= link_to "お知らせ作成",new_notice_path %></li>
+          <% else %>
+          <% end %>
+          <li><%= link_to "お知らせ、メンテナンスについて",notices_path  %></li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h5>お問い合わせ</h5>
+        <ul>
+          <% if admin_signed_in? %>
+          <li><%= link_to "お問い合わせフォーム",inquiries_path  %></a></li>
+          <% else %>
+          <li><%= link_to "お問い合わせフォーム",new_inquiry_path  %></a></li>
+          <% end %>
+          <li><%= link_to "FAQ",faqs_path  %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
   </body>
 </html>

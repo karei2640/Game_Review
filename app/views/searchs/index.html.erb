@@ -77,7 +77,7 @@
               <td><% if customer.profile_image.attached? %>
                   <%= image_tag customer.get_profile_image, size: "60x60" %>
               <% else %>
-                <%= image_tag 'no_image', size: "60x60" %>
+                <%= image_tag asset_path('no_image.jpg'), size: "60x60" %>
               <% end %></td>
               <% if admin_signed_in? %>
                 <td><strong><%= link_to customer.name, admin_customer_path(customer) %>さん</td></strong>

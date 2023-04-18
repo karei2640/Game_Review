@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :faqs, only: [:index]
+  resources :notices, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   root :to =>"homes#top"
   get "/about" => "homes#about"
   get '/search', to: 'searchs#index'
@@ -49,5 +51,6 @@ scope module: :public do
   resources :favorites, only: [:index]
   get "/search" => "games#search"
 end
+resources :inquiries, only: [:new, :show, :index, :edit, :create, :update]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

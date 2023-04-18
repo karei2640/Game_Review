@@ -2,6 +2,11 @@
 	<div class="row ">
     <div class="col">
       <h2>ゲーム投稿詳細</h2>
+      <% if flash[:notice] %>
+          <div class="alert alert-success" role="alert">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
     </div>
   </div>
     <div class="col">
@@ -9,7 +14,7 @@
         <% if @game.image.attached? %>
            <tr><%= image_tag @game.image, size:'200x200' if @game.image.attached? %></tr>
         <% else %>
-            <tr><%= image_tag 'no_image', size: "200x200" %></tr>
+            <tr><%= image_tag asset_path('no_image.jpg'), size: "200x200" %></tr>
         <% end %>
         <% if @game.customer == current_customer %>
         <tr>
@@ -30,14 +35,14 @@
         </tr>
         <tr>
           <% if customer_signed_in? %>
-           <th>投稿者 :<strong><%= link_to @game.customer.name, customer_path(@game.customer.id) %>さん</strong></th>
+           <th>投稿者<br><strong><%= link_to @game.customer.name, customer_path(@game.customer.id) %></strong></th>
           <% else %> 
-           <th>投稿者:<strong><%= @game.customer.name %>さん</strong></th>
+           <th>投稿者<br><strong><%= @game.customer.name %></strong></th>
           <% end %> 
            <th>ゲーム名:<strong><%= @game.game_title %></strong></th>
         </tr>
         <tr>
-          <th>発売日:  <strong><%= @game.release_date %></strong></th>
+          <th>発売日:<br><strong><%= @game.release_date %></strong></th>
           <th>
             1⃣タイプ:<strong><%= @game.platform.name %></strong>
             2⃣ジャンル:<strong><%= @game.genre.name %></strong>
@@ -45,8 +50,12 @@
           </th>
         </tr>
         <tr>
-          <th>税込価格(税抜)</th>
+          <th>税込(税抜)</th>
+          <% if @game.price.present? %>
           <th><strong><%= (@game.price * 1.1).floor.to_s(:delimited) %>(<%= @game.price %>)円</strong></th>
+          <% else %>
+            <th><strong>0円</strong></th>
+          <% end %>
         </tr>
         <tr>
           <th>ゲーム紹介！</th>
@@ -54,19 +63,19 @@
         </tr>
         <tr>
           <th>ゲーム説明</th>
-          <td><%= @game.introduct %></td>
+          <td><strong><%= @game.introduct %></strong></td>
         </tr>
         <tr>
           <th style="color: green;">Ｇｏｏｄ</th>
-          <td><%= @game.good_introduct %></td>
+          <td><strong><%= @game.good_introduct %></strong></td>
         </tr>
         <tr>
           <th style="color: red;">Ｂａｄ</th>
-          <td><%= @game.bad_introduct %></td>
+          <td><strong><%= @game.bad_introduct %></strong></td>
         </tr>
         <tr>
           <th>総合評価</th>
-          <td><%= @game.overall_review %></td>
+          <td><strong><%= @game.overall_review %></strong></td>
         </tr>
         <tr>
           <%= render "comment", game: @game %>
