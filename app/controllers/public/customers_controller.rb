@@ -4,8 +4,8 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @games = @customer.games.page(params[:page]).per(15)
-    @bordgames = @customer.bordgames.page(params[:page]).per(15)
+    @games = @customer.games.page(params[:games_page]).per(20)
+    @bordgames = @customer.bordgames.page(params[:boardgames_page]).per(20)
     @following_games = Game.joins(customer: :followers).where(followers: { follower_id: current_customer.id })
   end
   

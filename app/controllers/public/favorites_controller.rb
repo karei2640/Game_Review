@@ -2,7 +2,7 @@ class Public::FavoritesController < ApplicationController
   
   def index
     @customer = current_customer
-    @favorites = current_customer.favorites
+    @favorites = current_customer.favorites.page(params[:page]).per(25)
   end
   
   def create

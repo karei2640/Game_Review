@@ -16,12 +16,12 @@
             <tr>
                 <div class= "from-group">
                     <th><%= f.label :ゲーム名 %></th>
-                    <td><%= f.text_field :bordgame_title,maxlength: 150,size: "80x3", placeholder:"タイトル:150文字以内" %></td>
+                    <td><%= f.text_field :game_title,maxlength: 150,size: "80x3", placeholder:"タイトル:150文字以内" %></td>
                 </div>
             </tr>
             <tr>
                 <th><%= f.label :タイプ %></th>
-                <td><%= f.collection_select :bordplat_id, Platform.all, :id, :name, :prompt => "--タイプ選択--" %>
+                <td><%= f.collection_select :tableplat_id, Tableplat.all, :id, :name, :prompt => "--タイプ選択--" %>
                 <%= f.collection_select :table_id, Table.all, :id, :name, :prompt => "--ジャンル選択--" %>
                 <%= f.collection_select :category_id, Category.all, :id, :name, :prompt => "--プレイ人数--" %></td>
             </tr>
