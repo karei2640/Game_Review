@@ -8,8 +8,8 @@
                 <% end %>
               <% end %>
               </td>
-              <% if game.game_title.length > 10 %>
-                <td><%= link_to "#{game.game_title.slice(0, 10)}...", game, class: "game_#{game.id}" %></td>
+              <% if game.game_title.length > 8 %>
+                <td><%= link_to "#{game.game_title.slice(0, 8)}...", game, class: "game_#{game.id}" %></td>
               <% else %>
                 <td><%= link_to game.game_title, game, class: "game_#{game.id}" %></td>
               <% end %>

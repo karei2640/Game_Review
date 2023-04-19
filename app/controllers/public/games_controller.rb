@@ -2,9 +2,9 @@ class Public::GamesController < ApplicationController
   
   def index
     @games = Game.page(params[:page]).per(5)
-    @latest_games = Game.order(created_at: :desc).page(params[:page]).per(20)
-    @popular_games = Game.joins(:view_counts).group(:id).order('count(view_counts.id) desc').page(params[:page]).per(20)
-    @favorite_games = Game.joins(:favorites).group(:id).order('count(favorites.id) desc').page(params[:page]).per(20)
+    @latest_games = Game.order(created_at: :desc).page(params[:latest_games_page]).per(20)
+    @popular_games = Game.joins(:view_counts).group(:id).order('count(view_counts.id) desc').page(params[:popular_games_page]).per(20)
+    @favorite_games = Game.joins(:favorites).group(:id).order('count(favorites.id) desc').page(params[:favorite_games_page]).per(20)
     @customer = current_customer
   end
   

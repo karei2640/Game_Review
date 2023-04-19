@@ -1,5 +1,7 @@
 class NoticesController < ApplicationController
   def index
+    @category = params[:category] || 'all'
+    @notices = filter_notices(@category).page(params[:page]).per(15)
     @maintenance_notices = Notice.where(category: 'メンテナンス').page(params[:page]).per(15)
     @announcement_notices = Notice.where(category:'お知らせ').page(params[:page]).per(15)
     @event_notices = Notice.where(category:'イベント').page(params[:page]).per(15)
@@ -44,6 +46,19 @@ class NoticesController < ApplicationController
   end
 
   private
+  
+  def filter_notices(category)
+    case category
+    when 'maintenance'
+      Notice.where(category: 'メンテナンス')
+    when 'announcement'
+      Notice.where(category: 'お知らせ')
+    when 'event'
+      Notice.where(category: 'イベント')
+    else
+      Notice.all
+    end
+  end
 
   def notice_params
     params.require(:notice).permit(:title, :content, :category)

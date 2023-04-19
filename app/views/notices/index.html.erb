@@ -3,30 +3,47 @@
 <%= link_to "お知らせ作成", new_notice_path, class: "btn btn-primary float-right" %>
 <% else %>
 <% end %>
-<ul class="nav nav-tabs" role="tablist">
+<ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link active" href="#maintenance" role="tab" data-toggle="tab">メンテナンス</a>
+    <a class="nav-link <%= @category == 'all' ? 'active' : '' %>" href="/notices">すべて</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#announcement" role="tab" data-toggle="tab">お知らせ</a>
+    <a class="nav-link <%= @category == 'maintenance' ? 'active' : '' %>" href="/notices?category=maintenance">メンテナンス</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#event" role="tab" data-toggle="tab">イベント</a>
+    <a class="nav-link <%= @category == 'announcement' ? 'active' : '' %>" href="/notices?category=announcement">お知らせ</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <%= @category == 'event' ? 'active' : '' %>" href="/notices?category=event">イベント</a>
   </li>
 </ul>
 
+
 <div class="tab-content">
-  <div role="tabpanel" class="tab-pane active" id="maintenance">
-    <%= render partial: 'notices/notice', collection: @maintenance_notices %>
+  <div class="tab-pane fade show <%= @category == 'all' ? 'active' : '' %>" id="all">
+    <% @notices.each do |notice| %>
+      <%= render 'notice', notice: notice %>
+    <% end %>
+    <%= paginate @notices %>
+  </div>
+
+  <div class="tab-pane fade show <%= @category == 'maintenance' ? 'active' : '' %>" id="maintenance">
+    <% @maintenance_notices.each do |notice| %>
+      <%= render 'notice', notice: notice %>
+    <% end %>
     <%= paginate @maintenance_notices %>
   </div>
-  <div role="tabpanel" class="tab-pane" id="announcement">
-    <%= render partial: 'notices/notice', collection: @announcement_notices %>
+
+  <div class="tab-pane fade show <%= @category == 'announcement' ? 'active' : '' %>" id="announcement">
+    <% @announcement_notices.each do |notice| %>
+      <%= render 'notice', notice: notice %>
+    <% end %>
     <%= paginate @announcement_notices %>
   </div>
-  <div role="tabpanel" class="tab-pane" id="event">
-    <%= render partial: 'notices/notice', collection: @event_notices %>
+
+  <div class="tab-pane fade show <%= @category == 'event' ? 'active' : '' %>" id="event">
+    <% @event_notices.each do |notice| %>
+      <%= render 'notice', notice: notice %>
+    <% end %>
     <%= paginate @event_notices %>
   </div>
-</div>
-</div>

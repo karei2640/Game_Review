@@ -122,3 +122,20 @@ Game.create!(
   customer_id: 4
 )
 
+Notice.create(
+  title: "新機能リリースのお知らせ",
+  content: "新しい機能がリリースされました。ぜひお試しください。",
+  category: "お知らせ"
+)
+
+Notice.create(
+  title: "メンテナンスのお知らせ",
+  content: "本日〇時からシステムメンテナンスを実施いたします。",
+  category: "メンテナンス"
+)
+
+Notice.create(
+  title: "次回イベントのお知らせ",
+  content: "次回のイベントは〇月〇日に開催いたします。",
+  category: "イベント"
+)
