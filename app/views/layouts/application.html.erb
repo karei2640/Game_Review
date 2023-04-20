@@ -24,8 +24,10 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-            <li><%= link_to faqs_path, class: 'btn btn-info' do %><i class="fab fa-quora fa-lg" style="color: #07058f;" ></i>FAQ
-            <% end %>
+            <li>
+              <%= link_to notices_path, class: 'btn btn-info' do %>
+                <i class="fas fa-rss-square fa-lg" style="color: #07058f;"></i> News
+              <% end %>
             </li>　
             <!--adminログイン時のヘッダー-->
             <% if admin_signed_in? %>

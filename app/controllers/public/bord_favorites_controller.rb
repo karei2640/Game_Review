@@ -2,7 +2,7 @@ class Public::BordFavoritesController < ApplicationController
     
   def index
     @customer = current_customer
-    @bordfavorite = current_customer.bord_favorites
+    @bordfavorite = current_customer.bord_favorites.page(params[:page]).per(25)
   end  
     
   def create

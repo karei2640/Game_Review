@@ -2,6 +2,11 @@
 	<div class="row ">
     <div class="col">
       <h2>ボードゲーム投稿詳細</h2>
+      <% if flash[:notice] %>
+          <div class="alert alert-success" role="alert">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
     </div>
   </div>
     <div class="col">
@@ -54,7 +59,7 @@
           <% end %>
         </tr>
         <tr>
-          <th>ゲーム紹介！</th>
+          <th>タイトル</th>
           <td><strong><%= @bordgame.introduct_title %></strong></td>
         </tr>
         <tr>

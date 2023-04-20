@@ -40,8 +40,8 @@
                     <td><%= link_to favorite.game.game_title, game_path(favorite.game), class: "game_#{favorite.game.id}" %></td>
                   <% end %>
                   <td><%= favorite.game.genre.name %></td>
-                  <% if favorite.game.introduct_title.length > 20 %>
-                    <td><%= "#{favorite.game.introduct_title.slice(0, 20)}..." %></td>
+                  <% if favorite.game.introduct_title.length > 30 %>
+                    <td><%= "#{favorite.game.introduct_title.slice(0, 30)}..." %></td>
                   <% else %>
                     <td><%= favorite.game.introduct_title %></td>
                   <% end %>
@@ -49,6 +49,9 @@
                   <td><%= favorite.game.view_counts.count %></td>
                 </tr>
               <% end %>
+              <td><%= paginate @favorites %></td>
+              </tbody>
+            </table>
             <% else %>
               <tr>
                 <td></td>

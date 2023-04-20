@@ -1,5 +1,5 @@
 class InquiriesController < ApplicationController
-  
+  before_action :authenticate_admin!, only: [:index, :edit, :update, :destroy]
   def new
     @inquiry = Inquiry.new
   end
@@ -40,6 +40,12 @@ class InquiriesController < ApplicationController
 
   def inquiry_params
     params.require(:inquiry).permit(:name, :email, :message,:status)
+  end
+  
+  def authenticate_admin!
+    unless admin_signed_in?
+      redirect_to root_path, alert: '管理者以外はアクセスできません'
+    end
   end
 
 end

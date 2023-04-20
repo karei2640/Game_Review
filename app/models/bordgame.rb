@@ -10,6 +10,10 @@ class Bordgame < ApplicationRecord
   belongs_to :tableplat
     has_one_attached :image
     
+  validates :introduct_title, presence: true
+  validates :introduct, presence: true
+  validates :overall_review, presence: true
+  
   def bord_favorited_by?(customer)
     bord_favorites.where(customer_id: customer.id).exists?
   end

@@ -4,8 +4,8 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @games = @customer.games.page(params[:page]).per(15)
-    @bordgames = @customer.bordgames.page(params[:page]).per(15)
+    @games = @customer.games.page(params[:games_page]).per(50)
+    @bordgames = @customer.bordgames.page(params[:boardgames_page]).per(50)
     @following_games = Game.joins(customer: :followers).where(followers: { follower_id: current_customer.id })
   end
   
@@ -26,7 +26,12 @@ class Public::CustomersController < ApplicationController
   end
   
   def edit
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
+    if @customer == current_customer
+      render :edit
+    else
+      redirect_to root_path, alert: "他のユーザーの情報は編集できません"
+    end
   end
 
   def update

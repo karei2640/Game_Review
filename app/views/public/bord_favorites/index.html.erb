@@ -49,6 +49,7 @@
                     <td><%= bord_favorite.bordgame.bord_view_counts.count %></td>
                   </tr>
                 <% end %>
+                <td><%= paginate @bordfavorite %></td>
               </tbody>
             </table>
           <% else %>
