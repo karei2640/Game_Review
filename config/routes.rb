@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   resources :faqs, only: [:index]
   resources :notices, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   root :to =>"homes#top"

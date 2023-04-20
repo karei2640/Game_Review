@@ -19,6 +19,9 @@ class Customer < ApplicationRecord
          has_many :followers, through: :reverse_of_relationships, source: :follower
          has_many :favorites
          has_many :bord_favorites
+         has_many :view_counts, dependent: :destroy
+        has_many :viewed_games, through: :view_counts, source: :game
+
         
          has_one_attached :profile_image
   with_options presence: true do
