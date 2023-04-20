@@ -2,6 +2,14 @@
   <div class="row">
     <div class="col-sm-8 px-sm-0 offset-sm-1">
       <h2>テーブルゲーム新規登録</h2>
+      <%= content_tag :p do %>
+          投稿には<strong>ゲーム名</strong>、<strong>ジャンル</strong>、<strong>点数</strong>、<strong>発売日</strong>、<strong>価格</strong>、<strong>タイトル</strong>、<strong>ゲーム内容</strong>、<strong>総合評価</strong>の記述が必要です。
+      <% end %>
+      <% if flash[:alert] %>
+      <div class="alert alert-danger"role="alert">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
     </div>
     <div class= "row">
         <div class="col-sm-2 px-sm-0" >
@@ -61,19 +69,19 @@
             </tr>
             <tr>
                 <div class="form-group">
-                    <th><%= f.label :Ｇｏｏｄ %></th>
+                    <th style="color: green;">G o o d</th>
                     <td><%= f.text_area :good_introduct,maxlength: 180, size: "80x4", placeholder:"良い点:120文字以内"%></td>
                 </div>
             </tr>
             <tr>
                 <div class="form-group">
-                    <th><%= f.label :Ｂａｄ %></th>
+                    <th style="color: red;">B a d</th>
                     <td><%= f.text_area :bad_introduct,maxlength: 180, size: "80x4", placeholder:"悪い点:120文字以内" %></td>
                 </div>
             </tr>
            <tr>
                 <div class="form-group">
-                    <th><%= f.label :Ｔｏｔａｌ %></th>
+                    <th><%= f.label :総合評価 %></th>
                     <td><%= f.text_area :overall_review,maxlength: 200, size: "80x4", placeholder:"総合評価:200文字以内" %></td>
                 </div>
             </tr>
@@ -82,7 +90,7 @@
             <tr>
                 <div class="form-action">
                     <th>　　　　　</th>
-                    <th><%= f.submit "登録する",class:"btn btn-success" %></th>
+                    <th><%= f.submit "登録する",class:"btn btn-success btn-block" %></th>
                 </div>
             </tr>
         <% end %>

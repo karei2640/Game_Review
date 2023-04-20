@@ -3,6 +3,10 @@
     <% if customer_signed_in? %>
     <div class="col-md-3">
       <h2>ユーザ情報</h2>
+      <% if flash[:notice] %>
+        <div class="alert alert-notice">
+        </div>
+      <% end %>
       <%= form_with model: @customer, url: customer_path(current_customer.id), remote: true do |f| %>
         <%= render partial: 'info', customer: @customer %>
       <% end %>
