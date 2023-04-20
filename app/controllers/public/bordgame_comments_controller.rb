@@ -5,14 +5,14 @@ class Public::BordgameCommentsController < ApplicationController
     bordgame_comment = current_customer.bordgame_comments.new(bordgame_comment_params)
     bordgame_comment.bordgame_id = bordgame.id
     bordgame_comment.save
-    redirect_to bordgame_path(bordgame)
+    redirect_to bordgame_path(bordgame),notice: 'コメントに成功しました。'
   end
 
   def destroy
     bordgame_comment = BordgameComment.find(params[:id])
     bordgame = bordgame_comment.bordgame
     bordgame_comment.destroy
-    redirect_to bordgame_path(bordgame)
+    redirect_to bordgame_path(bordgame),alert: 'コメントを削除しました'
   end
 
   private

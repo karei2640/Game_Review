@@ -1,9 +1,15 @@
 class Public::BordgamesController < ApplicationController
   def index
-    @bordgames = Bordgame.all
-    @latest_bordgames = Bordgame.order(created_at: :desc).page(params[:latest_bordgames]).per(10)
-    @popular_bordgames = Bordgame.joins(:bord_view_counts).group(:id).order('count(bord_view_counts.id) desc').page(params[:popular_bordgames]).per(10)
-    @bordfavorite_bordgames = Bordgame.joins(:bord_favorites).group(:id).order('count(bord_favorites.id) desc').page(params[:bordfavorite_bordgames]).per(20)
+    @bordgames = Bordgame.page(params[:page]).per(150)
+    @latest_bordgames = Bordgame.order(created_at: :desc).page(params[:latest_bordgames]).per(150)
+    @popular_bordgames_all = Bordgame.joins(:bord_view_counts).group(:id).order('count(bord_view_counts.id) desc').page(params[:popular_bordgames_all_page]).per(150)
+    @popular_bordgames_monthly = Bordgame.joins(:bord_view_counts).where(bord_view_counts: { created_at: 1.month.ago..Time.current }).group(:id).order('count(bord_view_counts.id) desc').page(params[:popular_bordgames_monthly_page]).per(150)
+    @popular_bordgames_weekly = Bordgame.joins(:bord_view_counts).where(bord_view_counts: { created_at: 1.week.ago..Time.current }).group(:id).order('count(bord_view_counts.id) desc').page(params[:popular_bordgames_weekly_page]).per(150)
+    @popular_bordgames_daily = Bordgame.joins(:bord_view_counts).where(bord_view_counts: { created_at: 1.day.ago..Time.current }).group(:id).order('count(bord_view_counts.id) desc').page(params[:popular_bordgames_daily_page]).per(150)
+    @favorite_bordgames_all = Bordgame.joins(:bord_favorites).group(:id).order('count(bord_favorites.id) desc').page(params[:favorite_bordgames_all_page]).per(150)
+    @favorite_bordgames_monthly = Bordgame.joins(:bord_favorites).where(bord_favorites: { created_at: 1.month.ago..Time.current }).group(:id).order('count(bord_favorites.id) desc').page(params[:favorite_bordgames_monthly_page]).per(150)
+    @favorite_bordgames_weekly = Bordgame.joins(:bord_favorites).where(bord_favorites: { created_at: 1.week.ago..Time.current }).group(:id).order('count(bord_favorites.id) desc').page(params[:favorite_bordgames_weekly_page]).per(150)
+    @favorite_bordgames_daily = Bordgame.joins(:bord_favorites).where(bord_favorites: { created_at: 1.day.ago..Time.current }).group(:id).order('count(bord_favorites.id) desc').page(params[:favorite_bordgames_daily_page]).per(150)
     @customer = current_customer
   end
 
@@ -27,6 +33,7 @@ class Public::BordgamesController < ApplicationController
     if @bordgame.save
       redirect_to @bordgame
     else
+      flash.now[:alert] = "投稿に失敗しました。必要な項目を全て入力してください。"
       render 'new'
     end
   end  
@@ -38,8 +45,9 @@ class Public::BordgamesController < ApplicationController
   def update
     @bordgame = Bordgame.find(params[:id])
     if @bordgame.update(bordgame_params)
-      redirect_to @bordgame
+      redirect_to bordgame_path(@bordgame),notice: '投稿を更新しました。'
     else
+      flash.now[:alert] = "投稿に失敗しました。必要な項目を全て入力してください。"
       render 'edit'
     end
   end
@@ -48,9 +56,9 @@ class Public::BordgamesController < ApplicationController
     @bordgame = Bordgame.find(params[:id])
     @bordgame.destroy
    if admin_signed_in?
-      redirect_to admin_bordgames_path # 管理者ページにリダイレクト
+      redirect_to admin_bordgames_path, alert: '投稿を削除しました。' # 管理者ページにリダイレクト
    else
-      redirect_to boardgames_path # 一般顧客はボードゲーム一覧ページにリダイレクト
+      redirect_to bordgames_path, alert: '投稿を削除しました。' # 一般顧客はボードゲーム一覧ページにリダイレクト
    end
   end
   
@@ -59,6 +67,10 @@ class Public::BordgamesController < ApplicationController
 
   def bordgame_params
     params.require(:bordgame).permit(:game_title,:tableplat_id, :category_id, :table_id, :points, :release_date, :price, :image, :introduct_title, :introduct, :good_introduct, :bad_introduct, :overall_review,:bordgame_comment)
+  end
+  
+  def bordgame_comment_params
+    params.require(:bordgame_comment).permit(:comment)
   end
   
   def ensure_correct_customer

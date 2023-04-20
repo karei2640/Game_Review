@@ -1,75 +1,97 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-9">
-      <div class="container">
-        <h1>ゲーム投稿一覧</h1>
-         <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#latest">最新記事</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#popular">閲覧数順</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#favorite"><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数順</a>
-          </li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane active" id="latest">
-            <table class="table table-hover">
-              <thead class="thead-dark">
-                <tr>
-                  <th><%= paginate @latest_games %></th>
-                  <th>ゲーム名</th>
-                  <th>タイプ</th>
-                  <th>紹介</th>
-                  <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
-                  <th>閲覧数</th>
-                  <th>コメント数</th>
-                  <th colspan="3"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <%= render 'public/games/newgames' %>
-              </tbody>
-          </table>
-        </div>
-        <div class="tab-pane" id="popular">
-          <table class="table table-hover">
+    <div class='col-md-9'>
+      <h1>ゲーム投稿一覧</h1>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#latest">最新記事</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#popular">閲覧数順</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#favorite"><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数順</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="latest">
+          <table class='table table-hover table-inverse'>
             <thead class="thead-dark">
               <tr>
-                <th><%= paginate @popular_games %></th>
+                <th></th>
                 <th>ゲーム名</th>
-                <th>タイプ</th>
+                <th></th>
                 <th>紹介</th>
-                <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
-                <th>閲覧数</th>
-                <th>コメント数</th>
+                <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数　</th>
+                <th>閲覧数　　</th>
+                <th>コメント数　　</th>
                 <th colspan="3"></th>
               </tr>
-            </thead>
-            <tbody>
-                <%= render 'public/games/viewgames' %>
-             </tbody>
+          </thead>
+          <tbody>
+              <%= render 'public/games/newgames', games: @latest_games %>
+            </tbody>
+            <%= paginate @latest_games, param_name: 'latest_games_page' %>
+          </table>
+        </div>
+        <div class="tab-pane fade" id="popular">
+          <table class='table table-hover table-inverse'>
+          <% if params[:ranking_period] == 'all' %>
+            <%= render partial: 'public/games/game_ranking', locals: { games: @popular_games_all } %>
+          <% elsif params[:ranking_period] == 'monthly' %>
+            <%= render partial: 'public/games/game_ranking', locals: { games: @popular_games_monthly } %>
+          <% elsif params[:ranking_period] == 'weekly' %>
+            <%= render partial: 'public/games/game_ranking', locals: { games: @popular_games_weekly } %>
+          <% else %>
+            <%= render partial: 'public/games/game_ranking', locals: { games: @popular_games_daily } %>
+          <% end %>
+          <div class="ranking-tab-nav">
+            <div class="period-options">
+            <ul class="nav nav-pills">
+              <li class="nav-item">
+                <%= link_to '全期間', request.params.merge(ranking_period: 'all'), class: "nav-link #{params[:ranking_period] == 'all' ? 'active' : ''}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '1か月', request.params.merge(ranking_period: 'monthly'), class: "nav-link #{params[:ranking_period] == 'monthly' ? 'active' : ''}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '1週間', request.params.merge(ranking_period: 'weekly'), class: "nav-link #{params[:ranking_period] == 'weekly' ? 'active' : ''}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '1日', request.params.merge(ranking_period: 'daily'), class: "nav-link #{params[:ranking_period].nil? || params[:ranking_period] == 'daily' ? 'active' : ''}" %>
+              </li>
+            </ul>
+          </div>
           </table>
         </div>
         <div class="tab-pane" id="favorite">
-          <table class="table table-hover">
-            <thead class="thead-dark">
-              <tr>
-                <th><%= paginate @favorite_games %></th>
-                <th>ゲーム名</th>
-                <th>タイプ</th>
-                <th>紹介</th>
-                <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
-                <th>閲覧数</th>
-                <th>コメント数</th>
-                <th colspan="3"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <%= render 'public/games/favoritegames' %>
-             </tbody>
+          <table class='table table-hover table-inverse'>
+            <% if params[:ranking_period] == 'all' %>
+              <%= render partial: 'public/games/game_ranking', locals: { games: @favorite_games_all } %>
+            <% elsif params[:ranking_period] == 'monthly' %>
+              <%= render partial: 'public/games/game_ranking', locals: { games: @favorite_games_monthly } %>
+            <% elsif params[:ranking_period] == 'weekly' %>
+              <%= render partial: 'public/games/game_ranking', locals: { games: @favorite_games_weekly } %>
+            <% else %>
+              <%= render partial: 'public/games/game_ranking', locals: { games: @favorite_games_daily } %>
+            <% end %>
+            <div class="ranking-tab-nav">
+          <div class="period-options">
+         <ul class="nav nav-pills">
+           <li class="nav-item">
+            <%= link_to '全期間', request.params.merge(ranking_period: 'all'), class: "nav-link #{params[:ranking_period] == 'all' ? 'active' : ''}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '1か月', request.params.merge(ranking_period: 'monthly'), class: "nav-link #{params[:ranking_period] == 'monthly' ? 'active' : ''}"  %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '1週間', request.params.merge(ranking_period: 'weekly'), class: "nav-link #{params[:ranking_period] == 'weekly' ? 'active' : ''}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '1日', request.params.merge(ranking_period: 'daily'), class: "nav-link #{params[:ranking_period].nil? || params[:ranking_period] == 'daily' ? 'active' : ''}"  %>
+          </li>
+        </ul>
+        </div>
           </table>
         </div>
       </div>

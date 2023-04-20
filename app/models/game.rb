@@ -10,6 +10,10 @@ class Game < ApplicationRecord
   belongs_to :platform
   has_one_attached :image
   
+  validates :introduct_title, presence: true
+  validates :introduct, presence: true
+  validates :overall_review, presence: true
+  
   def favorited_by?(customer)
     favorites.where(customer_id: customer.id).exists?
   end

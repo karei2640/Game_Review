@@ -1,4 +1,5 @@
 class NoticesController < ApplicationController
+  before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
   def index
     @category = params[:category] || 'all'
     @notices = filter_notices(@category).page(params[:page]).per(15)
@@ -63,4 +64,11 @@ class NoticesController < ApplicationController
   def notice_params
     params.require(:notice).permit(:title, :content, :category)
   end
+  
+  def authenticate_admin!
+    unless admin_signed_in?
+      redirect_to root_path, alert: '管理者以外はアクセスできません'
+    end
+  end
+  
 end

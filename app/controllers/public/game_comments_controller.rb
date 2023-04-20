@@ -5,14 +5,14 @@ class Public::GameCommentsController < ApplicationController
     comment = current_customer.comments.new(comment_params)
     comment.game_id = game.id
     comment.save
-    redirect_to game_path(game)
+    redirect_to game_path(game),notice: 'コメントに成功しました。'
   end
 
   def destroy
     comment = Comment.find(params[:id])
     game = comment.game
     comment.destroy
-    redirect_to game_path(game)
+    redirect_to game_path(game),alert: 'コメントを削除しました'
   end
 
   private
