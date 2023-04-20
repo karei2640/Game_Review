@@ -14,6 +14,10 @@ class Game < ApplicationRecord
   validates :introduct, presence: true
   validates :overall_review, presence: true
   
+  def view_counts_guest
+    view_counts.where(customer_id: nil).count
+  end
+  
   def favorited_by?(customer)
     favorites.where(customer_id: customer.id).exists?
   end

@@ -60,6 +60,15 @@
           <% else %>
             <%= render partial: 'game_ranking', locals: { games: @popular_games_daily } %>
           <% end %>
+          <% if params[:ranking_period] == 'all' %>
+            <%= paginate @popular_games_all, param_name: 'popular_games_all_page' %>
+          <% elsif params[:ranking_period] == 'monthly' %>
+            <%= paginate @popular_games_monthly, param_name: 'popular_games_monthly_page' %>
+          <% elsif params[:ranking_period] == 'weekly' %>
+            <%= paginate @popular_games_weekly, param_name: 'popular_games_weekly_page' %>
+          <% else %>
+            <%= paginate @popular_games_daily, param_name: 'popular_games_daily_page' %>
+          <% end %>
           <div class="ranking-tab-nav">
             <div class="period-options">
             <ul class="nav nav-pills">
@@ -89,6 +98,15 @@
               <%= render partial: 'game_ranking', locals: { games: @favorite_games_weekly } %>
             <% else %>
               <%= render partial: 'game_ranking', locals: { games: @favorite_games_daily } %>
+            <% end %>
+            <% if params[:ranking_period] == 'all' %>
+              <%= paginate @favorite_games_all, param_name: 'favorite_games_all_page' %>
+            <% elsif params[:ranking_period] == 'monthly' %>
+              <%= paginate @favorite_games_monthly, param_name: 'favorite_games_monthly_page' %>
+            <% elsif params[:ranking_period] == 'weekly' %>
+              <%= paginate @favorite_games_weekly, param_name: 'favorite_games_weekly_page' %>
+            <% else %>
+              <%= paginate @favorite_games_daily, param_name: 'favorite_games_daily_page' %>
             <% end %>
             <div class="ranking-tab-nav">
           <div class="period-options">

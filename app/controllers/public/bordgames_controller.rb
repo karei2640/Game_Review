@@ -1,4 +1,5 @@
 class Public::BordgamesController < ApplicationController
+  
   def index
     @bordgames = Bordgame.page(params[:page]).per(150)
     @latest_bordgames = Bordgame.order(created_at: :desc).page(params[:latest_bordgames]).per(150)
@@ -16,9 +17,9 @@ class Public::BordgamesController < ApplicationController
   def show
     @bordgame = Bordgame.find(params[:id])
     if current_customer
-      current_customer.bord_view_counts.create(bordgame_id: @bordgame.id)
+      current_customer.bord_view_counts.create(bordgame: @bordgame)
     else
-      BordViewCount.create(bordgame_id: @bordgame.id)
+      BordViewCount.create(bordgame: @bordgame)
     end
     @comment = BordgameComment.new
   end
@@ -62,9 +63,8 @@ class Public::BordgamesController < ApplicationController
    end
   end
   
- 
   private
-
+  
   def bordgame_params
     params.require(:bordgame).permit(:game_title,:tableplat_id, :category_id, :table_id, :points, :release_date, :price, :image, :introduct_title, :introduct, :good_introduct, :bad_introduct, :overall_review,:bordgame_comment)
   end

@@ -13,6 +13,7 @@ Admin.create!(
    password: 'admins'
 )
 
+
 Customer.create!(
   email: 'example@example.com',
   password: 'password',
@@ -71,7 +72,7 @@ Game.create!(
   points: 69,
   release_date: Date.new(2010, 6, 1),
   price: 5900,
-  customer_id: 1
+  customer_id: 3
 )
 
 Game.create!(
