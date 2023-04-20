@@ -17,11 +17,12 @@ class Public::GamesController < ApplicationController
   
   def show
     @game = Game.find(params[:id])
-      if current_customer
-       current_customer.view_counts.create(game_id: @game.id)
-      else
-        ViewCount.create(game_id: @game.id)
-      end  
+    if current_customer
+      current_customer.view_counts.create(game: @game)
+    else
+      ViewCount.create(game: @game)
+    end
+    @comments = @game.comments.page(params[:page]).per(20)
     @comment = Comment.new
   end
   

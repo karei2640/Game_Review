@@ -14,6 +14,10 @@ class Bordgame < ApplicationRecord
   validates :introduct, presence: true
   validates :overall_review, presence: true
   
+  def bord_view_counts_guest
+    bord_view_counts.where(customer_id: nil).count
+  end
+  
   def bord_favorited_by?(customer)
     bord_favorites.where(customer_id: customer.id).exists?
   end

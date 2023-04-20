@@ -4,13 +4,13 @@
   <% if @inquiries.any? %>
     <ul class="nav nav-tabs mb-4">
       <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#status-0">未対応</a>
+        <a class="nav-link <%= params[:tab] == "status-0" || params[:tab].nil? ? "active" : "" %>" data-toggle="tab" href="#status-0">未対応</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#status-1">対応中</a>
+        <a class="nav-link <%= params[:tab] == "status-1" ? "active" : "" %>" data-toggle="tab" href="#status-1">対応中</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#status-2">対応済み</a>
+        <a class="nav-link <%= params[:tab] == "status-2" ? "active" : "" %>" data-toggle="tab" href="#status-2">対応済み</a>
       </li>
     </ul>
     <div class="tab-content">
@@ -33,7 +33,7 @@
                 <td><%= link_to inquiry.name, inquiry_path(inquiry) %></td>
                 <td><%= inquiry.email %></td>
                 <td><%= inquiry.message %></td>
-                <td><%= inquiry.created_at %></td>
+                <td><%= inquiry.created_at.strftime('%Y/%m/%d') %></td>
                 <% if admin_signed_in? %>
                 <td><%= inquiry.status %></td>
                 <% end %>
@@ -62,7 +62,7 @@
                 <td><%= link_to inquiry.name, inquiry_path(inquiry) %></td>
                 <td><%= inquiry.email %></td>
                 <td><%= inquiry.message %></td>
-                <td><%= inquiry.created_at %></td>
+                <td><%= inquiry.created_at.strftime('%Y/%m/%d') %></td>
                 <% if admin_signed_in? %>
                 <td><%= inquiry.status %></td>
                 <% end %>
@@ -91,7 +91,7 @@
                 <td><%= link_to inquiry.name, inquiry_path(inquiry) %></td>
                 <td><%= inquiry.email %></td>
                 <td><%= inquiry.message %></td>
-                <td><%= inquiry.created_at %></td>
+                <td><%= inquiry.created_at.strftime('%Y/%m/%d') %></td>
                 <% if admin_signed_in? %>
                 <td><%= inquiry.status %></td>
                 <% end %>

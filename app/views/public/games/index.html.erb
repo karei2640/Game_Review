@@ -1,3 +1,4 @@
+<script src="/path/to/jquery.cookie.min.js"></script>
 <div class='container px-5 px-sm-0'>
   <div class='row'>
     <div class='col-md-3'>
@@ -18,14 +19,14 @@
           </div>
         <% end %>
       <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#latest">最新記事</a>
+         <li class="nav-item">
+          <%= link_to '最新記事', '#latest', class: "nav-link #{params[:tab] == 'latest' || params[:tab].blank? ? 'active' : ''}", data: { toggle: "tab" }, aria: { selected: params[:tab] == 'latest' || params[:tab].blank? } %>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#popular">閲覧数順</a>
+          <%= link_to '閲覧数順', '#popular', class: "nav-link #{params[:tab] == 'popular' ? 'active' : ''}", data: { toggle: "tab" }, aria: { selected: params[:tab] == 'popular' } %>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#favorite"><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数順</a>
+          <%= link_to '<i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数順'.html_safe, '#favorite', class: "nav-link #{params[:tab] == 'favorite' ? 'active' : ''}", data: { toggle: "tab" }, aria: { selected: params[:tab] == 'favorite' } %>
         </li>
       </ul>
       <div class="tab-content">
@@ -60,6 +61,15 @@
           <% else %>
             <%= render partial: 'game_ranking', locals: { games: @popular_games_daily } %>
           <% end %>
+          <% if params[:ranking_period] == 'all' %>
+            <%= paginate @popular_games_all, param_name: 'popular_games_all_page' %>
+          <% elsif params[:ranking_period] == 'monthly' %>
+            <%= paginate @popular_games_monthly, param_name: 'popular_games_monthly_page' %>
+          <% elsif params[:ranking_period] == 'weekly' %>
+            <%= paginate @popular_games_weekly, param_name: 'popular_games_weekly_page' %>
+          <% else %>
+            <%= paginate @popular_games_daily, param_name: 'popular_games_daily_page' %>
+          <% end %>
           <div class="ranking-tab-nav">
             <div class="period-options">
             <ul class="nav nav-pills">
@@ -89,6 +99,15 @@
               <%= render partial: 'game_ranking', locals: { games: @favorite_games_weekly } %>
             <% else %>
               <%= render partial: 'game_ranking', locals: { games: @favorite_games_daily } %>
+            <% end %>
+            <% if params[:ranking_period] == 'all' %>
+              <%= paginate @favorite_games_all, param_name: 'favorite_games_all_page' %>
+            <% elsif params[:ranking_period] == 'monthly' %>
+              <%= paginate @favorite_games_monthly, param_name: 'favorite_games_monthly_page' %>
+            <% elsif params[:ranking_period] == 'weekly' %>
+              <%= paginate @favorite_games_weekly, param_name: 'favorite_games_weekly_page' %>
+            <% else %>
+              <%= paginate @favorite_games_daily, param_name: 'favorite_games_daily_page' %>
             <% end %>
             <div class="ranking-tab-nav">
           <div class="period-options">
