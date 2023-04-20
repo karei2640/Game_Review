@@ -21,6 +21,7 @@ class Public::BordgamesController < ApplicationController
     else
       BordViewCount.create(bordgame: @bordgame)
     end
+    @comments = @bordgame.bordgame_comments.page(params[:page]).per(4)
     @comment = BordgameComment.new
   end
 
