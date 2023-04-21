@@ -13,6 +13,9 @@
  *= require_tree .
  *= require_self
  */
+ 
+@import 'kaminari-bootstrap';
+
 header {
   background-color:rgba(255, 128, 0, 0.8);color: white;
 }
@@ -31,3 +34,4 @@ footer {
 #to-top-button.show {
   display: block;
 }
+

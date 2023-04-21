@@ -9,7 +9,9 @@ class Public::CustomersController < ApplicationController
     @following_games = Game.joins(customer: :followers).where(followers: { follower_id: current_customer.id })
   end
   
-  def index
+  def bord_show
+    @customer = Customer.find(params[:id])
+    @bordgames = @customer.bordgames.page(params[:boardgames_page]).per(50)
   end
   
   def unsubscribe

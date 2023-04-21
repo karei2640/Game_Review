@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <% games.each do |game| %>
+    <% @games.each do |game| %>
       <tr>
           <td><%= link_to(game) do %>
            <% if game.image.attached? %>
