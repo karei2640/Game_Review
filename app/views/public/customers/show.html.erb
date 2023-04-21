@@ -2,7 +2,7 @@
   <div class="row">
     <% if customer_signed_in? %>
     <div class="col-md-3">
-      <h2>ユーザ情報</h2>
+      <h2>ユーザー情報</h2>
       <% if flash[:notice] %>
         <div class="alert alert-notice">
         </div>
@@ -16,10 +16,10 @@
       <h2>投稿一覧</h2>
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#games" role="tab">ゲーム投稿一覧</a>
+          <%= link_to "ゲーム投稿一覧", customer_path(current_customer.id), class: 'btn btn-info'  %></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#bordgames" role="tab">ボードゲーム投稿一覧</a>
+         <%= link_to "ボードゲーム投稿一覧",  bord_show_customer_path(current_customer), class: 'btn btn-light' %>
         </li>
       </ul>
       <div class="tab-content">

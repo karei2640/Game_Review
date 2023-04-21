@@ -24,6 +24,10 @@ namespace :admin do
   end
   resources :bordgames, only: [:index, :show,:create, :edit, :update, :destroy] do
   end
+  get 'popular', to: 'games#popular_index'
+  get 'favorite', to: 'games#favorite_index'
+  get 'bord_popular', to: 'bordgames#popular_index'
+  get 'bord_favorite', to: 'bordgames#favorite_index'
   resources :genres, only: [:index,:new, :edit, :create, :update] # ジャンルの追加機能
   resources :tables, only: [:index,:new, :edit, :create, :update]# テーブルジャンルの追加機能
   resources :tableplats, only: [:index,:new, :edit, :create, :update]
@@ -35,7 +39,8 @@ scope module: :public do
   get '/search', to: 'searchs#index'
   get "/customers/unsubscribe" => "customers#unsubscribe"
   get "/customers/withdrawl" => "customers#withdrawl"
-  resources :customers, only: [:show, :update, :edit] do  
+  resources :customers, only: [:show, :update, :edit] do
+    get :bord_show, on: :member
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
@@ -45,10 +50,14 @@ scope module: :public do
     resource :bord_favorites, only: [ :create, :destroy]
   end
   resources :bord_favorites, only: [:index]
-  resources :games, only: [:new,:index, :show,:create, :edit, :update, :destroy] do
+  resources :games, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
     resources :game_comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
   end
+  get 'popular', to: 'games#popular_index'
+  get 'favorite', to: 'games#favorite_index'
+  get 'bord_popular', to: 'bordgames#popular_index'
+  get 'bord_favorite', to: 'bordgames#favorite_index'
   resources :favorites, only: [:index]
   get "/search" => "games#search"
 end

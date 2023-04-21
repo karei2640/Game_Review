@@ -2,7 +2,7 @@
   <div class='row'>
     <div class='col-md-3'>
       <% if customer_signed_in? %>
-        <h2>ユーザ情報</h2>
+        <h2>ユーザー情報</h2>
         <%= form_with model: @customer, url: customer_path(current_customer.id), remote: true do |f| %>
           <%= render partial: 'public/customers/info', customer: @customer %>
         <% end %>
@@ -19,15 +19,15 @@
         <% end %>
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <%= link_to '最新記事', '#latest', class: "nav-link #{params[:tab] == 'latest' || params[:tab].blank? ? 'active' : ''}", data: { toggle: "tab" }, aria: { selected: params[:tab] == 'latest' || params[:tab].blank? } %>
+          <%= link_to '最新記事',bordgames_path, class: 'btn btn-info' %>
         </li>
         <li class="nav-item">
-          <%= link_to '閲覧数順', '#popular', class: "nav-link #{params[:tab] == 'popular' ? 'active' : ''}", data: { toggle: "tab" }, aria: { selected: params[:tab] == 'popular' } %>
+          <%= link_to '閲覧数順', bord_popular_path, class: 'btn btn-light' %>
         </li>
         <li class="nav-item">
-          <%= link_to '<i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数順'.html_safe, '#favorite', class: "nav-link #{params[:tab] == 'favorite' ? 'active' : ''}", data: { toggle: "tab" }, aria: { selected: params[:tab] == 'favorite' } %>
-        </li>
-      </ul>
+          <%= link_to bord_favorite_path, class: 'btn btn-light' do %>
+          <i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数順
+          <% end %>
       </ul>
       <div class="tab-content">
       <div class="tab-pane active" id="latest">
@@ -55,84 +55,6 @@
         </tbody>
         <%= paginate @latest_bordgames, param_name: 'latest_bordgames' %>
       </table>
-    </div>
-    <div class="tab-pane fade" id="popular">
-      <table class='table table-hover table-inverse'>
-        <% if params[:ranking_period] == 'all' %>
-            <%= render partial: 'bordgame_ranking', locals: { games: @popular_bordgames_all } %>
-          <% elsif params[:ranking_period] == 'monthly' %>
-            <%= render partial: 'bordgame_ranking', locals: { games: @popular_bordgames_monthly } %>
-          <% elsif params[:ranking_period] == 'weekly' %>
-            <%= render partial: 'bordgame_ranking', locals: { games: @popular_bordgames_weekly } %>
-          <% else %>
-            <%= render partial: 'bordgame_ranking', locals: { games: @popular_bordgames_daily } %>
-          <% end %>
-          <% if params[:ranking_period] == 'all' %>
-            <%= paginate @popular_bordgames_all, param_name: 'popular_bordgames_all_page', remote: true %>
-          <% elsif params[:ranking_period] == 'monthly' %>
-            <%= paginate @popular_bordgames_monthly, param_name: 'popular_bordgames_monthly_page', remote: true %>
-          <% elsif params[:ranking_period] == 'weekly' %>
-            <%= paginate @popular_bordgames_weekly, param_name: 'popular_bordgames_weekly_page', remote: true %>
-          <% else %>
-            <%= paginate @popular_bordgames_daily, param_name: 'popular_bordgames_daily_page', remote: true %>
-          <% end %>
-        <div class="ranking-tab-nav">
-            <div class="period-options">
-            <ul class="nav nav-pills">
-              <li class="nav-item">
-              <%= link_to '全期間', request.params.merge(ranking_period: 'all'), class: "nav-link #{params[:ranking_period] == 'all' ? 'active' : ''}", turbo: false %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '1か月', request.params.merge(ranking_period: 'monthly'), class: "nav-link #{params[:ranking_period] == 'monthly' ? 'active' : ''}", turbo: false %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '1週間', request.params.merge(ranking_period: 'weekly'), class: "nav-link #{params[:ranking_period] == 'weekly' ? 'active' : ''}", turbo: false %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '1日', request.params.merge(ranking_period: 'daily'), class: "nav-link #{params[:ranking_period].nil? || params[:ranking_period] == 'daily' ? 'active' : ''}", turbo: false %>
-            </li>
-            </ul>
-          </div>
-          </table>
-          </div>
-        <div class="tab-pane" id="favorite">
-        <table class='table table-hover table-inverse'>
-          <% if params[:ranking_period] == 'all' %>
-            <%= render partial: 'bordgame_ranking', locals: { games: @favorite_bordgames_all } %>
-          <% elsif params[:ranking_period] == 'monthly' %>
-            <%= render partial: 'bordgame_ranking', locals: { games: @favorite_bordgames_monthly } %>
-          <% elsif params[:ranking_period] == 'weekly' %>
-            <%= render partial: 'bordgame_ranking', locals: { games: @favorite_bordgames_weekly } %>
-          <% else %>
-            <%= render partial: 'bordgame_ranking', locals: { games: @favorite_bordgames_daily } %>
-          <% end %>
-          <% if params[:ranking_period] == 'all' %>
-            <%= paginate @favorite_bordgames_all, param_name: 'favorite_bordgames_all_page', remote: true %>
-          <% elsif params[:ranking_period] == 'monthly' %>
-            <%= paginate @favorite_bordgames_monthly, param_name: 'favorite_bordgames_monthly_page', remote: true %>
-          <% elsif params[:ranking_period] == 'weekly' %>
-            <%= paginate @favorite_bordgames_weekly, param_name: 'favorite_bordgames_weekly_page', remote: true %>
-          <% else %>
-            <%= paginate @favorite_bordgames_daily, param_name: 'favorite_bordgames_daily_page', remote: true %>
-          <% end %>
-          <div class="ranking-tab-nav">
-          <div class="period-options">
-         <ul class="nav nav-pills">
-           <li class="nav-item">
-            <%= link_to '全期間', request.params.merge(ranking_period: 'all'), class: "nav-link #{params[:ranking_period] == 'all' ? 'active' : ''}" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to '1か月', request.params.merge(ranking_period: 'monthly'), class: "nav-link #{params[:ranking_period] == 'monthly' ? 'active' : ''}"  %>
-          </li>
-          <li class="nav-item">
-            <%= link_to '1週間', request.params.merge(ranking_period: 'weekly'), class: "nav-link #{params[:ranking_period] == 'weekly' ? 'active' : ''}" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to '1日', request.params.merge(ranking_period: 'daily'), class: "nav-link #{params[:ranking_period].nil? || params[:ranking_period] == 'daily' ? 'active' : ''}"  %>
-          </li>
-        </ul>
-        </div>
-        </table>
         </div>
       </div>
     </div>
