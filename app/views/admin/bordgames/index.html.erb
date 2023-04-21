@@ -1,18 +1,23 @@
  <div class="container">
   <div class="row">
     <div class='col-md-9'>
-      <h1>テーブルゲーム投稿一覧</h1>
+     <h1>テーブルゲーム投稿一覧</h1>
+      <% if flash[:alert] %>
+          <div class="alert alert-danger" role="alert">
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <%= link_to '最新記事', '#latest', class: "nav-link #{params[:tab] == 'latest' || params[:tab].blank? ? 'active' : ''}", data: { toggle: "tab" }, aria: { selected: params[:tab] == 'latest' || params[:tab].blank? } %>
+          <%= link_to '最新記事',admin_bordgames_path, class: 'btn btn-success' %>
         </li>
         <li class="nav-item">
-          <%= link_to '閲覧数順', '#popular', class: "nav-link #{params[:tab] == 'popular' ? 'active' : ''}", data: { toggle: "tab" }, aria: { selected: params[:tab] == 'popular' } %>
+          <%= link_to '閲覧数順', admin_bord_popular_path, class: 'btn btn-info' %>
         </li>
         <li class="nav-item">
-          <%= link_to '<i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数順'.html_safe, '#favorite', class: "nav-link #{params[:tab] == 'favorite' ? 'active' : ''}", data: { toggle: "tab" }, aria: { selected: params[:tab] == 'favorite' } %>
-        </li>
-      </ul>
+          <%= link_to admin_bord_favorite_path, class: 'btn btn-info' do %>
+          <i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数順
+          <% end %>
       </ul>
       <div class="tab-content">
       <div class="tab-pane active" id="latest">
@@ -20,9 +25,9 @@
         <thead class="thead-dark">
           <tr>
             <th></th>
-            <th>ゲーム名</th>
-            <th></th>
-            <th>紹介</th>
+            <th>ゲーム名　</th>
+            <th>　　　　　　</th>
+            <th>タイトル　　　</th>
             <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数　</th>
             <th>閲覧数　　</th>
             <th>コメント数　　</th>
@@ -31,7 +36,7 @@
         </thead>
         <tbody>
           <% if @latest_bordgames.any? %>
-            <%= render 'newgames' %>
+            <%= render 'public/bordgames/newgames' %>
           <% else %>
             <tr>
               <td colspan="8">投稿がありません。</td>
@@ -40,66 +45,6 @@
         </tbody>
         <%= paginate @latest_bordgames, param_name: 'latest_bordgames' %>
       </table>
-    </div>
-    <div class="tab-pane fade" id="popular">
-      <table class='table table-hover table-inverse'>
-        <% if params[:ranking_period] == 'all' %>
-            <%= render partial: 'public/bordgames/bordgame_ranking', locals: { games: @popular_bordgames_all } %>
-          <% elsif params[:ranking_period] == 'monthly' %>
-            <%= render partial: 'public/bordgames/bordgame_ranking', locals: { games: @popular_bordgames_monthly } %>
-          <% elsif params[:ranking_period] == 'weekly' %>
-            <%= render partial: 'public/bordgames/bordgame_ranking', locals: { games: @popular_bordgames_weekly } %>
-          <% else %>
-            <%= render partial: 'public/bordgames/bordgame_ranking', locals: { games: @popular_bordgames_daily } %>
-          <% end %>
-        <div class="ranking-tab-nav">
-            <div class="period-options">
-            <ul class="nav nav-pills">
-              <li class="nav-item">
-              <%= link_to '全期間', request.params.merge(ranking_period: 'all'), class: "nav-link #{params[:ranking_period] == 'all' ? 'active' : ''}", turbo: false %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '1か月', request.params.merge(ranking_period: 'monthly'), class: "nav-link #{params[:ranking_period] == 'monthly' ? 'active' : ''}", turbo: false %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '1週間', request.params.merge(ranking_period: 'weekly'), class: "nav-link #{params[:ranking_period] == 'weekly' ? 'active' : ''}", turbo: false %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '1日', request.params.merge(ranking_period: 'daily'), class: "nav-link #{params[:ranking_period].nil? || params[:ranking_period] == 'daily' ? 'active' : ''}", turbo: false %>
-            </li>
-            </ul>
-          </div>
-          </table>
-          </div>
-        <div class="tab-pane" id="favorite">
-        <table class='table table-hover table-inverse'>
-          <% if params[:ranking_period] == 'all' %>
-            <%= render partial: 'public/bordgames/bordgame_ranking', locals: { games: @favorite_bordgames_all } %>
-          <% elsif params[:ranking_period] == 'monthly' %>
-            <%= render partial: 'public/bordgames/bordgame_ranking', locals: { games: @favorite_bordgames_monthly } %>
-          <% elsif params[:ranking_period] == 'weekly' %>
-            <%= render partial: 'public/bordgames/bordgame_ranking', locals: { games: @favorite_bordgames_weekly } %>
-          <% else %>
-            <%= render partial: 'public/bordgames/bordgame_ranking', locals: { games: @favorite_bordgames_daily } %>
-          <% end %>
-          <div class="ranking-tab-nav">
-          <div class="period-options">
-         <ul class="nav nav-pills">
-           <li class="nav-item">
-            <%= link_to '全期間', request.params.merge(ranking_period: 'all'), class: "nav-link #{params[:ranking_period] == 'all' ? 'active' : ''}" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to '1か月', request.params.merge(ranking_period: 'monthly'), class: "nav-link #{params[:ranking_period] == 'monthly' ? 'active' : ''}"  %>
-          </li>
-          <li class="nav-item">
-            <%= link_to '1週間', request.params.merge(ranking_period: 'weekly'), class: "nav-link #{params[:ranking_period] == 'weekly' ? 'active' : ''}" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to '1日', request.params.merge(ranking_period: 'daily'), class: "nav-link #{params[:ranking_period].nil? || params[:ranking_period] == 'daily' ? 'active' : ''}"  %>
-          </li>
-        </ul>
-        </div>
-        </table>
         </div>
       </div>
     </div>

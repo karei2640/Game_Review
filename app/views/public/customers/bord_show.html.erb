@@ -1,0 +1,41 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <% if customer_signed_in? %>
+    <div class="col-md-3">
+      <h2>ユーザー情報</h2>
+      <% if flash[:notice] %>
+        <div class="alert alert-notice">
+        </div>
+      <% end %>
+      <%= form_with model: @customer, url: customer_path(current_customer.id), remote: true do |f| %>
+        <%= render partial: 'info', customer: @customer %>
+      <% end %>
+    </div>
+    <% end %>
+    <div class="col-md-9">
+      <h2>投稿一覧</h2>
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <%= link_to "ゲーム投稿一覧", customer_path(current_customer.id), class: 'btn btn-light'  %></a>
+        </li>
+        <li class="nav-item">
+         <%= link_to "ボードゲーム投稿一覧",  bord_show_customer_path(current_customer.id), class: 'btn btn-info' %>
+        </li>
+      </ul>
+      </ul>
+      <div class="tab-pane" id="bordgames" role="tabpanel">
+      <% if @bordgames.present? %>
+        <table class="table table-hover table-inverse">
+          <tbody>
+            <%= render 'bordgame' %>
+          </tbody>
+        </table>
+        <%= paginate @bordgames, param_name: 'bordgames_page' %>
+      <% else %>
+        <p>ボードゲームの投稿がありません。</p>
+      <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

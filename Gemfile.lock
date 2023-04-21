@@ -118,6 +118,9 @@ GEM
     kaminari-activerecord (1.2.2)
       activerecord
       kaminari-core (= 1.2.2)
+    kaminari-bootstrap (3.0.1)
+      kaminari (>= 0.13.0)
+      rails
     kaminari-core (1.2.2)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -191,7 +194,7 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    regexp_parser (2.7.0)
+    regexp_parser (2.8.0)
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
@@ -269,6 +272,7 @@ DEPENDENCIES
   jp_prefecture
   jquery-rails
   kaminari (~> 1.2.1)
+  kaminari-bootstrap (= 3.0.1)
   listen (~> 3.3)
   mysql2
   net-imap

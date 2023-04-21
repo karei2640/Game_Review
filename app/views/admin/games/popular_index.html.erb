@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class='col-md-9'>
+      <h1>ゲーム投稿一覧</h1>
+      <% if flash[:alert] %>
+          <div class="alert alert-danger" role="alert">
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
+      <ul class="nav nav-tabs">
+         <li class="nav-item">
+          <%= link_to '最新記事', admin_games_path, class: 'btn btn-info' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to '閲覧数順', admin_popular_path, class: 'btn btn-success' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_favorite_path, class: 'btn btn-info' do %>
+          <i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数順
+          <% end %>
+        </li>
+      </ul>
+      <table class='table table-hover table-inverse'>
+          <% if params[:ranking_period] == 'all' %>
+            <%= render partial: 'public/games/game_ranking', locals: { games: @popular_games_all } %>
+          <% elsif params[:ranking_period] == 'monthly' %>
+            <%= render partial: 'public/games/game_ranking', locals: { games: @popular_games_monthly } %>
+          <% elsif params[:ranking_period] == 'weekly' %>
+            <%= render partial: 'public/games/game_ranking', locals: { games: @popular_games_weekly } %>
+          <% else %>
+            <%= render partial: 'public/games/game_ranking', locals: { games: @popular_games_daily } %>
+          <% end %>
+          <% if params[:ranking_period] == 'all' %>
+            <%= paginate @popular_games_all, param_name: 'popular_games_all_page' %>
+          <% elsif params[:ranking_period] == 'monthly' %>
+            <%= paginate @popular_games_monthly, param_name: 'popular_games_monthly_page' %>
+          <% elsif params[:ranking_period] == 'weekly' %>
+            <%= paginate @popular_games_weekly, param_name: 'popular_games_weekly_page' %>
+          <% else %>
+            <%= paginate @popular_games_daily, param_name: 'popular_games_daily_page' %>
+          <% end %>
+            <ul class="nav nav-pills">
+              <li class="nav-item">
+                <%= link_to '全期間', request.params.merge(ranking_period: 'all'), class: "nav-link #{params[:ranking_period] == 'all' ? 'active' : ''}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '1か月', request.params.merge(ranking_period: 'monthly'), class: "nav-link #{params[:ranking_period] == 'monthly' ? 'active' : ''}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '1週間', request.params.merge(ranking_period: 'weekly'), class: "nav-link #{params[:ranking_period] == 'weekly' ? 'active' : ''}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '1日', request.params.merge(ranking_period: 'daily'), class: "nav-link #{params[:ranking_period].nil? || params[:ranking_period] == 'daily' ? 'active' : ''}" %>
+              </li>
+            </ul>
+          </div>
+          </table>
+        </div>
+        </div>

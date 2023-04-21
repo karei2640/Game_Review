@@ -14,9 +14,9 @@
   <td>
     <%= link_to game_path(game) do %>
     <% if game.image.attached? %>
-      <%= image_tag game.image, size:'100x100' %>
+      <%= image_tag game.image, size:'120x120' %>
     <% else %>
-      <%= image_tag asset_path('no_image.jpg'), size: "100x100" %>
+      <%= image_tag asset_path('no_image.jpg'), size: "120x120" %>
     <% end %>
   </td>
   <% end %>
