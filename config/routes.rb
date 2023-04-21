@@ -61,6 +61,13 @@ scope module: :public do
   resources :favorites, only: [:index]
   get "/search" => "games#search"
 end
-resources :inquiries, only: [:new, :show, :index, :edit, :create, :update]
+resources :inquiries, only: [:new, :show, :edit, :create, :update] do
+  collection do
+    get 'status/:status', action: :status, as: :status
+    get 'untreated'
+    get 'processing'
+    get 'completed'
+  end
+end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

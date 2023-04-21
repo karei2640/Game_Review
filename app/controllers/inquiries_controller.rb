@@ -1,15 +1,24 @@
 class InquiriesController < ApplicationController
-  before_action :authenticate_admin!, only: [:index, :edit, :update, :destroy]
+  before_action :authenticate_admin!, only: [:untreated, :processing, :completed, :index, :edit, :update, :destroy]
+  
   def new
     @inquiry = Inquiry.new
+  end
+  
+  def untreated
+    @untreated_inquiries = Inquiry.where(status: "未対応").order(created_at: :desc).page(params[:page]).per(20)
+  end
+  
+  def processing
+    @processing_inquiries = Inquiry.where(status: "対応中").order(created_at: :desc).page(params[:page]).per(20)
+  end
+  
+  def completed
+    @completed_inquiries = Inquiry.where(status: "対応済み").order(created_at: :desc).page(params[:page]).per(20)
   end
 
   def show
     @inquiry = Inquiry.find(params[:id])
-  end
-
-  def index
-    @inquiries = Inquiry.all.page(params[:page]).per(10)
   end
   
   def edit

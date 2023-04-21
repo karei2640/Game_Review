@@ -74,7 +74,7 @@
         <h5>お問い合わせ</h5>
         <ul>
           <% if admin_signed_in? %>
-          <li><%= link_to "お問い合わせフォーム",inquiries_path  %></a></li>
+          <li><%= link_to "お問い合わせ一覧",untreated_inquiries_path  %></a></li>
           <% else %>
           <li><%= link_to "お問い合わせフォーム",new_inquiry_path  %></a></li>
           <% end %>
