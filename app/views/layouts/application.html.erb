@@ -1,16 +1,88 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GameReview</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Roll The Dice: ゲームの世界への挑戦</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/5667bc939f.js" crossorigin="anonymous"></script>
   </head>
 
+
   <body>
-    <%= yield %>
+    <header class="border-bottom border-dark">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <%= link_to image_tag('Roll The Dice.logo3 .png', size: "100x100", class: "ml-5"), root_path %>
+          <a class="navbar-brand" href="/"><h3>ゲームの世界への挑戦</h3></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+            <li>
+              <%= link_to notices_path, class: 'btn btn-info' do %>
+                <i class="fas fa-rss-square fa-lg" style="color: #07058f;"></i> News
+              <% end %>
+            </li>　
+            <!--adminログイン時のヘッダー-->
+            <% if admin_signed_in? %>
+            <%= render partial: 'layouts/header_admin' %>
+            <!--customersログイン時のヘッダー-->
+            <% elsif customer_signed_in? %>
+            <%= render partial: 'layouts/header_customer' %>
+            <!--ログイン前時のヘッダー-->
+            <% else %>
+            <%= render partial: 'layouts/header' %>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+        <%= form_with(url: search_path, method: :get) do |form| %>
+              <%= form.label :keyword, "検索ワード" %>
+              <%= form.text_field :keyword %>
+              <%= form.submit "検索" %>
+            <% end %>
+      </nav>
+    </header>
+    <body>
+      <button id="to-top-button" class="btn btn-primary" title="トップへ">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+    <main>
+      <%= flash[:success] %>
+      <%= yield %>
+    </main>
+    <footer class="border-bottom border-dark pb-6">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>お知らせ</h5>
+        <ul>
+          <% if admin_signed_in? %>
+          <li><%= link_to "お知らせ作成",new_notice_path %></li>
+          <% else %>
+          <% end %>
+          <li><%= link_to "お知らせ、メンテナンスについて",notices_path  %></li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h5>お問い合わせ</h5>
+        <ul>
+          <% if admin_signed_in? %>
+          <li><%= link_to "お問い合わせフォーム",inquiries_path  %></a></li>
+          <% else %>
+          <li><%= link_to "お問い合わせフォーム",new_inquiry_path  %></a></li>
+          <% end %>
+          <li><%= link_to "FAQ",faqs_path  %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
   </body>
 </html>

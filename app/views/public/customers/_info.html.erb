@@ -1,0 +1,54 @@
+<div data-turbolinks="true">
+<table class='table'>
+  <% if @customer.profile_image.attached? %>
+  <tr><%= image_tag @customer.get_profile_image, size: "100x100" %></tr>
+  <% else %>
+  <tr><%= image_tag asset_path('no_image.jpg'), size: "100x100" %></tr>
+  <% end %>
+  <tr>
+    <th><% if flash[:notice] %>
+      <div class="alert alert-success">
+        <%= flash[:notice] %>
+      </div>
+    <% end %></th>
+  </tr>
+  <tr>
+	  <th>名前</th>
+	  <th><%= @customer.name %></th>
+  </tr>
+  <tr>
+	  <th><i class="fas fa-map-marker-alt fa-lg"></i></th>
+	  <th><%= @customer.prefecture_code %></th>
+  </tr>
+  <tr>
+	  <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>ゲーム</th>
+	  <th><%= link_to '一覧', favorites_path %></th>
+  </tr>
+  <tr>
+	  <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>ボード</th></th>
+	  <th><%= link_to '一覧', bord_favorites_path %></th>
+  </tr>
+  <tr>
+    <th>フォロー</th>
+    <th><%= link_to @customer.followings.count, customer_followings_path(@customer) %></th>
+  </tr>
+  <tr>
+    <th>フォロワー</th>
+    <th><%= link_to @customer.followers.count, customer_followers_path(@customer) %></th>
+  </tr>
+  
+</table>
+　
+<div class='row'>
+  <% if current_customer == @customer %>
+    <%= link_to edit_customer_path(current_customer.id), class: "btn btn-outline-secondary btn-block edit-customer-btn" do %>
+    <i class="fas fa-user-cog"></i>
+    <% end %>
+  <% else %>
+  <td><%= render "public/relationships/btn", customer: @customer %></td>
+  <% end %>
+</div>
+<div>
+  <%= image_tag asset_path('黒Dice.png'), size: "250x250" %>
+</div>
+</div>

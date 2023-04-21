@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card my-4">
+        <div class="card-header bg-primary text-white">
+          <h1 class="text-center">お問い合わせ編集</h1>
+        </div>
+        <div class="card-body">
+          <%= form_for @inquiry do |form| %>
+            <div class="form-group">
+              <%= form.label :名前 %>
+              <%= form.text_field :name, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= form.label :メールアドレス %>
+              <%= form.email_field :email, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= form.label :メッセージ %>
+              <%= form.text_area :message, rows: 6, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <div>ステータス：</div>
+              <% ["未確認", "確認済み", "対応中", "対応済み"].each do |status| %>
+                <div class="form-check form-check-inline">
+                  <%= form.radio_button :status, status, id: "inquiry_status_#{status.parameterize}", class: "form-check-input" %>
+                  <%= form.label "inquiry_status_#{status.parameterize}", status, class: "form-check-label" %>
+                </div>
+              <% end %>
+            </div>
+            <%= form.submit "更新する", class: "btn btn-primary" %>
+            <%= link_to "一覧に戻る", inquiries_path, class: "btn btn-secondary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

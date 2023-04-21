@@ -1,0 +1,106 @@
+<div class="container">
+  <% if @games.present? %>
+    <div class="game-results">
+      <h3>ゲーム検索結果</h3>
+      <ul>
+        <% @games.each do |game| %>
+        <div class="tab-content">
+        <div class="tab-pane active" id="latest">
+          <table class='table table-hover table-inverse'>
+            <thead>
+              <tr>
+                <th></th>
+                <th>ゲーム名</th>
+                <th>タイプ</th>
+                <th>紹介</th>
+                <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
+                <th>閲覧数</th>
+                <th>コメント件数</th>
+                <th colspan="3"></th>
+              </tr>
+          </thead>
+              <%= render 'public/games/viewgames' %>
+              <% end %>
+              <%= paginate @games %>
+            </tbody>
+          </table>
+        </div>
+        <% end %>
+        </div>
+      </ul>
+  <% if @bordgames.present? %>
+    <div class="bordgame-results">
+      <h3>ボードゲーム検索結果</h3>
+      <ul>
+        <% @bordgames.each do |bordgame| %>
+        <div class="tab-content">
+        <div class="tab-pane active" id="latest">
+          <table class='table table-hover table-inverse'>
+            <thead>
+              <tr>
+                <th></th>
+                <th>ゲーム名</th>
+                <th>タイプ</th>
+                <th>紹介</th>
+                <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
+                <th>閲覧数</th>
+                <th>コメント件数</th>
+                <th colspan="3"></th>
+              </tr>
+          </thead>
+              <%= render 'public/bordgames/viewgames' %>
+              <% end %>
+              <%= paginate @bordgames %>
+            </tbody>
+          </table>
+        </div>
+        <% end %>
+       </div> 
+       </ul>
+   <div class="container">
+  <% if @customers.present? %>
+  <div class="customer-results">
+    <h3>会員検索結果</h3>
+    <ul>
+      <% @customers.each do |customer| %>
+      <div class="tab-content">
+        <div class="tab-pane active" id="latest">
+          <table class='table table-hover table-inverse'>
+            <thead>
+              <tr>
+                <th>画像</th>
+                <th>名前</th>
+                <th>フォロー数</th>
+                <th>フォロワー数</th>
+            </thead>
+            <tbody>
+              <td><% if customer.profile_image.attached? %>
+                  <%= image_tag customer.get_profile_image, size: "60x60" %>
+              <% else %>
+                <%= image_tag asset_path('no_image.jpg'), size: "60x60" %>
+              <% end %></td>
+              <% if admin_signed_in? %>
+                <td><strong><%= link_to customer.name, admin_customer_path(customer) %>さん</td></strong>
+                <td><%=  customer.followings.count %></td>
+                <td><%=  customer.followers.count %></td>
+              <% elsif customer_signed_in? %>
+                <td><%= link_to customer.name, customer_path(customer) %>さん</td>
+                <td><%= link_to customer.followings.count, customer_followings_path(customer) %></td>
+                <td><%= link_to customer.followers.count, customer_followers_path(customer) %></td>
+              <% end %>
+            </tbody>
+            <% end %>
+        </ul>
+        <% if @customers.total_pages > 1 %>
+          <%= paginate @customers %>
+        <% end %>
+      </div>
+    <% else %>
+      <p>ユーザー名が見つかりませんでした</p>
+    <% end %>
+    </div>
+    <div class="container">
+      <% if @games.empty? && @bordgames.empty? && @customers.empty? %>
+        <p>検索結果は見つかりませんでした。</p>
+      <% end %>
+    </div>

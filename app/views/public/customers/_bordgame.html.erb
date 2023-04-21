@@ -1,0 +1,44 @@
+<div class="tab-pane" id="bordgames" role="tabpanel">
+<% if @bordgames.present? %>
+<table class='table table-hover table-inverse'>
+  <thead class="thead-dark">
+    <tr>
+      <th></th>
+      <th>ボードゲーム名　</th>
+      <th>ジャンル　　</th>
+      <th>ゲーム紹介　</th>
+      <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数　</th>
+      <th>閲覧数　</th>
+      <th colspan="5s"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bordgames.each do |bordgame| %>
+      <tr>
+        <td>
+          <%= link_to bordgame_path(bordgame) do %>
+            <% if bordgame.image.attached? %>
+              <%= image_tag bordgame.image, size:'120x120' %>
+            <% else %>
+              <%= image_tag asset_path('no_image'), size: "120x120" %>
+            <% end %>
+          <% end %>
+        </td>
+        <% if bordgame.game_title.length > 8 %>
+          <td><%= link_to "#{bordgame.game_title.slice(0, 8)}...", bordgame, class: "bordgame_#{bordgame.id}" %></td>
+        <% else %>
+          <td><%= link_to bordgame.game_title, bordgame, class: "bordgame_#{bordgame.id}" %></td>
+        <% end %>
+        <td><%= bordgame.table.name %></td>
+        <% if bordgame.introduct_title.length > 10 %>
+          <td><%= "#{bordgame.introduct_title.slice(0, 10)}..." %></td>
+        <% else %>
+          <td><%= bordgame.introduct_title %></td>
+        <% end %>
+        <td><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i><%= bordgame.bord_favorites.count %></td>
+        <td><p class="view-count">view: <%= bordgame.bord_view_counts.count %></p></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

@@ -1,0 +1,42 @@
+<table class='table table-hover table-inverse'>
+  <thead class="thead-dark">
+    <tr>
+      <th></th>
+      <th>ゲーム名　</th>
+      <th>　　　　</th>
+      <th>タイトル　　</th>
+      <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数　</th>
+      <th>閲覧数　　</th>
+      <th>コメント数　　　　</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @games.each do |game| %>
+      <tr>
+          <td><%= link_to(game) do %>
+           <% if game.image.attached? %>
+              <%= image_tag game.image, size:'120x120' %>
+           <% else %>
+              <%= image_tag asset_path('no_image.jpg'), size: "120x120" %>
+          <% end %>
+          </td>
+          <% end %>
+          <% if game.game_title.length > 10 %>
+            <td><%= link_to "#{game.game_title.slice(0, 10)}...", game, class: "game_#{game.id}" %></td>
+          <% else %>
+            <td><%= link_to game.game_title, game, class: "game_#{game.id}" %></td>
+          <% end %>
+          <td><%= game.platform.name %></td>
+          <% if game.introduct_title.length > 20 %>
+            <td><%= "#{game.introduct_title.slice(0, 20)}..." %></td>
+          <% else %>
+            <td><%= game.introduct_title %></td>
+          <% end %>
+          <td><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i><%= game.favorites.count %></td>
+          <td><%= game.view_counts.count %></td>
+          <td><%= game.comments.count %>件</td>
+        </tr>
+      <% end %>
+  </div>
+</div>

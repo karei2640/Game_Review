@@ -1,0 +1,82 @@
+<div class="container">
+  <h2>よくある質問</h2>
+  <hr>
+
+  <div class="accordion" id="faqAccordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <h3>Q: このサイトの目的は何ですか？</h3>
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+      <div class="card-body">
+        <h3>A: 豊富な情報がある。レビューサイトは、多数のゲームの情報を提供しており、ユーザーが欲しい情報を見つけることができます。<br>
+        A: 様々なゲーム情報を知る。自分自身がその分野やテーマについて、まだ十分な知識を持っていない場合でも、ユーザーの投稿を参考に学ぶ、また伝えることが出来ます。</h3>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <h3>Q: 登録が必要ですか？</h3>
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+        <div class="card-body">
+          <h3>A: はい、登録が必要です。登録することで、レビューを投稿したり、コメント機能、お気に入り登録がができます。<br>お気に入り登録をする事で、いつでも投稿を確認が出来ます。</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            <h3>Q: ゲームを追加する方法は？</h3>
+          </button>
+        </h5>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+        <div class="card-body">
+         <h3> A: 新規登録後可能となります。新規登録は<%= link_to "こちら", new_customer_registration_path %>からできます。</h3>
+        </div>
+      </div>
+    </div>
+     <div class="card">
+      <div class="card-header" id="headingFour">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          <h3>  Q: どんなゲーム投稿ができますか？</h3>
+          </button>
+        </h5>
+      </div>
+      <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqAccordion">
+        <div class="card-body">
+          <h3>A: PC、PS5、PS4、Switchの他に、iOS & Androidとその他様々な投稿も行えます。プラットフォームを使用しない、ボードゲームも同様に投稿が行えます。</h3>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingFive">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+           <h3> Q: こんな機能が欲しい、不具合があるった場合は？</h3>
+          </button>
+        </h5>
+      </div>
+      <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqAccordion">
+        <div class="card-body">
+         <h3> A: ご要望、不具合報告は<%= link_to "こちら",new_inquiry_path  %>から送れます。ユーザー名（ゲストでも可）、メールアドレスが必要になります。</h3>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
