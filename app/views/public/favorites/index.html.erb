@@ -2,7 +2,7 @@
   <div class='row'>
     <% if customer_signed_in? %>
     <div class='col-md-3'>
-      <h2>ユーザ情報</h2>
+      <h2>ユーザー情報</h2>
       <%= form_with model: @customer, url: customer_path(current_customer.id), remote: true do |f| %>
         <%= render partial: 'public/customers/info', customer: @customer %>
       <% end %>
@@ -16,7 +16,7 @@
               <tr>
                 <th></th>
                 <th>ゲーム名　　　</th>
-                <th>　　　　</th>
+                <th>タイプ　</th>
                 <th>紹介　　　</th>
                 <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数　　</th>
                 <th>閲覧数　　</th>
