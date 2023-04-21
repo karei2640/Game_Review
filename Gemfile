@@ -58,7 +58,6 @@ gem 'devise'
 gem 'jp_prefecture'
 gem 'jquery-rails'
 gem 'kaminari','~> 1.2.1'
-gem 'kaminari-bootstrap', '= 3.0.1'
 
 gem 'dotenv-rails'
 group :production do
