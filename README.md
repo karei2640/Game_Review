@@ -35,12 +35,15 @@ Roll The Diceは、読者たちが互いに情報やアドバイスを共有し�
 ・ゲームに関するニュースやイベント情報を知りたい人<br>
 ・ゲーム業界に興味がある人<br>
 
+# 利用規約<br>
+ ・著作権の都合上、画像投稿は行えません<br>
+
 # 使用している言語フレームワークのバージョン（予定）
 ruby 3.1.2<br>
 Rails 6.1.7.3<br>
 Bootstrap v4.5.3
 
-# インストール方法（予定）
+# インストール方法
 $ git clone git@github.com:karei2640/Game_Review.git<br>
 $ cd Game_Review<br>
 $ rails db:migrate<br>
