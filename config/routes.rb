@@ -51,7 +51,9 @@ scope module: :public do
   end
   resources :bord_favorites, only: [:index]
   resources :games, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
-    resources :game_comments, only: [:create, :destroy]
+    resources :game_comments, only: [:create, :destroy] do
+    resources :replies, only: [:create, :destroy]
+  end
     resource :favorites, only: [:create, :destroy]
   end
   get 'popular', to: 'games#popular_index'

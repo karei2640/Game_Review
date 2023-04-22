@@ -11,8 +11,8 @@
     </div>
     <% end %>
     <tr>
-      <th>コメント一覧　　　</th>
-      <th>投稿日　</th>
+      <th>コメント一覧<br>投稿者</th>
+      <th>投稿日</th>
       <th>コメント</th>
       <th></th>
       <th colspan="3"></th>
@@ -22,12 +22,12 @@
   <% @comments.each do |comment| %>
   <tr>
     <% if customer_signed_in? %>
-    <td>投稿者<br><%= link_to "#{comment.customer.name}さん", customer_path(comment.customer) %></td>
+    <td><br><%= link_to "#{comment.customer.name}さん", customer_path(comment.customer) %></td>
     <% else %> 
-    <td>投稿者<br><%= "#{comment.customer.name}さん" %></td>
+    <td><br><%= "#{comment.customer.name}さん" %></td>
     <% end %>
-    <td>投稿日<br><%= comment.created_at.strftime('%Y/%m/%d') %></td>
-    <th>コメント<br><%= comment.comment %></th>
+    <td><br><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+    <th><br><%= comment.comment %></th>
     <td>
       <% if comment.customer == current_customer || admin_signed_in? %>
       <%= link_to "削除", game_game_comment_path(comment.game,comment), method: :delete, class: "btn btn-lg btn-danger p-0 p-1", style: "font-size: 15px;", data: { confirm: "本当に削除しますか？" } %>
@@ -40,10 +40,12 @@
   <td>
   <%= paginate @comments %>
   <% if customer_signed_in? %>
-  <%= form_with model:[@comment], url: game_game_comments_path(@game) do |f| %>
-  <%= f.text_area :comment,maxlength: 100, size: "95x4", placeholder:"コメントをここに(100文字以内)" %>
+  <%= form_with model:[@comment], url: game_game_comments_path(@game), id: "new-comment-form" do |f| %>
+  <%= f.text_area :comment, maxlength: 100, size: "95x4", placeholder:"コメントをここに(100文字以内)" %>
+  <%= f.hidden_field :parent_comment_id %>
   <%= f.submit "送信" %>
   <% end %>
+
   <% end %>
   <% if @comment.parent_comment_id %>
     <%= form.hidden_field :parent_comment_id, value: @comment.parent_comment_id %>

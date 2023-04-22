@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @bordgames.sort_by { |bordgame| -bordgame.bord_view_counts.count }.each_with_index do |bordgame, index| %>
+    <% @bordgames.sort_by { |bordgame| -bordgame.bord_favorites.count }.each_with_index do |bordgame, index| %>
       <tr>
         <td><%= index + 1 %>位</td>
         <td>

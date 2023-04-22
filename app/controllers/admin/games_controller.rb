@@ -7,7 +7,7 @@ class Admin::GamesController < ApplicationController
   end
   
   def popular_index
-    @games = Game.page(params[:page]).per(150)
+    @games = Game.all.order(view_counts_count: :desc)
     @popular_games_all = Game.joins(:view_counts).group(:id).order('count(view_counts.id) desc').page(params[:popular_games_all_page]).per(150)
     @popular_games_monthly = Game.joins(:view_counts).where(view_counts: { created_at: 1.month.ago..Time.current }).group(:id).order('count(view_counts.id) desc').page(params[:popular_games_monthly_page]).per(150)
     @popular_games_weekly = Game.joins(:view_counts).where(view_counts: { created_at: 1.week.ago..Time.current }).group(:id).order('count(view_counts.id) desc').page(params[:popular_games_weekly_page]).per(150)
@@ -40,4 +40,5 @@ class Admin::GamesController < ApplicationController
     @game.destroy
     redirect_to admin_games_path
   end
+  
 end

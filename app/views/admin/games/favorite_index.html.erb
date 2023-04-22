@@ -20,16 +20,15 @@
           <% end %>
         </li>
       </ul>
-      <div class="tab-pane" id="favorite">
           <table class='table table-hover table-inverse'>
             <% if params[:ranking_period] == 'all' %>
-              <%= render partial: 'public/games/game_ranking', locals: { games: @favorite_games_all } %>
+              <%= render partial: 'public/games/favorite_game_ranking', locals: { games: @favorite_games_all } %>
             <% elsif params[:ranking_period] == 'monthly' %>
-              <%= render partial: 'public/games/game_ranking', locals: { games: @favorite_games_monthly } %>
+              <%= render partial: 'public/games/favorite_game_ranking', locals: { games: @favorite_games_monthly } %>
             <% elsif params[:ranking_period] == 'weekly' %>
-              <%= render partial: 'public/games/game_ranking', locals: { games: @favorite_games_weekly } %>
+              <%= render partial: 'public/games/favorite_game_ranking', locals: { games: @favorite_games_weekly } %>
             <% else %>
-              <%= render partial: 'public/games/game_ranking', locals: { games: @favorite_games_daily } %>
+              <%= render partial: 'public/games/favorite_game_ranking', locals: { games: @favorite_games_daily } %>
             <% end %>
             <% if params[:ranking_period] == 'all' %>
               <%= paginate @favorite_games_all, param_name: 'favorite_games_all_page' %>

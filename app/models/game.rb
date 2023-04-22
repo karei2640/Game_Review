@@ -9,11 +9,12 @@ class Game < ApplicationRecord
   belongs_to :category
   belongs_to :platform
   has_one_attached :image
-  
+  attribute :rank, :integer
   validates :introduct_title, presence: true
   validates :introduct, presence: true
   validates :overall_review, presence: true
-  
+  attribute :rank, :integer
+  attribute :score, :integer  # スコアを追加
   def view_counts_guest
     view_counts.where(customer_id: nil).count
   end

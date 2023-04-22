@@ -23,13 +23,13 @@
     
       <table class='table table-hover table-inverse'>
         <% if params[:ranking_period] == 'all' %>
-          <%= render partial: 'public/bordgames/bordgame_ranking', locals: { games: @favorite_bordgames_all } %>
+          <%= render partial: 'public/bordgames/bordgame_favorite_ranking', locals: { games: @favorite_bordgames_all } %>
         <% elsif params[:ranking_period] == 'monthly' %>
-          <%= render partial: 'public/bordgames/bordgame_ranking', locals: { games: @favorite_bordgames_monthly } %>
+          <%= render partial: 'public/bordgames/bordgame_favorite_ranking', locals: { games: @favorite_bordgames_monthly } %>
         <% elsif params[:ranking_period] == 'weekly' %>
-          <%= render partial: 'public/bordgames/bordgame_ranking', locals: { games: @favorite_bordgames_weekly } %>
+          <%= render partial: 'public/bordgames/bordgame_favorite_ranking', locals: { games: @favorite_bordgames_weekly } %>
         <% else %>
-          <%= render partial: 'public/bordgames/bordgame_ranking', locals: { games: @favorite_bordgames_daily } %>
+          <%= render partial: 'public/bordgames/bordgame_favorite_ranking', locals: { games: @favorite_bordgames_daily } %>
         <% end %>
         <% if params[:ranking_period] == 'all' %>
           <%= paginate @favorite_bordgames_all, param_name: 'favorite_bordgames_all_page', remote: true %>

@@ -2,7 +2,14 @@ class Admin::CustomersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @customers = Customer.page(params[:page])
+    @customers = Customer.all
+    if params[:name].present?
+      @customers = @customers.where('name LIKE ?', "%#{params[:name]}%")
+    end
+    if params[:email].present?
+      @customers = @customers.where('email LIKE ?', "%#{params[:email]}%")
+    end
+    @customers = @customers.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def show
