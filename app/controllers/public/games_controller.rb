@@ -78,6 +78,18 @@ class Public::GamesController < ApplicationController
   
   private
   
+  def count_views(games, period)
+    @views_all = count_views(@popular_games_all, Time.zone.now.all_month)
+    @views_monthly = count_views(@popular_games_monthly, 1.month.ago.all_month)
+    @views_weekly = count_views(@popular_games_weekly, 1.week.ago.all_week)
+    @views_daily = count_views(@popular_games_daily, 1.day.ago.all_day)
+    views = {}
+    games.each do |game|
+      views[game.id] = game.views.where(created_at: period).count
+    end
+    views
+  end
+  
   def game_params
     params.require(:game).permit(:game_title, :platform_id, :category_id, :genre_id, :points, :release_date, :price, :image, :introduct_title, :introduct, :good_introduct, :bad_introduct, :overall_review,:game_comment)
   end

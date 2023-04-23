@@ -2,7 +2,8 @@ class Public::BordFavoritesController < ApplicationController
     
   def index
     @customer = current_customer
-    @bordfavorite = current_customer.bord_favorites.page(params[:page]).per(25)
+    @bordfavorite = current_customer.bord_favorites.includes(game: :genre).order(created_at: :desc).page(params[:favorites_page]).per(10)
+
   end  
     
   def create

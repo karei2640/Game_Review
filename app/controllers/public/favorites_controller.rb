@@ -2,7 +2,7 @@ class Public::FavoritesController < ApplicationController
   
   def index
     @customer = current_customer
-    @favorites = current_customer.favorites.page(params[:page]).per(25)
+    @favorites = current_customer.favorites.includes(game: :genre).order(created_at: :desc).page(params[:favorites_page]).per(10)
   end
   
   def create

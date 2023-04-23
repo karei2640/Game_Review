@@ -2,7 +2,7 @@
 <tr>
     <td><%= link_to inquiry.name, inquiry_path(inquiry) %></td>
     <td><%= inquiry.email %></td>
-    <td><%= inquiry.message %></td>
+    <td><%= inquiry.message.truncate(30, separator: '...') %></td>
     <td><%= inquiry.created_at.strftime('%Y/%m/%d') %></td>
     <% if admin_signed_in? %>
     <td><%= inquiry.status %></td>

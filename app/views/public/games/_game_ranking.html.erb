@@ -2,7 +2,7 @@
   <thead class="thead-dark">
     <tr>
       <th>順位　</th>
-      <th>ゲーム　　</th>
+      <th>ゲーム名　</th>
       <th></th>
       <th>タイトル</th>
       <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数　</th>
@@ -34,7 +34,17 @@
           <td><%= game.introduct_title %></td>
         <% end %>
         <td><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i><%= game.favorites.count %></td>
-        <td><%= game.view_counts.count %></td>
+        <td>
+          <% if params[:ranking_period] == 'all' %>
+            <%= game.view_counts.count %>
+          <% elsif params[:ranking_period] == 'monthly' %>
+            <%= game.view_counts.where(created_at: Time.current.all_month).count %>
+          <% elsif params[:ranking_period] == 'weekly' %>
+            <%= game.view_counts.where(created_at: Time.current.all_week).count %>
+          <% else params[:ranking_period] == 'daily'%>
+            <%= game.view_counts.where(created_at: Time.zone.now.all_day).count %>
+          <% end %>
+        </td>
         <td><%= game.comments.count %>件</td>
       </tr>
     <% end %>

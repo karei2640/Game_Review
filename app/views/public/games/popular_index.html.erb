@@ -49,10 +49,10 @@
           <% else %>
             <%= paginate @popular_games_daily, param_name: 'popular_games_daily_page' %>
           <% end %>
-            <ul class="nav nav-pills">
-              <li class="nav-item">
-                <%= link_to '全期間', request.params.merge(ranking_period: 'all'), class: "nav-link #{params[:ranking_period] == 'all' ? 'active' : ''}" %>
-              </li>
+          <ul class="nav nav-pills">
+            <li class="nav-item">
+              <%= link_to '全期間', request.params.merge(ranking_period: 'all'), class: "nav-link #{params[:ranking_period] == 'all' ? 'active' : ''}" %>
+            </li>
               <li class="nav-item">
                 <%= link_to '1か月', request.params.merge(ranking_period: 'monthly'), class: "nav-link #{params[:ranking_period] == 'monthly' ? 'active' : ''}" %>
               </li>

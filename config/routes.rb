@@ -40,6 +40,7 @@ scope module: :public do
   get "/customers/unsubscribe" => "customers#unsubscribe"
   get "/customers/withdrawl" => "customers#withdrawl"
   resources :customers, only: [:show, :update, :edit] do
+    get 'bordgames', on: :member
     get :bord_show, on: :member
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'

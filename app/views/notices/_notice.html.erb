@@ -2,7 +2,7 @@
   <div class="card mx-auto">
     <div class="card-body">
       <h5 class="card-title"><%= notice.created_at.strftime("%Y/%m/%d") %>「<%= notice.title %>」</h5>
-      <p class="card-text"><%= notice.content %></p>
+      <p class="card-text"><%= truncate(notice.content, length: 30, omission: '...') %></p>
     </div>
   </div>
 </a>
