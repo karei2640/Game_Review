@@ -41,3 +41,9 @@ ja:
               blank: "　郵便番号を入力してください"
             address:
               blank: "　住所を入力してください"
+              
+  ja:
+  devise:
+    sessions:
+      signed_in: 'ログインしました。'
+      signed_out: 'ログアウトしました。'

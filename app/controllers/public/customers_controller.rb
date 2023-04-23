@@ -6,7 +6,7 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @games = @customer.games.page(params[:games_page]).per(50)
     @bordgames = @customer.bordgames.page(params[:boardgames_page]).per(50)
-    @following_games = Game.joins(customer: :followers).where(followers: { follower_id: current_customer.id })
+    @following_games = Game.joins(customer: :followers).where(followers: { follower_id: @customer.id })
   end
   
   def bord_show
@@ -47,6 +47,14 @@ class Public::CustomersController < ApplicationController
   end
     
   private
+  
+  def set_customer
+    if current_admin.present?
+      @customer = Customer.find(params[:id])
+    else
+      @customer = current_customer
+    end
+  end
 
   def customer_params
     params.require(:customer).permit(:name, :profile_image, :birthday, :post_code, :prefecture_code, :address, :telephone, :email, :password, :password_confirmation)

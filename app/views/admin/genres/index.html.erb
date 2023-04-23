@@ -3,6 +3,11 @@
     <div class="row">
       <div class="col">
         <h2>ジャンル追加</h2>
+         <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
         </div>
         </div>
         <div class="row">
@@ -27,10 +32,9 @@
                         <% @genres.each do |genre| %>
                         <tr>
                           <td><%= genre.name %></td>
-                          <td><%#= link_to "編集する", edit_admin_genre_path(genre), class:"btn btn-success"%></td>
+                          <td><%= link_to "編集する", edit_admin_genre_path(genre), class:"btn btn-success"%></td>
                         </tr>
                         <% end %>
-                        <%#= paginate @genres %>
                       </tbody>
                 </table>
              </div>

@@ -3,6 +3,11 @@
     <div class="row">
       <div class="col">
         <h2>テーブルジャンル追加</h2>
+        <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
         </div>
         </div>
         <div class="row">
@@ -27,10 +32,9 @@
                         <% @tables.each do |table| %>
                         <tr>
                           <td><%= table.name %></td>
-                          <td><%#= link_to "編集する", edit_admin_table_path(table), class:"btn btn-success"%></td>
+                          <td><%= link_to "編集する", edit_admin_table_path(table), class:"btn btn-success"%></td>
                         </tr>
                         <% end %>
-                        <%#= paginate @tables %>
                       </tbody>
                 </table>
              </div>

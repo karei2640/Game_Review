@@ -3,6 +3,11 @@
     <div class="row">
       <div class="col">
         <h2>プレイ人数追加</h2>
+         <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
         </div>
         </div>
         <div class="row">
@@ -27,10 +32,9 @@
                         <% @categories.each do |categorie| %>
                         <tr>
                           <td><%= categorie.name %></td>
-                          <td><%#= link_to "編集する", edit_admin_categories_path(category), class:"btn btn-success"%></td>
+                          <td><%= link_to "編集する", edit_admin_category_path(categorie), class: "btn btn-success" %></td>
                         </tr>
                         <% end %>
-                        <%#= paginate @categories %>
                       </tbody>
                 </table>
              </div>

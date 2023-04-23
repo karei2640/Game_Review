@@ -2,6 +2,14 @@
 
 class Admin::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  
+  def create
+    super do |resource|
+      if resource.is_a?(Admin)
+        return redirect_to admin_customers_path
+      end
+    end
+  end
 
   # GET /resource/sign_in
   # def new

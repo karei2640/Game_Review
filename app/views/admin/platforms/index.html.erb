@@ -3,6 +3,11 @@
     <div class="row">
       <div class="col">
         <h2>タイプ追加</h2>
+         <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
         </div>
         </div>
         <div class="row">
@@ -27,10 +32,9 @@
                         <% @platforms.each do |platform| %>
                         <tr>
                           <td><%= platform.name %></td>
-                          <td><%#= link_to "編集する", edit_admin_platforms_path(platform), class:"btn btn-success"%></td>
+                          <td><%= link_to "編集する", edit_admin_platform_path(platform), class:"btn btn-success"%></td>
                         </tr>
                         <% end %>
-                        <%#= paginate @genres %>
                       </tbody>
                 </table>
              </div>

@@ -36,6 +36,8 @@
         <tr>
           <% if customer_signed_in? %>
            <th>投稿者<br><strong><%= link_to @game.customer.name, customer_path(@game.customer.id) %></strong></th>
+           <% elsif admin_signed_in? %>
+           <th>投稿者<br><strong><%= link_to @game.customer.name, admin_customer_path(@game.customer.id) %></strong></th>
           <% else %> 
            <th>投稿者<br><strong><%= @game.customer.name %></strong></th>
           <% end %> 

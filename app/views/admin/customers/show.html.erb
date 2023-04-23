@@ -1,7 +1,12 @@
-<div class="container">
-  <h2><%= @customer.name %>さんの会員詳細</h2>
-  <div class="row">
-    <div class="col-sm-8 offset-sm-2">
+<div class="container px-5 px-sm-0">
+  <div data-turbolinks="true" class="row">
+    <div class="col-md-3">
+      <h2>ユーザー情報</h2>
+      <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
       <table class="table table-bordered">
         <tbody>
           <tr>
@@ -49,6 +54,41 @@
         </tbody>
       </table>
       <%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success btn-block" %>
+    </div>
+   <div class="col-md-9">
+  <h2>投稿一覧</h2>
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#game_posts">ゲーム投稿一覧</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#boardgame_posts">ボードゲーム投稿一覧</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div id="game_posts" class="tab-pane fade show active">
+      <% if @games.present? %>
+        <table class="table table-hover table-inverse">
+          <tbody>
+            <%= render 'public/customers/game' %>
+          </tbody>
+        </table>
+        <%= paginate @games, param_name: 'games_page' %>
+      <% else %>
+        <p>ゲームの投稿がありません。</p>
+      <% end %>
+    </div>
+    <div id="boardgame_posts" class="tab-pane fade">
+      <% if @bordgames.present? %>
+        <table class="table table-hover table-inverse">
+          <tbody>
+            <%= render 'public/customers/bordgame' %>
+          </tbody>
+        </table>
+        <%= paginate @bordgames, param_name: 'bordgames_page' %>
+      <% else %>
+        <p>ボードゲームの投稿がありません。</p>
+      <% end %>
     </div>
   </div>
 </div>
