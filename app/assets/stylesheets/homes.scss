@@ -7,5 +7,7 @@ html, body {
     padding: 0;
   }
   .container-fluid {
-    background-image: image-url('background-image.jpg');
+    background-image: url('background-image.jpg');
+    background-position: center center;
+    background-size: cover;
   }

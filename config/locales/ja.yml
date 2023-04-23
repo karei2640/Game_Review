@@ -16,3 +16,28 @@ ja:
       - :year
       - :month
       - :day
+      
+
+ja:
+  errors:
+    messages:
+      not_saved: "保存に失敗しました"
+  activerecord:
+    errors:
+      models:
+        customer:
+          attributes:
+            email:
+              taken: "　Eメールはすでに存在します"
+            password_confirmation:
+              confirmation: "　確認用パスワードととパスワードの入力が一致しません"
+            name:
+              blank: "　ユーザー名を入力してください"
+            birthday:
+              blank: "　生年月日を入力してください"
+            telephone:
+              blank: "　電話番号を入力してください"
+            post_code:
+              blank: "　郵便番号を入力してください"
+            address:
+              blank: "　住所を入力してください"

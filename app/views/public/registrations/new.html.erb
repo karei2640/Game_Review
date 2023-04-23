@@ -33,10 +33,13 @@
             <%= f.label :birthday, '生年月日' %>
           </div>
           <div class="col-md-8">
-            <%= f.date_select :birthday, { start_year: Date.current.year, end_year: 1930,   
-              include_blank: true, use_two_digit_numbers: true,
-               },
-              { class: "form-control" } %>
+            <%= f.date_select :birthday, {
+              order: [:year, :month, :day],
+              start_year: Date.current.year.to_i,
+              end_year: 1930.to_i,
+              include_blank: true,
+              use_two_digit_numbers: 'true'.inquiry
+            }, { class: "form-control" } %>
           </div>
         </div>
         <div class="form-group">

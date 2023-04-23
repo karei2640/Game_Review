@@ -9,9 +9,10 @@ Bundler.require(*Rails.groups)
 module GameReview
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.i18n.default_locale = :ja
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     config.load_defaults 6.1
     config.assets.enabled = true
-    config.i18n.default_locale = :ja
     config.time_zone = 'Tokyo'
 
     # Configuration for the application, engines, and railties goes here.
@@ -21,5 +22,6 @@ module GameReview
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    
   end
 end

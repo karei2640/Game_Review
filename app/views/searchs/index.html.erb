@@ -2,67 +2,112 @@
   <% if @games.present? %>
     <div class="game-results">
       <h3>ゲーム検索結果</h3>
-      <ul>
-        <% @games.each do |game| %>
-        <div class="tab-content">
-        <div class="tab-pane active" id="latest">
-          <table class='table table-hover table-inverse'>
-            <thead>
-              <tr>
-                <th></th>
-                <th>ゲーム名</th>
-                <th>タイプ</th>
-                <th>紹介</th>
-                <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
-                <th>閲覧数</th>
-                <th>コメント件数</th>
-                <th colspan="3"></th>
-              </tr>
+      <% if @games.any? %>
+        <table class='table table-hover table-inverse'>
+          <thead>
+            <tr>
+              <th></th>
+              <th>ゲーム名</th>
+              <th>タイプ</th>
+              <th>紹介</th>
+              <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
+              <th>閲覧数</th>
+              <th>コメント件数</th>
+              <th colspan="3"></th>
+            </tr>
           </thead>
-              <%= render 'public/games/viewgames' %>
-              <% end %>
-              <%= paginate @games %>
-            </tbody>
-          </table>
-        </div>
-        <% end %>
-        </div>
-      </ul>
+          <tbody>
+            <% @games.each do |game| %>
+              <tr>
+                <td>
+                  <%= link_to(game) do %>
+                    <% if game.image.attached? %>
+                      <%= image_tag game.image, size: "100x100" %>
+                    <% end %>
+                  <% end %>
+                </td>
+                <% if game.game_title.length > 10 %>
+                  <td><%= link_to "#{game.game_title.slice(0, 10)}...", game, class: "game_#{game.id}" %></td>
+                <% else %>
+                  <td><%= link_to game.game_title, game, class: "game_#{game.id}" %></td>
+                <% end %>
+                <td><%= game.platform.name %></td>
+                <% if game.introduct_title.length > 20 %>
+                  <td><%= "#{game.introduct_title.slice(0, 20)}..." %></td>
+                <% else %>
+                  <td><%= game.introduct_title %></td>
+                <% end %>
+                <td><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i><%= game.favorites.count %></td>
+                <td><%= game.view_counts.count %></td>
+                <td><%= game.comments.count %>件</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @games %>
+      <% else %>
+        <p>該当するゲームはありません。</p>
+      <% end %>
+    </div>
+  <% end %>
+  
   <% if @bordgames.present? %>
     <div class="bordgame-results">
       <h3>ボードゲーム検索結果</h3>
-      <ul>
-        <% @bordgames.each do |bordgame| %>
-        <div class="tab-content">
-        <div class="tab-pane active" id="latest">
-          <table class='table table-hover table-inverse'>
-            <thead>
-              <tr>
-                <th></th>
-                <th>ゲーム名</th>
-                <th>タイプ</th>
-                <th>紹介</th>
-                <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
-                <th>閲覧数</th>
-                <th>コメント件数</th>
-                <th colspan="3"></th>
-              </tr>
+      <% if @bordgames.any? %>
+        <table class='table table-hover table-inverse'>
+          <thead>
+            <tr>
+              <th></th>
+              <th>ゲーム名</th>
+              <th>タイプ</th>
+              <th>紹介</th>
+              <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>数</th>
+              <th>閲覧数</th>
+              <th>コメント件数</th>
+              <th colspan="3"></th>
+            </tr>
           </thead>
-              <%= render 'public/bordgames/viewgames' %>
+          <tbody>
+            <% @bordgames.each do |bordgame| %>
+              <tr>
+                <td>
+                  <%= link_to(bordgame) do %>
+                    <% if bordgame.image.attached? %>
+                      <%= image_tag bordgame.image, size:"100x100" %>
               <% end %>
-              <%= paginate @bordgames %>
-            </tbody>
-          </table>
-        </div>
-        <% end %>
-       </div> 
-       </ul>
+            <% end %>
+          </td>
+          <% if bordgame.game_title.length > 10 %>
+            <td><%= link_to "#{bordgame.game_title.slice(0, 10)}...", bordgame, class: "bordgame_#{bordgame.id}" %></td>
+          <% else %>
+            <td><%= link_to bordgame.game_title, bordgame, class: "bordgame_#{bordgame.id}" %></td>
+          <% end %>
+          <td><%= bordgame.tableplat.name %></td>
+          <% if bordgame.introduct_title.length > 20 %>
+            <td><%= "#{bordgame.introduct_title.slice(0, 20)}..." %></td>
+          <% else %>
+            <td><%= bordgame.introduct_title %></td>
+         <% end %>
+         <td><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i><%= bordgame.bord_favorites.count %></td>
+          <td><%= bordgame.bord_view_counts.count %></td>
+          <td><%= bordgame.bordgame_comments.count %>件</td>
+        </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @bordgames %>
+      <% else %>
+        <p>該当するゲームはありません。</p>
+      <% end %>
+    </div>
+  <% end %>
+  
    <div class="container">
-  <% if @customers.present? %>
+ <% if @customers.present? %>
   <div class="customer-results">
     <h3>会員検索結果</h3>
-    <ul>
-      <% @customers.each do |customer| %>
+    <% if @customers.any? %>
       <div class="tab-content">
         <div class="tab-pane active" id="latest">
           <table class='table table-hover table-inverse'>
@@ -72,35 +117,42 @@
                 <th>名前</th>
                 <th>フォロー数</th>
                 <th>フォロワー数</th>
+              </tr>
             </thead>
             <tbody>
-              <td><% if customer.profile_image.attached? %>
-                  <%= image_tag customer.get_profile_image, size: "60x60" %>
-              <% else %>
-                <%= image_tag asset_path('no_image.jpg'), size: "60x60" %>
-              <% end %></td>
-              <% if admin_signed_in? %>
-                <td><strong><%= link_to customer.name, admin_customer_path(customer) %>さん</td></strong>
-                <td><%=  customer.followings.count %></td>
-                <td><%=  customer.followers.count %></td>
-              <% elsif customer_signed_in? %>
-                <td><%= link_to customer.name, customer_path(customer) %>さん</td>
-                <td><%= link_to customer.followings.count, customer_followings_path(customer) %></td>
-                <td><%= link_to customer.followers.count, customer_followers_path(customer) %></td>
+              <% @customers.each do |customer| %>
+                <tr>
+                  <td>
+                    <% if customer.profile_image.attached? %>
+                      <%= image_tag customer.get_profile_image, size: "90x90" %>
+                    <% else %>
+                      <%= image_tag asset_path('no_image.jpg'), size: "90x90" %>
+                    <% end %>
+                  </td>
+                  <% if admin_signed_in? %>
+                  <td><strong><%= link_to customer.name, admin_customer_path(customer) %>さん</td></strong>
+                  <td><%=  customer.followings.count %></td>
+                  <td><%=  customer.followers.count %></td>
+                <% elsif customer_signed_in? %>
+                  <td><%= link_to customer.name, customer_path(customer) %>さん</td>
+                  <td><%= link_to customer.followings.count, customer_followings_path(customer) %></td>
+                  <td><%= link_to customer.followers.count, customer_followers_path(customer) %></td>
+                <% else %>
+                  <td><%= link_to customer.name, new_customer_registration_path %>（※閲覧は登録後可能）</td>
+                  <td><%=  customer.followings.count %></td>
+                  <td><%=  customer.followers.count %></td>
+                <% end %>
+                </tr>
               <% end %>
             </tbody>
-            <% end %>
-        </ul>
-        <% if @customers.total_pages > 1 %>
-          <%= paginate @customers %>
-        <% end %>
+          </table>
+        </div>
       </div>
+      <% if @customers.total_pages > 1 %>
+        <%= paginate @customers %>
+      <% end %>
     <% else %>
       <p>ユーザー名が見つかりませんでした</p>
     <% end %>
-    </div>
-    <div class="container">
-      <% if @games.empty? && @bordgames.empty? && @customers.empty? %>
-        <p>検索結果は見つかりませんでした。</p>
-      <% end %>
-    </div>
+  </div>
+<% end %>

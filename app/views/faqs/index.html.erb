@@ -14,7 +14,7 @@
 
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
       <div class="card-body">
-        <h3>A: 豊富な情報がある。レビューサイトは、多数のゲームの情報を提供しており、ユーザーが欲しい情報を見つけることができます。<br>
+        <h3>A: 豊富な情報がある。レビューサイトは、多数のゲームの情報を提供しており、ユーザーが欲しい情報を見つけることができます。<br><br>
         A: 様々なゲーム情報を知る。自分自身がその分野やテーマについて、まだ十分な知識を持っていない場合でも、ユーザーの投稿を参考に学ぶ、また伝えることが出来ます。</h3>
       </div>
     </div>
@@ -74,6 +74,20 @@
       <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqAccordion">
         <div class="card-body">
          <h3> A: ご要望、不具合報告は<%= link_to "こちら",new_inquiry_path  %>から送れます。ユーザー名（ゲストでも可）、メールアドレスが必要になります。</h3>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingsix">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix">
+           <h3> Q: 退会後のアカウント復帰方法は？</h3>
+          </button>
+        </h5>
+      </div>
+      <div id="collapsesix" class="collapse" aria-labelledby="headingsix" data-parent="#faqAccordion">
+        <div class="card-body">
+         <h3> A: お問い合わせフォームの<%= link_to "こちら",new_inquiry_path  %>から送れます。要望・お問い合わせ欄に、アカウント復帰の内容、登録時のユーザー名、メールアドレス等の登録情報が必要になります。</h3>
         </div>
       </div>
     </div>
