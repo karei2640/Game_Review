@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 2023_04_23_074331) do
     t.integer "customer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "bord_view_count", default: 0
   end
 
   create_table "categories", force: :cascade do |t|
