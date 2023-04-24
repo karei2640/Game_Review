@@ -18,7 +18,8 @@
      <th colspan="3"></th>
     </tr>
    </thead>
-   <tbody>    
+   <tbody>
+     <% if @comments.any? %>
     <% @comments.each do |bordgame_comment| %>
     <tr>
       <% if customer_signed_in? %>
@@ -35,13 +36,18 @@
       </td>
     </tr>
     <% end %>
+    <% else %>
+    <tr>
+      <td colspan="5">コメントはありません</td>
+    </tr>
+  <% end %>
     <td></td>
     <td></td>
     <td>
       <%= paginate @comments %>
     <% if customer_signed_in? %>
     <%= form_with model:[@comment], url: bordgame_bordgame_comments_path(@bordgame) do |f| %>
-    <%= f.text_area :bordgame_comment,maxlength: 100, size: "80x4", placeholder:"コメントをここに(100文字以内)" %>
+    <%= f.text_area :bordgame_comment, minlength: 2, maxlength: 100, size: "95x4", placeholder: "コメントをここに（2文字以上、100文字以内）", required: true %>
     <%= f.submit "送信" %>
     <% end %>
     <% end %>

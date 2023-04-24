@@ -16,3 +16,10 @@ import '@fortawesome/fontawesome-free/js/all'
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+document.getElementById('search-submit').addEventListener('click', function(event) {
+    if (document.getElementById('keyword').value.trim() === '') {
+      event.preventDefault();
+      alert('タイトルを入れてください。');
+    }
+  });

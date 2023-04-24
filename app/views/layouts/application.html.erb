@@ -43,10 +43,13 @@
           </div>
         </div>
         <%= form_with(url: search_path, method: :get) do |form| %>
-              <%= form.label :keyword, "検索ワード" %>
-              <%= form.text_field :keyword %>
-              <%= form.submit "検索" %>
-            <% end %>
+        <%= form.label :keyword, "検索ワード" %>
+        <%= form.text_field :keyword %>
+        <%= form.submit "検索", id: "search-submit" %>
+        <% if params[:keyword].blank? && request.path == search_path %>
+          <p class="text-danger">ゲームタイトル・ユーザー名を入れてください。</p>
+        <% end %>
+      <% end %>
       </nav>
     </header>
     <body>

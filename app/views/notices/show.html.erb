@@ -12,7 +12,6 @@
         <div class="card-footer text-right">
           <%= link_to "一覧に戻る", notices_path, class: "btn btn-secondary" %>
           <% if admin_signed_in? %>
-          <%= link_to "編集", edit_notice_path(@notice), class: "btn btn-primary" %>
           <%= link_to "削除", notice_path(@notice), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
           <% else %>
           <% end %>

@@ -1,7 +1,6 @@
 <div class="container">
   <h1 class="text-center mb-4">お問い合わせ一覧</h1>
   
-  <% if @untreated_inquiries.any? %>
     <ul class="nav nav-tabs mb-4">
       <li class="nav-item">
         <%= link_to '未対応', untreated_inquiries_path, class: 'btn btn-info' %>
@@ -12,6 +11,7 @@
         <%= link_to '対応済み', completed_inquiries_path, class: 'btn btn-light' %>
       </li>
     </ul>
+    <% if @untreated_inquiries.any? %>
    <div class="tab-content">
   <div class="tab-pane fade show active" id="status-0">
     <table class="table">
