@@ -6,7 +6,7 @@
         <div class="col-md-6 text-center" style="background-color: rgba(255,0,0,0.8); padding: 30px; border-radius: 10px; color: white;">
           <h1 style="font-size: 60px; text-shadow: 2px 2px 4px black;">退会画面</h1>
           <p style="font-size: 25px;">退会手続きをされますと、すべてのサービスがご利用いただけなくなります。</p><br>
-          <p style="font-size: 25px;">再度ご利用いただく場合には、新規登録のお手続きが必要になります。><br>
+          <p style="font-size: 25px;">再度ご利用いただく場合には、お問い合わせフォームより、ユーザー名や、Eメール等の登録した情報をお送りいただくか、<br>新規登録が必要となります。</p>
           <p style="font-size: 25px;">本当に退会してよろしいですか？<br>
           <p><%= link_to "退会しない", customer_path(@customer), class:"btn btn-success" %></p>
           <p><%= link_to "退会する", customers_withdrawl_path, class:"btn btn-danger", method: :get, data: { confirm: "本当に退会しますか？" } %></p>

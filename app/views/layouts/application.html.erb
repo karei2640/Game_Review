@@ -44,7 +44,7 @@
         </div>
          <%= form_with(url: search_path, method: :get) do |form| %>
           <%= form.collection_select :genre_id, Genre.all, :id, :name, { prompt: "--ジャンル選択--" } %>
-          <%= form.collection_select :table_id, Table.all, :id, :name, { prompt: "--テーブル選択--" } %>
+          <%= form.collection_select :table_id, Table.all, :id, :name, { prompt: "--テーブル選択--" } %><br>
           <%= form.label :keyword, "ゲーム検索ワード" %>
           <%= form.text_field :keyword %>
           <%= form.submit "検索", id: "search-submit" %>
