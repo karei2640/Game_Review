@@ -58,6 +58,17 @@ address: '名古屋市中区栄1-1-1',
 telephone: '0521234567'
 )
 
+Customer.create!(
+email: 'example3@example.com',
+password: 'password',
+name: '鈴木 次郎',
+birthday: Date.new(2000, 4, 4),
+post_code: '4600001',
+prefecture_code: '愛知県',
+address: '名古屋市中区栄1-1-1',
+telephone: '0521234567'
+)
+
 Game.create!(
   genre_id: 1,
   platform_id: 2,
