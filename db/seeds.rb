@@ -10,7 +10,7 @@
 
 Admin.create!(
    email: 'admin@admin',
-   password: 'admins'
+   password: 'password'
 )
 
 
