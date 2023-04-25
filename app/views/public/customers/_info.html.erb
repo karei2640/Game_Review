@@ -1,9 +1,9 @@
 <div data-turbolinks="true">
 <table class='table'>
   <% if @customer.profile_image.attached? %>
-  <tr><%= image_tag @customer.get_profile_image, size: "100x100" %></tr>
+  <tr><%= image_tag @customer.get_profile_image, size: "150x150" %></tr>
   <% else %>
-  <tr><%= image_tag asset_path('no_image.jpg'), size: "100x100" %></tr>
+  <tr><%= image_tag asset_path('no_image.jpg'), size: "150x150" %></tr>
   <% end %>
   <tr>
     <th><% if flash[:notice] %>

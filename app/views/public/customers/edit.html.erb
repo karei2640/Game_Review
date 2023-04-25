@@ -50,10 +50,6 @@
           <%= f.text_field :telephone, autofocus: true, class: "form-control",
             maxlength: 20, onkeypress: "return event.charCode >= 48 && event.charCode <= 57" %>
         </div>
-        <div class="form-group">
-          <%= f.label :current_password, "現在のパスワード"%> 
-          <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
-        </div>
         <div class="text-center">
         <%= f.submit "編集内容を保存", class:"btn btn-success btn-block" %>
         </div><br><br><br>
