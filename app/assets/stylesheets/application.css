@@ -15,6 +15,19 @@
  */
  
 @import 'kaminari-bootstrap';
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+}
 
 header {
   background-color:rgba(255, 128, 0, 0.8);color: white;
@@ -23,6 +36,7 @@ header {
 footer {
   background-color:rgba(255, 128, 0, 0.8);color: white;
   padding-left: 20%;
+  
   
 }
 #to-top-button {

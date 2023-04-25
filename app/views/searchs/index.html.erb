@@ -1,4 +1,7 @@
 <div class="container">
+  <% if params[:keyword].blank? && params[:genre_id].blank? && request.path == search_path %>
+          <br><p class="text-danger">ゲームタイトル・ユーザー名・ジャンルを入れてください。</p>
+      <% end %>
   <% if @games.present? %>
     <div class="game-results">
       <h3>ゲーム検索結果</h3>
@@ -104,55 +107,51 @@
   <% end %>
   
    <div class="container">
- <% if @customers.present? %>
-  <div class="customer-results">
-    <h3>会員検索結果</h3>
-    <% if @customers.any? %>
-      <div class="tab-content">
-        <div class="tab-pane active" id="latest">
-          <table class='table table-hover table-inverse'>
-            <thead>
-              <tr>
-                <th>画像</th>
-                <th>名前</th>
-                <th>フォロー数</th>
-                <th>フォロワー数</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @customers.each do |customer| %>
-                <tr>
-                  <td>
-                    <% if customer.profile_image.attached? %>
-                      <%= image_tag customer.get_profile_image, size: "90x90" %>
-                    <% else %>
-                      <%= image_tag asset_path('no_image.jpg'), size: "90x90" %>
-                    <% end %>
-                  </td>
-                  <% if admin_signed_in? %>
-                  <td><strong><%= link_to customer.name, admin_customer_path(customer) %>さん</td></strong>
-                  <td><%=  customer.followings.count %></td>
-                  <td><%=  customer.followers.count %></td>
-                <% elsif customer_signed_in? %>
-                  <td><%= link_to customer.name, customer_path(customer) %>さん</td>
-                  <td><%= link_to customer.followings.count, customer_followings_path(customer) %></td>
-                  <td><%= link_to customer.followers.count, customer_followers_path(customer) %></td>
+ <% if @keyword.present? %>
+  <% @customers = Customer.where("name LIKE ?", "%#{@keyword}%").page(params[:page]).per(15) %>
+  <% if @customers.present? %>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>プロフィール画像</th>
+            <th>会員名</th>
+            <th>フォロー数</th>
+            <th>フォロワー数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @customers.each do |customer| %>
+            <tr>
+              <td>
+                <% if customer.profile_image.attached? %>
+                  <%= image_tag customer.get_profile_image, size: "90x90" %>
                 <% else %>
-                  <td><%= link_to customer.name, new_customer_registration_path %>（※閲覧は登録後可能）</td>
-                  <td><%=  customer.followings.count %></td>
-                  <td><%=  customer.followers.count %></td>
+                  <%= image_tag asset_path('no_image.jpg'), size: "90x90" %>
                 <% end %>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <% if @customers.total_pages > 1 %>
-        <%= paginate @customers %>
-      <% end %>
-    <% else %>
-      <p>ユーザー名が見つかりませんでした</p>
+              </td>
+              <% if admin_signed_in? %>
+              <td><strong><%= link_to customer.name, admin_customer_path(customer) %>さん</td></strong>
+              <td><%=  customer.followings.count %></td>
+              <td><%=  customer.followers.count %></td>
+            <% elsif customer_signed_in? %>
+              <td><%= link_to customer.name, customer_path(customer) %>さん</td>
+              <td><%= link_to customer.followings.count, customer_followings_path(customer) %></td>
+              <td><%= link_to customer.followers.count, customer_followers_path(customer) %></td>
+            <% else %>
+              <td><%= link_to customer.name, new_customer_registration_path %>（※閲覧は登録後可能）</td>
+              <td><%=  customer.followings.count %></td>
+              <td><%=  customer.followers.count %></td>
+            <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <% if @customers.total_pages > 1 %>
+      <%= paginate @customers %>
     <% end %>
-  </div>
+  <% else %>
+    <p>ユーザー名が見つかりませんでした</p>
+  <% end %>
 <% end %>
