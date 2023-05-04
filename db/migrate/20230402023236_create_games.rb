@@ -2,8 +2,6 @@ class CreateGames < ActiveRecord::Migration[6.1]
   def change
     create_table :games do |t|
       t.string :image
-      t.string :image1
-      t.string :image2
       t.string :genre_id
       t.string :platform_id
       t.string :category_id

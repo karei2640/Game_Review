@@ -22,11 +22,11 @@
   </tr>
   <tr>
 	  <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>ゲーム</th>
-	  <th><%= link_to '一覧', favorites_path %></th>
+	  <th><%= link_to '一覧', favorites_path(customer_id: @customer.id) %></th>
   </tr>
   <tr>
 	  <th><i class="fas fa-star fa-lg" aria-hidden="true" style="color: #ffa200;"></i>ボード</th></th>
-	  <th><%= link_to '一覧', bord_favorites_path %></th>
+	  <th><%= link_to '一覧', bord_favorites_path(customer_id: @customer.id) %></th>
   </tr>
   <tr>
     <th>フォロー</th>
