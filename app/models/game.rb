@@ -4,6 +4,7 @@ class Game < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_one :bordgame
   has_many :genre_games
+  has_many_attached :images
   belongs_to :customer
   belongs_to :genre
   belongs_to :category

@@ -10,12 +10,23 @@
     </div>
   </div>
     <div class="col">
-      <table class="table table-bordered">
+      <style>
+        .center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      </style>
+      
+      <div class="center">
         <% if @game.image.attached? %>
-           <tr><%= image_tag @game.image, size:'200x200' if @game.image.attached? %></tr>
+          <%= image_tag @game.image, size: '450x300' %>
         <% else %>
-            <tr><%= image_tag asset_path('no_image.jpg'), size: "200x200" %></tr>
+          <%= image_tag asset_path('no_image.jpg'), size: "450x300" %>
         <% end %>
+      </div>
+
+      <table class="table table-bordered">
         <% if @game.customer == current_customer %>
         <tr>
           <th><%= link_to "編集", edit_game_path(@game), class:"btn btn-success btn-lg" %></th>

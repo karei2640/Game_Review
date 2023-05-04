@@ -159,6 +159,8 @@ ActiveRecord::Schema.define(version: 2023_04_23_074331) do
 
   create_table "games", force: :cascade do |t|
     t.string "image"
+    t.string "image1"
+    t.string "image2"
     t.string "genre_id"
     t.string "platform_id"
     t.string "category_id"

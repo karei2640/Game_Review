@@ -44,3 +44,39 @@ footer {
   display: block;
 }
 
+@media (max-width: 768px) {
+  .user-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .user-info-container form, .user-info-container .guest-info {
+    display: none;
+  }
+  
+  .user-info-container.expanded form, .user-info-container.expanded .guest-info {
+    display: block;
+  }
+  
+  .user-info-container .toggle-info {
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: none;
+  }
+  .table {
+    width: auto;
+  }
+}

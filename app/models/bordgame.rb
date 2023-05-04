@@ -2,6 +2,7 @@ class Bordgame < ApplicationRecord
   has_many :bord_favorites, dependent: :destroy
   has_many :bord_view_counts, dependent: :destroy
   has_many :bordgame_comments, dependent: :destroy
+  has_many_attached :images
   belongs_to :customer
   has_one :game
   has_many :genre_games

@@ -1,17 +1,28 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
+    <div class='col-md-3'>
     <% if customer_signed_in? %>
-    <div class="col-md-3">
-      <h2>ユーザー情報</h2>
-      <% if flash[:notice] %>
-        <div class="alert alert-notice">
+      <div class="card">
+      <div class="card-header" id="user-info-header">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#user-info-content" aria-expanded="false" aria-controls="user-info-content">
+            ユーザー情報
+          </button>
+      </div>
+    
+      <div id="user-info-content" class="collapse" aria-labelledby="user-info-header">
+        <div class="card-body">
+          <% if current_customer %>
+            <%= form_with model: @customer, url: customer_path(current_customer.id), remote: true do |f| %>
+              <%= render partial: 'public/customers/info', customer: @customer %>
+            <% end %>
+          <% else %>
+            <%= render partial: 'public/customers/guest' %>
+          <% end %>
         </div>
-      <% end %>
-      <%= form_with model: @customer, url: customer_path(current_customer.id), remote: true do |f| %>
-        <%= render partial: 'info', customer: @customer %>
-      <% end %>
+      </div>
     </div>
     <% end %>
+    </div>
     <div class="col-md-9">
       <h2>投稿一覧</h2>
       <ul class="nav nav-tabs" role="tablist">

@@ -17,7 +17,7 @@
    <table>
     <tr>
         <div class= "from-group">
-            <th>ゲーム画像<% f.label :ゲーム画像 %></th>
+            <th>ゲーム画像</th>
             <th><%= f.file_field :image, accept: 'image/*' %></th>
         </div>
     </tr>
@@ -60,17 +60,17 @@
     </tr>
     <tr>
         <div class="form-group">
-            <th><%= f.label :Ｇｏｏｄ %></th>
+            <th style="color: green;">G o o d</th>
             <td><%= f.text_area :good_introduct,maxlength: 180, size: "80x4", placeholder:"良い点:120文字以内" %></td>
         </div>
     </tr>
     <tr>
         <div class="form-group">
-            <th><%= f.label :Ｂａｄ %></th>
+            <th style="color: red;">B a d</th>
             <td><%= f.text_area :bad_introduct,maxlength: 180, size: "80x4", placeholder:"悪い点:120文字以内" %></td>
         </div>
     </tr>
-   <tr>
+    <tr>
         <div class="form-group">
             <th><%= f.label :総合評価 %></th>
             <td><%= f.text_area :overall_review,maxlength: 200, size: "80x4", placeholder:"総合評価:200文字以内" %></td>

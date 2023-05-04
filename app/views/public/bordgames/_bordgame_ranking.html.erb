@@ -25,7 +25,7 @@
           <% end %><br>
           <% if bordgame.game_title.length > 10 %>
           <%= link_to "#{bordgame.game_title.slice(0, 10)}...", bordgame, class: "bordgame_#{bordgame.id}" %>
-        <% else %>
+        <% else %><br>
           <%= link_to bordgame.game_title, bordgame, class: "bordgame_#{bordgame.id}" %>
         <% end %>
         </td>

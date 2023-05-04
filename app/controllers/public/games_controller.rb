@@ -91,7 +91,7 @@ class Public::GamesController < ApplicationController
   end
   
   def game_params
-    params.require(:game).permit(:game_title, :platform_id, :category_id, :genre_id, :points, :release_date, :price, :image, :introduct_title, :introduct, :good_introduct, :bad_introduct, :overall_review,:game_comment)
+    params.require(:game).permit(:game_title, :platform_id, :category_id,:image1, :image2,  :genre_id, :points, :release_date, :price, :image, :introduct_title, :introduct, :good_introduct, :bad_introduct, :overall_review,:game_comment)
   end
   
   def game_comment_params
