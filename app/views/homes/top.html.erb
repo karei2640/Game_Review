@@ -6,7 +6,17 @@
     <header></header>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-3"></div>
+        <div class="col-md-3">
+          <ul class="genre-list">
+            <li style="color: rgba(248, 249, 250, 0.8); font-weight: bold;">ゲームを探す</li>
+            <% Genre.all.each do |genre| %>
+              <li style="background-color: rgba(248, 249, 250, 0.8);"><%= link_to genre.name, search_path(genre_id: genre.id), style: "color: #212529;" %></li>
+            <% end %>
+            <% Table.all.each do |table| %>
+              <li style="background-color: rgba(248, 249, 250, 0.8);"><%= link_to table.name, search_path(table_id: table.id), style: "color: #212529;" %></li>
+            <% end %>
+          </ul>
+        </div>
         <div class="col-md-6 text-center" style="background-color:rgba(255, 128, 0, 0.8); padding: 4.4px; color: white;">
           <% if flash[:notice] %>
             <div class="alert alert-success" role="alert">
@@ -24,6 +34,5 @@
     </div>
   </div>
 </body>
-
   <footer>
   </footer>
