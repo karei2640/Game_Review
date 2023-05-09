@@ -12,6 +12,7 @@
             <% Genre.all.each do |genre| %>
               <li style="background-color: rgba(248, 249, 250, 0.8);"><%= link_to genre.name, search_path(genre_id: genre.id), style: "color: #212529;" %></li>
             <% end %>
+            <li style="color: rgba(248, 249, 250, 0.8); font-weight: bold;">ボードゲームを探す</li>
             <% Table.all.each do |table| %>
               <li style="background-color: rgba(248, 249, 250, 0.8);"><%= link_to table.name, search_path(table_id: table.id), style: "color: #212529;" %></li>
             <% end %>
