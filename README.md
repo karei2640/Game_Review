@@ -42,6 +42,8 @@ Roll The Diceは、読者たちが互いに情報やアドバイスを共有し�
 ruby 3.1.2<br>
 Rails 6.1.7.3<br>
 Bootstrap v4.5.3
+kaminari
+rails-i18n
 
 # インストール方法
 $ git clone git@github.com:karei2640/Game_Review.git<br>
