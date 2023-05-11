@@ -80,3 +80,24 @@ footer {
     width: auto;
   }
 }
+
+
+body {
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  font-weight: bold;
+  font-size: 36px;
+}
+
+p {
+  font-family: "Playfair Display", serif;
+  font-size: 16px;
+}
+
+div {
+  font-family: "Playfair Display", serif;
+  font-weight: bold;
+}
